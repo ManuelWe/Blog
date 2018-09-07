@@ -1,0 +1,468 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://dhbw.bisswanger.de/calendar'
+info:
+  description: Calendar Web Service for Web Engineering I lecture
+  version: "1.0.0-oas3"
+  title: Calendar
+  contact:
+    email: dhbw@bisswanger.de
+tags:
+  - name: event
+    description: Calendar Entries
+  - name: category
+    description: Categories
+  - name: image
+    description: Image Handling
+paths:
+  '/{user-id}/events':
+    get:
+      tags:
+        - event
+      summary: Retrieve all available events
+      parameters:
+        - name: user-id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+    post:
+      tags:
+        - event
+      summary: Create a new event
+      parameters:
+        - name: user-id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventCreate'
+        description: Event to be created
+        required: true
+  '/{user-id}/events/{event-id}':
+    get:
+      tags:
+        - event
+      summary: Retrieve a specific event
+      parameters:
+        - name: user-id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+        - name: event-id
+          in: path
+          description: ID of event to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+    put:
+      tags:
+        - event
+      summary: Update an existing event
+      parameters:
+        - name: user-id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+        - name: event-id
+          in: path
+          description: ID of event to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventCreate'
+        description: Event to be updated
+        required: true
+    delete:
+      tags:
+        - event
+      summary: Delete an existing event
+      parameters:
+        - name: user-id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+        - name: event-id
+          in: path
+          description: ID of event to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: successful operation
+  '/{user-id}/categories':
+    get:
+      tags:
+        - category
+      summary: Retrieve all available categories
+      parameters:
+        - name: user-id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+    post:
+      tags:
+        - category
+      summary: Create a new category
+      parameters:
+        - name: user-id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryCreate'
+        description: Category to be created
+        required: true
+  '/{user-id}/categories/{category-id}':
+    get:
+      tags:
+        - category
+      summary: Retrieve a specific category
+      parameters:
+        - name: user-id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+        - name: category-id
+          in: path
+          description: ID of category to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+    delete:
+      tags:
+        - category
+      summary: Delete an existing category
+      parameters:
+        - name: user-id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+        - name: category-id
+          in: path
+          description: ID of category to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: successful operation
+  '/{user-id}/categories/{category-id}/{event-id}':
+    post:
+      tags:
+        - category
+      summary: Assign an event to a category
+      parameters:
+        - name: user-id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+        - name: event-id
+          in: path
+          description: ID of event
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: category-id
+          in: path
+          description: ID of category
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: successful operation
+    delete:
+      tags:
+        - category
+      summary: Remove an event from a category
+      parameters:
+        - name: user-id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+        - name: event-id
+          in: path
+          description: ID of event
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: category-id
+          in: path
+          description: ID of category
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: successful operation
+  '/{user-id}/images/{event-id}':
+    post:
+      tags:
+        - image
+      summary: Add an image to an event
+      parameters:
+        - name: user-id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+        - name: event-id
+          in: path
+          description: ID of event
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: successful operation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageCreate'
+        description: Event to be updated
+        required: true
+    delete:
+      tags:
+        - image
+      summary: Remove an image from an event
+      parameters:
+        - name: user-id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+        - name: event-id
+          in: path
+          description: ID of event
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: successful operation
+components:
+  schemas:
+    Event:
+      type: object
+      required:
+        - id
+        - title
+        - organizer
+        - start
+        - end
+        - status
+        - allday
+        - categories
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        location:
+          type: string
+        organizer:
+          type: string
+        start:
+          type: string
+        end:
+          type: string
+        status:
+          type: string
+          enum:
+            - Free
+            - Busy
+            - Tentative
+        allday:
+          type: boolean
+        webpage:
+          type: string
+        imageurl:
+          type: string
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+        extra:
+          type: object
+    EventCreate:
+      type: object
+      required:
+        - title
+        - organizer
+        - start
+        - end
+        - status
+      properties:
+        title:
+          type: string
+          maxLength: 50
+        location:
+          type: string
+          maxLength: 50
+        organizer:
+          type: string
+          maxLength: 50
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+            - Free
+            - Busy
+            - Tentative
+        allday:
+          type: boolean
+        webpage:
+          type: string
+          maxLength: 100
+        imagedata:
+          type: string
+          format: byte
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventCategory'
+        extra:
+          type: object
+    EventCategory:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          format: int64
+    Category:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    CategoryCreate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          maxLength: 30
+    ImageCreate:
+      type: object
+      required:
+        - imagedata
+      properties:
+        imagedata:
+          type: string
+          format: byte
