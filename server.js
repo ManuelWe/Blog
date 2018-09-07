@@ -1,46 +1,66 @@
 // Get dependencies
-const express = require('express');
 var SwaggerExpress = require('swagger-express-mw');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const fs = require('fs');
+
+const app = require('connect')();
+const serveStatic = require('serve-static');
+const swaggerTools = require('swagger-tools');
+const jsyaml = require('js-yaml');
+const serverPort = 3000;
 
 // Get our API routes
 const api = require('./server/routes/index');
 
-const app = express();
 
 // Parsers for POST data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 // Point static path to dist
-app.use(express.static(path.join(__dirname, 'dist/Blog-App')));
+app.use(serveStatic(path.join(__dirname, 'dist/Blog-App')));
 
 // Set our api routes
 app.use('/api', api);
 
 // Catch all other routes and return the index file
-app.get('*', (req, res) => {
+app.use('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/Blog-App/index.html'));
 });
 
-// Swagger Config
-var config = {
-  appRoot: __dirname // required config
+
+// swaggerRouter configuration
+var options = {
+  swaggerUi: path.join(__dirname, '/SwaggerBackend/swagger.json'),
+  controllers: path.join(__dirname, './SwaggerBackend/controllers'),
+  useStubs: process.env.NODE_ENV === 'development', // Conditionally turn on stubs (mock mode)
 };
 
+// The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
+var spec = fs.readFileSync(path.join(__dirname, 'SwaggerBackend/api/swagger.yaml'), 'utf8');
+var swaggerDoc = jsyaml.safeLoad(spec);
 
-SwaggerExpress.create(config, function(err, swaggerExpress) {
-  if (err) { throw err; }
+// Initialize the Swagger middleware
+swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
+  // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
+  app.use(middleware.swaggerMetadata());
 
-  // install middleware
-  swaggerExpress.register(app);
+  // Validate Swagger requests
+  app.use(middleware.swaggerValidator());
 
-  var port = process.env.PORT || 3000;
-  app.listen(port);
+  // Route validated requests to appropriate controller
+  app.use(middleware.swaggerRouter(options));
 
-  //if (swaggerExpress.runner.swagger.paths['/hello']) {
-  console.log('try this:\ncurl http://127.0.0.1:' + port + '/hello?name=Scott');
+  // Serve the Swagger documents and Swagger UI
+  app.use(middleware.swaggerUi());
+
+  // Start the server
+  http.createServer(app).listen(serverPort, function() {
+    console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
+    console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
+  });
 });
+
 module.exports = app; // for testing
