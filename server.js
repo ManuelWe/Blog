@@ -1,5 +1,6 @@
 // Get dependencies
 const express = require('express');
+var SwaggerExpress = require('swagger-express-mw');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
@@ -24,18 +25,22 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/Blog-App/index.html'));
 });
 
-/**
- * Get port from environment and store in Express.
- */
-const port = process.env.PORT || '3000';
-app.set('port', port);
+// Swagger Config
+var config = {
+  appRoot: __dirname // required config
+};
 
-/**
- * Create HTTP server.
- */
-const server = http.createServer(app);
 
-/**
- * Listen on provided port, on all network interfaces.
- */
-server.listen(port, () => console.log(`API running on localhost:${port}`));
+SwaggerExpress.create(config, function(err, swaggerExpress) {
+  if (err) { throw err; }
+
+  // install middleware
+  swaggerExpress.register(app);
+
+  var port = process.env.PORT || 3000;
+  app.listen(port);
+
+  //if (swaggerExpress.runner.swagger.paths['/hello']) {
+  console.log('try this:\ncurl http://127.0.0.1:' + port + '/hello?name=Scott');
+});
+module.exports = app; // for testing
