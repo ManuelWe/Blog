@@ -1,6 +1,6 @@
 {
   "name": "blog-app",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "start": "ng serve",
     "build": "ng build && node server.js",
@@ -24,7 +24,10 @@
     "express": "~4.16.0",
     "rxjs": "^6.0.0",
     "zone.js": "~0.8.26",
-    "swagger-express-mw": "^0.1.0"
+    "swagger-express-mw": "^0.1.0",
+	"connect": "^3.2.0",
+    "js-yaml": "^3.3.0",
+    "swagger-tools": "0.10.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.0",
