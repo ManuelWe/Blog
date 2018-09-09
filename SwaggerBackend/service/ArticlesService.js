@@ -6,13 +6,12 @@ let Comment = require('../../db/models/comments');
 /**
  * Delete an existing article
  *
- * articleId String Article ID
+ * articleid String Article ID
  * no response value expected for this operation
  **/
-exports.apiArticlesArticle_idDELETE = function(articleId) {
-  console.log("hi");
+exports.apiArticlesArticleidDELETE = function(articleid) {
   return new Promise(function(resolve, reject) {
-    Article.findByIdAndDelete(articleId, function(err) {
+    Article.findByIdAndDelete(articleid, function(err) {
       if (err) {
         console.log(err);
         reject();
@@ -21,20 +20,18 @@ exports.apiArticlesArticle_idDELETE = function(articleId) {
       }
     });
   });
-};
+}
 
 
 /**
  * Retrieve a specific article
  *
- * articleId String Article ID
+ * articleid String Article ID
  * returns Article
  **/
-exports.apiArticlesArticle_idGET = function(articleId) {
-  console.log('hu');
+exports.apiArticlesArticleidGET = function(articleid) {
   return new Promise(function(resolve, reject) {
-    console.log(articleId);
-    Article.find({_id: articleId}, function(err, articles) {
+    Article.findById(articleid, function(err, articles) {
       if (err) {
         console.log(err);
         reject();
@@ -47,31 +44,31 @@ exports.apiArticlesArticle_idGET = function(articleId) {
       }
     });
   });
-};
+}
 
 // TODO Test
 /**
  * Retrieve all comments from an article
  *
- * articleId String Article ID
+ * articleid String Article ID
  * returns List
  **/
-exports.apiArticlesCommentsArticle_idGET = function(articleId) {
+exports.apiArticlesCommentsArticleidGET = function(articleid) {
   return new Promise(function(resolve, reject) {
-    Comment.find({articleId: articleId}, function(err, articles) {
+    Comment.find({articleId: articleid}, function(err, comments) {
       if (err) {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(articles).length > 0) {
-          resolve(articles);
+        if (Object.keys(comments).length > 0) {
+          resolve(comments);
         } else {
           resolve();
         }
       }
     });
   });
-};
+}
 
 
 /**
@@ -113,12 +110,12 @@ exports.apiArticlesPOST = function(body) {
       headline: body.headline,
     });
 
-    newArticle.save(function(err, Article) {
+    newArticle.save(function(err, article) {
       if (err) {
         console.log(err);
         reject();
       } else {
-        resolve(Article);
+        resolve(article);
       }
     });
   });

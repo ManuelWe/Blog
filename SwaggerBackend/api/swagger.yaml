@@ -56,16 +56,16 @@ paths:
             items:
               $ref: "#/definitions/User"
       x-swagger-router-controller: "Users"
-  /api/users/{user-id}:
+  /api/users/{userid}:
     get:
       tags:
       - "users"
       summary: "Retrieve a specific user"
-      operationId: "apiUsersUser_idGET"
+      operationId: "apiUsersUseridGET"
       produces:
       - "application/json"
       parameters:
-      - name: "user-id"
+      - name: "userid"
         in: "path"
         description: "User ID"
         required: true
@@ -81,13 +81,13 @@ paths:
       tags:
       - "users"
       summary: "Update an existing user"
-      operationId: "apiUsersUser_idPUT"
+      operationId: "apiUsersUseridPUT"
       consumes:
       - "application/json"
       produces:
       - "application/json"
       parameters:
-      - name: "user-id"
+      - name: "userid"
         in: "path"
         description: "User ID"
         required: true
@@ -111,11 +111,11 @@ paths:
       tags:
       - "users"
       summary: "Delete an existing user"
-      operationId: "apiUsersUser_idDELETE"
+      operationId: "apiUsersUseridDELETE"
       produces:
       - "application/json"
       parameters:
-      - name: "user-id"
+      - name: "userid"
         in: "path"
         description: "User ID"
         required: true
@@ -166,14 +166,14 @@ paths:
             items:
               $ref: "#/definitions/Article"
       x-swagger-router-controller: "Articles"
-  /api/articles/{article-id}:
+  /api/articles/{articleid}:
     get:
       tags:
       - "articles"
       summary: "Retrieve a specific article"
-      operationId: "apiArticlesArticle_idGET"
+      operationId: "apiArticlesArticleidGET"
       parameters:
-      - name: "article-id"
+      - name: "articleid"
         in: "path"
         description: "Article ID"
         required: true
@@ -189,11 +189,11 @@ paths:
       tags:
       - "articles"
       summary: "Delete an existing article"
-      operationId: "apiArticlesArticle_idDELETE"
+      operationId: "apiArticlesArticleidDELETE"
       produces:
       - "application/json"
       parameters:
-      - name: "article-id"
+      - name: "articleid"
         in: "path"
         description: "Article ID"
         required: true
@@ -203,16 +203,16 @@ paths:
         204:
           description: "successful operation"
       x-swagger-router-controller: "Articles"
-  /api/articles/comments/{article-id}:
+  /api/articles/comments/{articleid}:
     get:
       tags:
       - "articles"
       summary: "Retrieve all comments from an article"
-      operationId: "apiArticlesCommentsArticle_idGET"
+      operationId: "apiArticlesCommentsArticleidGET"
       produces:
       - "application/json"
       parameters:
-      - name: "article-id"
+      - name: "articleid"
         in: "path"
         description: "Article ID"
         required: true
@@ -226,16 +226,16 @@ paths:
             items:
               $ref: "#/definitions/Comment"
       x-swagger-router-controller: "Articles"
-  /api/comments/{comment-id}:
+  /api/comments/{commentid}:
     get:
       tags:
       - "comments"
       summary: "Retrieve a specific comment"
-      operationId: "apiCommentsComment_idGET"
+      operationId: "apiCommentsCommentidGET"
       produces:
       - "application/json"
       parameters:
-      - name: "comment-id"
+      - name: "commentid"
         in: "path"
         description: "Comment ID"
         required: true
@@ -251,9 +251,9 @@ paths:
       tags:
       - "comments"
       summary: "Delete an existing comment"
-      operationId: "apiCommentsComment_idDELETE"
+      operationId: "apiCommentsCommentidDELETE"
       parameters:
-      - name: "comment-id"
+      - name: "commentid"
         in: "path"
         description: "Comment ID"
         required: true
@@ -263,29 +263,17 @@ paths:
         204:
           description: "successful operation"
       x-swagger-router-controller: "Comments"
-  /api/comments/{comment-id}/{article-id}:
+  /api/comments:
     post:
       tags:
       - "comments"
       summary: "Create a new comment"
-      operationId: "apiCommentsComment_idArticle_idPOST"
+      operationId: "apiCommentsPOST"
       consumes:
       - "application/json"
       produces:
       - "application/json"
       parameters:
-      - name: "article-id"
-        in: "path"
-        description: "Article ID"
-        required: true
-        type: "string"
-        maxLength: 50
-      - name: "comment-id"
-        in: "path"
-        description: "Comment ID"
-        required: true
-        type: "string"
-        maxLength: 50
       - in: "body"
         name: "body"
         description: "Comment to be created"

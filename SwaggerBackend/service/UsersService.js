@@ -1,5 +1,6 @@
 'use strict';
 
+let User = require('../../db/models/users');
 
 /**
  * Retrieve all users
@@ -8,33 +9,20 @@
  **/
 exports.apiUsersGET = function() {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "zipCode" : 0,
-  "firstname" : "firstname",
-  "password" : "password",
-  "city" : "city",
-  "streetNumber" : 6,
-  "street" : "street",
-  "email" : "email",
-  "lastname" : "lastname"
-}, {
-  "zipCode" : 0,
-  "firstname" : "firstname",
-  "password" : "password",
-  "city" : "city",
-  "streetNumber" : 6,
-  "street" : "street",
-  "email" : "email",
-  "lastname" : "lastname"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    User.find({}, function(err, users) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        if (Object.keys(users).length > 0) {
+          resolve(users);
+        } else {
+          resolve();
+        }
+      }
+    });
   });
-}
+};
 
 
 /**
@@ -45,110 +33,101 @@ exports.apiUsersGET = function() {
  **/
 exports.apiUsersPOST = function(body) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "zipCode" : 0,
-  "firstname" : "firstname",
-  "password" : "password",
-  "city" : "city",
-  "streetNumber" : 6,
-  "street" : "street",
-  "email" : "email",
-  "lastname" : "lastname"
-}, {
-  "zipCode" : 0,
-  "firstname" : "firstname",
-  "password" : "password",
-  "city" : "city",
-  "streetNumber" : 6,
-  "street" : "street",
-  "email" : "email",
-  "lastname" : "lastname"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    let newUser = new User({
+      firstname: body.firstname,
+      lastname: body.lastname,
+      zipCode: body.zipCode,
+      city: body.city,
+      street: body.street,
+      streetNumber: body.streetNumber,
+      email: body.email,
+      password: body.password,
+    });
+
+    newUser.save(function(err, user) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        resolve(user);
+      }
+    });
   });
-}
+};
 
 
 /**
  * Delete an existing user
  *
- * userId String User ID
+ * userid String User ID
  * no response value expected for this operation
  **/
-exports.apiUsersUser_idDELETE = function(userId) {
+exports.apiUsersUseridDELETE = function(userid) {
   return new Promise(function(resolve, reject) {
-    resolve();
+    User.findByIdAndDelete(userid, function(err) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        resolve();
+      }
+    });
   });
-}
+};
 
 
 /**
  * Retrieve a specific user
  *
- * userId String User ID
+ * userid String User ID
  * returns User
  **/
-exports.apiUsersUser_idGET = function(userId) {
+exports.apiUsersUseridGET = function(userid) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "zipCode" : 0,
-  "firstname" : "firstname",
-  "password" : "password",
-  "city" : "city",
-  "streetNumber" : 6,
-  "street" : "street",
-  "email" : "email",
-  "lastname" : "lastname"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    User.findById(userid, function(err, users) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        if (Object.keys(users).length > 0) {
+          resolve(users);
+        } else {
+          resolve();
+        }
+      }
+    });
   });
-}
+};
 
 
 /**
  * Update an existing user
  *
- * userId String User ID
+ * userid String User ID
  * body UserCreate User to be updated
  * returns List
  **/
-exports.apiUsersUser_idPUT = function(userId,body) {
+exports.apiUsersUseridPUT = function(userid, body) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "zipCode" : 0,
-  "firstname" : "firstname",
-  "password" : "password",
-  "city" : "city",
-  "streetNumber" : 6,
-  "street" : "street",
-  "email" : "email",
-  "lastname" : "lastname"
-}, {
-  "zipCode" : 0,
-  "firstname" : "firstname",
-  "password" : "password",
-  "city" : "city",
-  "streetNumber" : 6,
-  "street" : "street",
-  "email" : "email",
-  "lastname" : "lastname"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    let newUser = new User({
+      firstname: body.firstname,
+      lastname: body.lastname,
+      zipCode: body.zipCode,
+      city: body.city,
+      street: body.street,
+      streetNumber: body.streetNumber,
+      email: body.email,
+      password: body.password,
+    });
+
+    User.findByIdAndUpdate(userid, body, {new: true}, function(err, user) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        resolve(user);
+      }
+    });
   });
-}
+};
 

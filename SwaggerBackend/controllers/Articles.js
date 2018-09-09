@@ -3,10 +3,9 @@
 var utils = require('../utils/writer.js');
 var Articles = require('../service/ArticlesService');
 
-module.exports.apiArticlesArticle_idDELETE = function apiArticlesArticle_idDELETE(req, res, next) {
-  console.log(req);
-  let articleId = req.swagger.params['article-id'].value;
-  Articles.apiArticlesArticle_idDELETE(articleId)
+module.exports.apiArticlesArticleidDELETE = function apiArticlesArticleidDELETE(req, res, next) {
+  let articleid = req.swagger.params['articleid'].value;
+  Articles.apiArticlesArticleidDELETE(articleid)
       .then(function(response) {
         utils.writeJson(res, response);
       })
@@ -15,9 +14,9 @@ module.exports.apiArticlesArticle_idDELETE = function apiArticlesArticle_idDELET
       });
 };
 
-module.exports.apiArticlesArticle_idGET = function apiArticlesArticle_idGET(req, res, next) {
-  let articleId = req.swagger.params['article-id'].value;
-  Articles.apiArticlesArticle_idGET(articleId)
+module.exports.apiArticlesArticleidGET = function apiArticlesArticleidGET(req, res, next) {
+  let articleid = req.swagger.params['articleid'].value;
+  Articles.apiArticlesArticleidGET(articleid)
       .then(function(response) {
         utils.writeJson(res, response);
       })
@@ -26,9 +25,9 @@ module.exports.apiArticlesArticle_idGET = function apiArticlesArticle_idGET(req,
       });
 };
 
-module.exports.apiArticlesCommentsArticle_idGET = function apiArticlesCommentsArticle_idGET(req, res, next) {
-  let articleId = req.swagger.params['article-id'].value;
-  Articles.apiArticlesCommentsArticle_idGET(articleId)
+module.exports.apiArticlesCommentsArticleidGET = function apiArticlesCommentsArticleidGET(req, res, next) {
+  let articleid = req.swagger.params['articleid'].value;
+  Articles.apiArticlesCommentsArticleidGET(articleid)
       .then(function(response) {
         utils.writeJson(res, response);
       })
