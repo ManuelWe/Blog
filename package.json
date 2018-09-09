@@ -20,14 +20,16 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "body-parser": "^1.18.3",
+    "connect": "^3.2.0",
     "core-js": "^2.5.4",
     "express": "~4.16.0",
-    "rxjs": "^6.0.0",
-    "zone.js": "~0.8.26",
-    "swagger-express-mw": "^0.1.0",
-	"connect": "^3.2.0",
     "js-yaml": "^3.3.0",
-    "swagger-tools": "0.10.1"
+    "mongoose": "^5.2.13",
+    "nodemon": "^1.18.4",
+    "rxjs": "^6.0.0",
+    "swagger-express-mw": "^0.1.0",
+    "swagger-tools": "0.10.1",
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.0",

@@ -3,56 +3,56 @@
 var utils = require('../utils/writer.js');
 var Articles = require('../service/ArticlesService');
 
-module.exports.articlesArticle_idDELETE = function articlesArticle_idDELETE (req, res, next) {
-  var articleId = req.swagger.params['article-id'].value;
-  Articles.articlesArticle_idDELETE(articleId)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+module.exports.apiArticlesArticleidDELETE = function apiArticlesArticleidDELETE(req, res, next) {
+  let articleid = req.swagger.params['articleid'].value;
+  Articles.apiArticlesArticleidDELETE(articleid)
+      .then(function(response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function(response) {
+        utils.writeJson(res, response);
+      });
 };
 
-module.exports.articlesArticle_idGET = function articlesArticle_idGET (req, res, next) {
-  var articleId = req.swagger.params['article-id'].value;
-  Articles.articlesArticle_idGET(articleId)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+module.exports.apiArticlesArticleidGET = function apiArticlesArticleidGET(req, res, next) {
+  let articleid = req.swagger.params['articleid'].value;
+  Articles.apiArticlesArticleidGET(articleid)
+      .then(function(response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function(response) {
+        utils.writeJson(res, response);
+      });
 };
 
-module.exports.articlesCommentsArticle_idGET = function articlesCommentsArticle_idGET (req, res, next) {
-  var articleId = req.swagger.params['article-id'].value;
-  Articles.articlesCommentsArticle_idGET(articleId)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+module.exports.apiArticlesCommentsArticleidGET = function apiArticlesCommentsArticleidGET(req, res, next) {
+  let articleid = req.swagger.params['articleid'].value;
+  Articles.apiArticlesCommentsArticleidGET(articleid)
+      .then(function(response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function(response) {
+        utils.writeJson(res, response);
+      });
 };
 
-module.exports.articlesGET = function articlesGET (req, res, next) {
-  Articles.articlesGET()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+module.exports.apiArticlesGET = function apiArticlesGET(req, res, next) {
+  Articles.apiArticlesGET()
+      .then(function(response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function(response) {
+        utils.writeJson(res, response);
+      });
 };
 
-module.exports.articlesPOST = function articlesPOST (req, res, next) {
-  var body = req.swagger.params['body'].value;
-  Articles.articlesPOST(body)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+module.exports.apiArticlesPOST = function apiArticlesPOST(req, res, next) {
+  let body = req.swagger.params['body'].value;
+  Articles.apiArticlesPOST(body)
+      .then(function(response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function(response) {
+        utils.writeJson(res, response);
+      });
 };

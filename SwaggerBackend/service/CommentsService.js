@@ -1,67 +1,76 @@
 'use strict';
 
+let Comment = require('../../db/models/comments');
 
 /**
  * Create a new comment
  *
- * articleId Long Article ID
- * commentId Long Comment ID
+ * articleid String Article ID
+ * commentid String Comment ID
  * body CommentCreate Comment to be created
  * returns Comment
  **/
-exports.commentsComment_idArticle_idPOST = function(articleId,commentId,body) {
+exports.apiCommentsPOST = function(body) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "date" : "2000-01-23",
-  "author" : "author",
-  "articleId" : 6,
-  "id" : 0,
-  "text" : "text"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    let newComment = new Comment({
+      articleId: body.articleId,
+      author: body.author,
+      text: body.text,
+      date: body.date,
+    });
+
+    newComment.save(function(err, comment) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        resolve(comment);
+      }
+    });
   });
-}
+};
 
 
 /**
  * Delete an existing comment
  *
- * commentId Long Comment ID
+ * commentid String Comment ID
  * no response value expected for this operation
  **/
-exports.commentsComment_idDELETE = function(commentId) {
+exports.apiCommentsCommentidDELETE = function(commentid) {
   return new Promise(function(resolve, reject) {
-    resolve();
+    Comment.findByIdAndDelete(commentid, function(err) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        resolve();
+      }
+    });
   });
-}
+};
 
 
 /**
  * Retrieve a specific comment
  *
- * commentId Long Comment ID
+ * commentid String Comment ID
  * returns Comment
  **/
-exports.commentsComment_idGET = function(commentId) {
+exports.apiCommentsCommentidGET = function(commentid) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "date" : "2000-01-23",
-  "author" : "author",
-  "articleId" : 6,
-  "id" : 0,
-  "text" : "text"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    Comment.findById(commentid, function(err, comments) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        if (Object.keys(comments).length > 0) {
+          resolve(comments);
+        } else {
+          resolve();
+        }
+      }
+    });
   });
-}
+};
 

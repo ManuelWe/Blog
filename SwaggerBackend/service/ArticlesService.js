@@ -1,15 +1,24 @@
 'use strict';
 
+let Article = require('../../db/models/articles');
+let Comment = require('../../db/models/comments');
 
 /**
  * Delete an existing article
  *
- * articleId Long Article ID
+ * articleid String Article ID
  * no response value expected for this operation
  **/
-exports.articlesArticle_idDELETE = function(articleId) {
+exports.apiArticlesArticleidDELETE = function(articleid) {
   return new Promise(function(resolve, reject) {
-    resolve();
+    Article.findByIdAndDelete(articleid, function(err) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        resolve();
+      }
+    });
   });
 }
 
@@ -17,56 +26,47 @@ exports.articlesArticle_idDELETE = function(articleId) {
 /**
  * Retrieve a specific article
  *
- * articleId Long Article ID
+ * articleid String Article ID
  * returns Article
  **/
-exports.articlesArticle_idGET = function(articleId) {
+exports.apiArticlesArticleidGET = function(articleid) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "date" : "2000-01-23",
-  "author" : "author",
-  "topic" : "topic",
-  "id" : 0,
-  "text" : "text",
-  "headline" : "headline"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    Article.findById(articleid, function(err, articles) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        if (Object.keys(articles).length > 0) {
+          resolve(articles);
+        } else {
+          resolve();
+        }
+      }
+    });
   });
 }
 
-
+// TODO Test
 /**
  * Retrieve all comments from an article
  *
- * articleId Long Article ID
+ * articleid String Article ID
  * returns List
  **/
-exports.articlesCommentsArticle_idGET = function(articleId) {
+exports.apiArticlesCommentsArticleidGET = function(articleid) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "date" : "2000-01-23",
-  "author" : "author",
-  "articleId" : 6,
-  "id" : 0,
-  "text" : "text"
-}, {
-  "date" : "2000-01-23",
-  "author" : "author",
-  "articleId" : 6,
-  "id" : 0,
-  "text" : "text"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    Comment.find({articleId: articleid}, function(err, comments) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        if (Object.keys(comments).length > 0) {
+          resolve(comments);
+        } else {
+          resolve();
+        }
+      }
+    });
   });
 }
 
@@ -76,31 +76,22 @@ exports.articlesCommentsArticle_idGET = function(articleId) {
  *
  * returns List
  **/
-exports.articlesGET = function() {
+exports.apiArticlesGET = function() {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "date" : "2000-01-23",
-  "author" : "Manuel W",
-  "topic" : "CS",
-  "id" : 0,
-  "text" : "text",
-  "headline" : "headline"
-}, {
-  "date" : "2000-01-23",
-  "author" : "Jan",
-  "topic" : "topic",
-  "id" : 0,
-  "text" : "text",
-  "headline" : "headline"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    Article.find({}, function(err, articles) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        if (Object.keys(articles).length > 0) {
+          resolve(articles);
+        } else {
+          resolve();
+        }
+      }
+    });
   });
-}
+};
 
 
 /**
@@ -109,29 +100,23 @@ exports.articlesGET = function() {
  * body ArticleCreate Article to be created
  * returns List
  **/
-exports.articlesPOST = function(body) {
+exports.apiArticlesPOST = function(body) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "date" : "2000-01-23",
-  "author" : "author",
-  "topic" : "topic",
-  "id" : 0,
-  "text" : "text",
-  "headline" : "headline"
-}, {
-  "date" : "2000-01-23",
-  "author" : "author",
-  "topic" : "topic",
-  "id" : 0,
-  "text" : "text",
-  "headline" : "headline"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
+    let newArticle = new Article({
+      date: body.date,
+      author: body.author,
+      topic: body.topic,
+      text: body.text,
+      headline: body.headline,
+    });
 
+    newArticle.save(function(err, article) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        resolve(article);
+      }
+    });
+  });
+};
