@@ -6,27 +6,25 @@
  *
  * returns List
  **/
-exports.usersGET = function() {
+exports.apiUsersGET = function() {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
-  "zipCode" : 6,
+  "zipCode" : 0,
   "firstname" : "firstname",
   "password" : "password",
   "city" : "city",
-  "streetNumber" : 1,
+  "streetNumber" : 6,
   "street" : "street",
-  "id" : 0,
   "email" : "email",
   "lastname" : "lastname"
 }, {
-  "zipCode" : 6,
+  "zipCode" : 0,
   "firstname" : "firstname",
   "password" : "password",
   "city" : "city",
-  "streetNumber" : 1,
+  "streetNumber" : 6,
   "street" : "street",
-  "id" : 0,
   "email" : "email",
   "lastname" : "lastname"
 } ];
@@ -45,27 +43,25 @@ exports.usersGET = function() {
  * body UserCreate User to be created
  * returns List
  **/
-exports.usersPOST = function(body) {
+exports.apiUsersPOST = function(body) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
-  "zipCode" : 6,
+  "zipCode" : 0,
   "firstname" : "firstname",
   "password" : "password",
   "city" : "city",
-  "streetNumber" : 1,
+  "streetNumber" : 6,
   "street" : "street",
-  "id" : 0,
   "email" : "email",
   "lastname" : "lastname"
 }, {
-  "zipCode" : 6,
+  "zipCode" : 0,
   "firstname" : "firstname",
   "password" : "password",
   "city" : "city",
-  "streetNumber" : 1,
+  "streetNumber" : 6,
   "street" : "street",
-  "id" : 0,
   "email" : "email",
   "lastname" : "lastname"
 } ];
@@ -81,10 +77,10 @@ exports.usersPOST = function(body) {
 /**
  * Delete an existing user
  *
- * userId Long User ID
+ * userId String User ID
  * no response value expected for this operation
  **/
-exports.usersUser_idDELETE = function(userId) {
+exports.apiUsersUser_idDELETE = function(userId) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -94,20 +90,19 @@ exports.usersUser_idDELETE = function(userId) {
 /**
  * Retrieve a specific user
  *
- * userId Long User ID
+ * userId String User ID
  * returns User
  **/
-exports.usersUser_idGET = function(userId) {
+exports.apiUsersUser_idGET = function(userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "zipCode" : 6,
+  "zipCode" : 0,
   "firstname" : "firstname",
   "password" : "password",
   "city" : "city",
-  "streetNumber" : 1,
+  "streetNumber" : 6,
   "street" : "street",
-  "id" : 0,
   "email" : "email",
   "lastname" : "lastname"
 };
@@ -123,31 +118,29 @@ exports.usersUser_idGET = function(userId) {
 /**
  * Update an existing user
  *
- * userId Long User ID
+ * userId String User ID
  * body UserCreate User to be updated
  * returns List
  **/
-exports.usersUser_idPUT = function(userId,body) {
+exports.apiUsersUser_idPUT = function(userId,body) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
-  "zipCode" : 6,
+  "zipCode" : 0,
   "firstname" : "firstname",
   "password" : "password",
   "city" : "city",
-  "streetNumber" : 1,
+  "streetNumber" : 6,
   "street" : "street",
-  "id" : 0,
   "email" : "email",
   "lastname" : "lastname"
 }, {
-  "zipCode" : 6,
+  "zipCode" : 0,
   "firstname" : "firstname",
   "password" : "password",
   "city" : "city",
-  "streetNumber" : 1,
+  "streetNumber" : 6,
   "street" : "street",
-  "id" : 0,
   "email" : "email",
   "lastname" : "lastname"
 } ];

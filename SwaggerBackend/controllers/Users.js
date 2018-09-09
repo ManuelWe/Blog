@@ -1,10 +1,10 @@
 'use strict';
 
 var utils = require('../utils/writer.js');
-var User = require('../service/UserService');
+var Users = require('../service/UsersService');
 
-module.exports.usersGET = function usersGET (req, res, next) {
-  User.usersGET()
+module.exports.apiUsersGET = function apiUsersGET (req, res, next) {
+  Users.apiUsersGET()
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -13,9 +13,9 @@ module.exports.usersGET = function usersGET (req, res, next) {
     });
 };
 
-module.exports.usersPOST = function usersPOST (req, res, next) {
+module.exports.apiUsersPOST = function apiUsersPOST (req, res, next) {
   var body = req.swagger.params['body'].value;
-  User.usersPOST(body)
+  Users.apiUsersPOST(body)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -24,9 +24,9 @@ module.exports.usersPOST = function usersPOST (req, res, next) {
     });
 };
 
-module.exports.usersUser_idDELETE = function usersUser_idDELETE (req, res, next) {
+module.exports.apiUsersUser_idDELETE = function apiUsersUser_idDELETE (req, res, next) {
   var userId = req.swagger.params['user-id'].value;
-  User.usersUser_idDELETE(userId)
+  Users.apiUsersUser_idDELETE(userId)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -35,9 +35,9 @@ module.exports.usersUser_idDELETE = function usersUser_idDELETE (req, res, next)
     });
 };
 
-module.exports.usersUser_idGET = function usersUser_idGET (req, res, next) {
+module.exports.apiUsersUser_idGET = function apiUsersUser_idGET (req, res, next) {
   var userId = req.swagger.params['user-id'].value;
-  User.usersUser_idGET(userId)
+  Users.apiUsersUser_idGET(userId)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -46,10 +46,10 @@ module.exports.usersUser_idGET = function usersUser_idGET (req, res, next) {
     });
 };
 
-module.exports.usersUser_idPUT = function usersUser_idPUT (req, res, next) {
+module.exports.apiUsersUser_idPUT = function apiUsersUser_idPUT (req, res, next) {
   var userId = req.swagger.params['user-id'].value;
   var body = req.swagger.params['body'].value;
-  User.usersUser_idPUT(userId,body)
+  Users.apiUsersUser_idPUT(userId,body)
     .then(function (response) {
       utils.writeJson(res, response);
     })

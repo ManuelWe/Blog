@@ -4,12 +4,16 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const db = require('./db').db;
 
 const app = require('connect')();
 const serveStatic = require('serve-static');
 const swaggerTools = require('swagger-tools');
 const jsyaml = require('js-yaml');
 const serverPort = 3000;
+
+
+
 
 // Get our API routes
 const api = require('./server/routes/index');

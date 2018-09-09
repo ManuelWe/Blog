@@ -4,19 +4,18 @@
 /**
  * Create a new comment
  *
- * articleId Long Article ID
- * commentId Long Comment ID
+ * articleId String Article ID
+ * commentId String Comment ID
  * body CommentCreate Comment to be created
  * returns Comment
  **/
-exports.commentsComment_idArticle_idPOST = function(articleId,commentId,body) {
+exports.apiCommentsComment_idArticle_idPOST = function(articleId,commentId,body) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "date" : "2000-01-23",
   "author" : "author",
-  "articleId" : 6,
-  "id" : 0,
+  "articleId" : "articleId",
   "text" : "text"
 };
     if (Object.keys(examples).length > 0) {
@@ -31,10 +30,10 @@ exports.commentsComment_idArticle_idPOST = function(articleId,commentId,body) {
 /**
  * Delete an existing comment
  *
- * commentId Long Comment ID
+ * commentId String Comment ID
  * no response value expected for this operation
  **/
-exports.commentsComment_idDELETE = function(commentId) {
+exports.apiCommentsComment_idDELETE = function(commentId) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -44,17 +43,16 @@ exports.commentsComment_idDELETE = function(commentId) {
 /**
  * Retrieve a specific comment
  *
- * commentId Long Comment ID
+ * commentId String Comment ID
  * returns Comment
  **/
-exports.commentsComment_idGET = function(commentId) {
+exports.apiCommentsComment_idGET = function(commentId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "date" : "2000-01-23",
   "author" : "author",
-  "articleId" : 6,
-  "id" : 0,
+  "articleId" : "articleId",
   "text" : "text"
 };
     if (Object.keys(examples).length > 0) {
