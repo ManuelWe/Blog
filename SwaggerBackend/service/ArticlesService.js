@@ -6,8 +6,8 @@ let Comment = require('../../db/models/comments');
 /**
  * Delete an existing article
  *
- * articleid String Article ID
- * no response value expected for this operation
+ * @articleid String Article ID
+ * @return no response value expected for this operation
  **/
 exports.apiArticlesArticleidDELETE = function(articleid) {
   return new Promise(function(resolve, reject) {
@@ -20,7 +20,7 @@ exports.apiArticlesArticleidDELETE = function(articleid) {
       }
     });
   });
-}
+};
 
 
 /**
@@ -44,9 +44,9 @@ exports.apiArticlesArticleidGET = function(articleid) {
       }
     });
   });
-}
+};
 
-// TODO Test
+
 /**
  * Retrieve all comments from an article
  *
@@ -68,7 +68,7 @@ exports.apiArticlesCommentsArticleidGET = function(articleid) {
       }
     });
   });
-}
+};
 
 
 /**
@@ -111,6 +111,26 @@ exports.apiArticlesPOST = function(body) {
     });
 
     newArticle.save(function(err, article) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        resolve(article);
+      }
+    });
+  });
+};
+
+/**
+ * Update an existing article
+ *
+ * articleid String Article ID
+ * body ArticleCreate Article to be updated
+ * returns List
+ **/
+exports.apiArticlesArticleidPUT = function(articleid, body) {
+  return new Promise(function(resolve, reject) {
+    Article.findByIdAndUpdate(articleid, body, {new: true}, function(err, article) {
       if (err) {
         console.log(err);
         reject();
