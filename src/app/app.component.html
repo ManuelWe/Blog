@@ -1,60 +1,101 @@
-<!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+<!--Section: Blog v.2-->
+<section class="text-center py-4" id="test">
 
-  <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" href="#">Navbar</a></mdb-navbar-brand>
+  <!--Section heading-->
+  <h2 class="h1 font-weight-bold text-center mb-5 pt-4">Recent posts</h2>
+  <!--Section description-->
+  <p class="text-center mb-5 pb-3">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+    occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-  <!-- Collapsible content -->
-  <links>
+  <!--Grid row-->
+  <div class="row">
 
-    <!-- Links -->
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link waves-light" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Pricing</a>
-      </li>
-
-      <!-- Dropdown -->
-      <li class="nav-item dropdown" dropdown>
-        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          Basic dropdown<span class="caret"></span></a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
-          <div class="divider dropdown-divider"></div>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
-        </div>
-      </li>
-
-    </ul>
-    <!-- Links -->
-
-    <!-- Search form -->
-    <form class="form-inline waves-light" mdbWavesEffect>
-      <div class="md-form mt-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+    <!--Grid column-->
+    <div class="col-lg-4 col-md-12 mb-4">
+      <!--Featured image-->
+      <div class="view overlay rounded z-depth-2 mb-2 waves-light" mdbWavesEffect>
+        <img src="https://mdbootstrap.com/img/Photos/Others/images/81.jpg" class="img-fluid" alt="First sample image">
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
       </div>
-    </form>
-  </links>
-  <!-- Collapsible content -->
 
-</mdb-navbar>
-<!--/.Navbar-->
+      <!--Excerpt-->
+      <a href="" class="pink-text">
+        <h6 class="mb-3 mt-4">
+          <i class="fa fa-map "></i>
+          <strong> Adventure</strong>
+        </h6>
+      </a>
+      <h4 class="mb-3 font-weight-bold dark-grey-text">
+        <strong>This is title of the news</strong>
+      </h4>
+      <p>by
+        <a class="font-weight-bold dark-grey-text">Billy Forester</a>, 15/07/2018</p>
+      <p class="grey-text">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat
+        facere possimus voluptas.</p>
+      <a mdbBtn color="pink" rounded="true" size="md" class="waves-light" mdbWavesEffect>Read more</a>
+    </div>
+    <!--Grid column-->
 
-<div class="container content"> <!-- container centers content on large screens -->
-  <div class="row">             <!-- responsive row has 12 columns by default -->
-    <div class="col-md-6">
-      Hello world<!-- uses 6 columns on medium and larger screens... -->
+    <!--Grid column-->
+    <div class="col-lg-4 col-md-6 mb-4">
+      <!--Featured image-->
+      <div class="view overlay rounded z-depth-2 mb-2 waves-light" mdbWavesEffect>
+        <img src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" class="img-fluid" alt="Second sample image">
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+
+      <!--Excerpt-->
+      <a href="" class="deep-orange-text">
+        <h6 class="mb-3 mt-4">
+          <i class="fa fa-graduation-cap"></i>
+          <strong> Education</strong>
+        </h6>
+      </a>
+      <h4 class="mb-3 font-weight-bold dark-grey-text">
+        <strong>This is title of the news</strong>
+      </h4>
+      <p>by
+        <a class="font-weight-bold dark-grey-text">Billy Forester</a>, 15/07/2018</p>
+      <p class="grey-text">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat
+        facere possimus voluptas.</p>
+      <a mdbBtn color="deep-orange" rounded="true" size="md" class="waves-light" mdbWavesEffect>Read more</a>
     </div>
-    <div class="col-md-6">
-      Manuel und Jan<!-- uses 12 columns on smaller than medium screens -->
+    <!--Grid column-->
+
+    <!--Grid column-->
+    <div class="col-lg-4 col-md-6 mb-4">
+      <!--Featured image-->
+      <div class="view overlay rounded z-depth-2 mb-2 waves-light" mdbWavesEffect>
+        <img src="https://mdbootstrap.com/img/Photos/Others/images/13.jpg" class="img-fluid" alt="Thrid sample image">
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+
+      <!--Excerpt-->
+      <a href="" class="cyan-text">
+        <h6 class="mb-3 mt-4">
+          <i class="fa fa-fire "></i>
+          <strong> Culture</strong>
+        </h6>
+      </a>
+      <h4 class="mb-3 font-weight-bold dark-grey-text">
+        <strong>This is title of the news</strong>
+      </h4>
+      <p>by
+        <a class="font-weight-bold dark-grey-text">Billy Forester</a>, 15/07/2018</p>
+      <p class="grey-text">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat
+        facere possimus voluptas.</p>
+      <a mdbBtn color="info" rounded="true" size="md" class="waves-light" mdbWavesEffect>Read more</a>
     </div>
+    <!--Grid column-->
+
   </div>
-</div>
-<footer></footer>
+  <!--Grid row-->
+
+</section>
+<!--Section: Blog v.2-->
