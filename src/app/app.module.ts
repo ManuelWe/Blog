@@ -1,22 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
-import { FooterComponent } from './footer/footer.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import {MDBBootstrapModule} from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    FooterComponent,
-    NavbarComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
-  bootstrap: [
-    AppComponent, FooterComponent, NavbarComponent
-  ]
+  bootstrap: [AppComponent],
+  schemas: [ NO_ERRORS_SCHEMA ],
 })
 export class AppModule { }
