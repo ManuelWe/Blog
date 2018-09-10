@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
   name = 'footer';
+  tag;
   constructor() { }
 
   ngOnInit() {
   }
-
 }
