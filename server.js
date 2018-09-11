@@ -13,6 +13,7 @@ const jsyaml = require('js-yaml');
 const serverPort = 3000;
 
 
+
 // TODO remove allow cors
 app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -49,8 +50,8 @@ var options = {
 };
 
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
-var spec = fs.readFileSync(path.join(__dirname, 'SwaggerBackend/api/swagger.yaml'), 'utf8');
-var swaggerDoc = jsyaml.safeLoad(spec);
+const spec = fs.readFileSync(path.join(__dirname, 'SwaggerBackend/api/swagger.yaml'), 'utf8');
+const swaggerDoc = jsyaml.safeLoad(spec);
 
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {

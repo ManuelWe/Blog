@@ -74,3 +74,45 @@ exports.apiCommentsCommentidGET = function(commentid) {
   });
 };
 
+/**
+ * Retrieve all comments
+ *
+ * returns List
+ **/
+exports.apiCommentsGET = function() {
+  return new Promise(function(resolve, reject) {
+    Comment.find({}, function(err, comments) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        if (Object.keys(comments).length > 0) {
+          resolve(comments);
+        } else {
+          resolve();
+        }
+      }
+    });
+  });
+}
+
+/**
+ * Update an existing comment
+ *
+ * commentid String Comment ID
+ * body CommentCreate Comment to be updated
+ * returns List
+ **/
+exports.apiCommentsCommentidPUT = function(commentid,body) {
+  return new Promise(function(resolve, reject) {
+    Comment.findByIdAndUpdate(commentid, body, {new: true}, function(err, comment) {
+      if (err) {
+        console.log(err);
+        reject();
+      } else {
+        resolve(comment);
+      }
+    });
+  });
+};
+

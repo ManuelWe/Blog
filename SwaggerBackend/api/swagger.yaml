@@ -185,6 +185,36 @@ paths:
           schema:
             $ref: "#/definitions/Article"
       x-swagger-router-controller: "Articles"
+    put:
+      tags:
+      - "articles"
+      summary: "Update an existing article"
+      operationId: "apiArticlesArticleidPUT"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "articleid"
+        in: "path"
+        description: "Article ID"
+        required: true
+        type: "string"
+        maxLength: 50
+      - in: "body"
+        name: "body"
+        description: "Article to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/ArticleCreate"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Article"
+      x-swagger-router-controller: "Articles"
     delete:
       tags:
       - "articles"
@@ -247,6 +277,36 @@ paths:
           schema:
             $ref: "#/definitions/Comment"
       x-swagger-router-controller: "Comments"
+    put:
+      tags:
+      - "comments"
+      summary: "Update an existing comment"
+      operationId: "apiCommentsCommentidPUT"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "commentid"
+        in: "path"
+        description: "Comment ID"
+        required: true
+        type: "string"
+        maxLength: 50
+      - in: "body"
+        name: "body"
+        description: "Comment to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/CommentCreate"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Comment"
+      x-swagger-router-controller: "Comments"
     delete:
       tags:
       - "comments"
@@ -264,6 +324,22 @@ paths:
           description: "successful operation"
       x-swagger-router-controller: "Comments"
   /api/comments:
+    get:
+      tags:
+      - "comments"
+      summary: "Retrieve all comments"
+      operationId: "apiCommentsGET"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Comment"
+      x-swagger-router-controller: "Comments"
     post:
       tags:
       - "comments"
