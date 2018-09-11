@@ -1,5 +1,14 @@
-#test {
+.container {
   box-sizing: border-box;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding: 20px 50px;
+}
+#articleImage {
+  margin-right: 16px;
+  margin-bottom: 100px;
+}
+p {
+  text-align: justify;
+}
+.articleAuthorPicture{
+  margin-right: 8px;
 }

@@ -1,5 +1,5 @@
-<!--Section: Blog v.2-->
-<section class="text-center py-4" id="test">
+<!--MainPage-->
+<div class="container" *ngIf="page == 0">
 
   <!--Section heading-->
   <h2 class="h1 font-weight-bold text-center mb-5 pt-4">Recent posts</h2>
@@ -34,9 +34,9 @@
         <a class="font-weight-bold dark-grey-text">Billy Forester</a>, 15/07/2018</p>
       <p class="grey-text">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat
         facere possimus voluptas.</p>
-      <a mdbBtn color="pink" rounded="true" size="md" class="waves-light" mdbWavesEffect>Read more</a>
+      <a mdbBtn (click)="readMore()" color="pink" rounded="true" size="md" class="waves-light" mdbWavesEffect>Read more</a>
     </div>
-    <!--Grid column-->
+    <!--Grid column -->
 
     <!--Grid column-->
     <div class="col-lg-4 col-md-6 mb-4">
@@ -97,5 +97,32 @@
   </div>
   <!--Grid row-->
 
-</section>
-<!--Section: Blog v.2-->
+</div>
+<!--ArticlePage-->
+<div class="container" *ngIf="page == 1">
+  <div class="row">
+    <div class="col-md-12 blogShort">
+      <h1>{{articleHeader}}</h1>
+      <img src="{{articlePicture}}" class="pull-left img-responsive img-fluid view overlay rounded z-depth-2 mb-2 waves-light" id="articleImage">
+      <article>
+        <p>
+          {{articleText}}
+        </p>
+      </article>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="media">
+        <a class="articleAuthorPicture pull-left">
+          <img class="img-responsive img-fluid view overlay rounded z-depth-2 mb-2 waves-light" src="{{articleAuthorPicture}}" style="width: 100px;height:100px;">
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading">{{articleAuthor}}</h4>
+          <h5>{{articleDate}}</h5>
+          <hr style="margin:8px auto">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
