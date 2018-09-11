@@ -123,35 +123,8 @@
   <hr style="margin:8px auto">
   <h4>Comments</h4>
   <div class="row">
-    <div class="col-lg-6">
-      <div class="mdb-feed">
-        <div class="news row">
-          <div class="label col-2">
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(17)-mini.jpg" class="rounded-circle z-depth-1-half" style="width: 75px;height:75px;"/>
-          </div>
-          <div class="label col-9">
-            <div class="author">
-              <a class="font-weight-bold dark-grey-text">{{allArticles[2].author}} </a> posted 1 hour(s) ago
-            </div>
-            <div class="comment">
-              <a class="name">Here is a super fancy comment about the article just read</a>
-            </div>
-          </div>
-        </div>
-        <div class="news row">
-          <div class="label col-2">
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9)-mini.jpg" class="rounded-circle z-depth-1-half" style="width: 75px;height:75px;"/>
-          </div>
-          <div class="label col-9">
-            <div class="author">
-              <a class="font-weight-bold dark-grey-text">{{allArticles[1].author}} </a> posted 2 hour(s) ago
-            </div>
-            <div class="comment">
-              <a class="name">Another fancy comment from me about this article</a>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="col-lg-10">
+      <div class="mdb-feed" [innerHtml]= "articleComments"></div>
     </div>
   </div>
 </section>
