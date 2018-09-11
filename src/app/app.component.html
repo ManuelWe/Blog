@@ -1,60 +1,157 @@
-<!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+<!--MainPage-->
+<div class="container" *ngIf="page == 0">
 
-  <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" href="#">Navbar</a></mdb-navbar-brand>
+  <!--Section heading-->
+  <h2 class="h1 font-weight-bold mb-5 pt-4">About this blog</h2>
+  <!--Section description-->
+  <p class="mb-5 pb-3">Hey there,<br>
+  this is a fun blog where everybody can create and comment entries... something about the blog (dunno what to right here)</p>
 
-  <!-- Collapsible content -->
-  <links>
+  <h2 class="h1 font-weight-bold mb-5 pt-4">Recent posts</h2>
+  <!--Grid row-->
+  <div class="row">
 
-    <!-- Links -->
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link waves-light" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Pricing</a>
-      </li>
-
-      <!-- Dropdown -->
-      <li class="nav-item dropdown" dropdown>
-        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          Basic dropdown<span class="caret"></span></a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
-          <div class="divider dropdown-divider"></div>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
-        </div>
-      </li>
-
-    </ul>
-    <!-- Links -->
-
-    <!-- Search form -->
-    <form class="form-inline waves-light" mdbWavesEffect>
-      <div class="md-form mt-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+    <!--Grid column-->
+    <div class="col-lg-4 col-md-12 mb-4">
+      <!--Featured image-->
+      <div class="view overlay rounded z-depth-2 mb-2 waves-light" mdbWavesEffect>
+        <img src="https://mdbootstrap.com/img/Photos/Others/images/81.jpg" class="img-fluid" alt="First sample image">
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
       </div>
-    </form>
-  </links>
-  <!-- Collapsible content -->
 
-</mdb-navbar>
-<!--/.Navbar-->
-
-<div class="container content"> <!-- container centers content on large screens -->
-  <div class="row">             <!-- responsive row has 12 columns by default -->
-    <div class="col-md-6">
-      Hello world<!-- uses 6 columns on medium and larger screens... -->
+      <!--Excerpt-->
+      <a href="" class="pink-text">
+        <h6 class="mb-3 mt-4">
+          <strong>{{allArticles[0].topic.join(", ")}}</strong>
+        </h6>
+      </a>
+      <h4 class="mb-3 font-weight-bold dark-grey-text">
+        <strong>{{allArticles[0].headline}}</strong>
+      </h4>
+      by <a class="font-weight-bold dark-grey-text">{{allArticles[0].author}}</a>, {{allArticles[0].date}}
+      <p class="grey-text">{{allArticles[0].text.substring(0, 200)}} ...</p>
+      <a mdbBtn (click)="readMore(0)" color="pink" rounded="true" size="md" class="waves-light" mdbWavesEffect>Read more</a>
     </div>
-    <div class="col-md-6">
-      Manuel und Jan<!-- uses 12 columns on smaller than medium screens -->
+    <!--Grid column -->
+
+    <!--Grid column-->
+    <div class="col-lg-4 col-md-6 mb-4">
+      <!--Featured image-->
+      <div class="view overlay rounded z-depth-2 mb-2 waves-light" mdbWavesEffect>
+        <img src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" class="img-fluid" alt="Second sample image">
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+
+      <!--Excerpt-->
+      <a href="" class="deep-orange-text">
+        <h6 class="mb-3 mt-4">
+          <strong>{{allArticles[1].topic.join(", ")}}</strong>
+        </h6>
+      </a>
+      <h4 class="mb-3 font-weight-bold dark-grey-text">
+        <strong>{{allArticles[1].headline}}</strong>
+      </h4>
+      by <a class="font-weight-bold dark-grey-text">{{allArticles[1].author}}</a>, {{allArticles[1].date}}
+      <p class="grey-text">{{allArticles[1].text.substring(0, 200)}} ...</p>
+      <a mdbBtn (click)="readMore(1)" color="deep-orange" rounded="true" size="md" class="waves-light" mdbWavesEffect>Read more</a>
+    </div>
+    <!--Grid column-->
+
+    <!--Grid column-->
+    <div class="col-lg-4 col-md-6 mb-4">
+      <!--Featured image-->
+      <div class="view overlay rounded z-depth-2 mb-2 waves-light" mdbWavesEffect>
+        <img src="https://mdbootstrap.com/img/Photos/Others/images/13.jpg" class="img-fluid" alt="Thrid sample image">
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+
+      <!--Excerpt-->
+      <a href="" class="cyan-text">
+        <h6 class="mb-3 mt-4">
+          <strong>{{allArticles[2].topic.join(", ")}}</strong>
+        </h6>
+      </a>
+      <h4 class="mb-3 font-weight-bold dark-grey-text">
+        <strong>{{allArticles[2].headline}}</strong>
+      </h4>
+      by <a class="font-weight-bold dark-grey-text">{{allArticles[2].author}}</a>, {{allArticles[2].date}}
+      <p class="grey-text">{{allArticles[2].text.substring(0, 200)}} ...</p>
+      <a mdbBtn (click)="readMore(2)" color="info" rounded="true" size="md" class="waves-light" mdbWavesEffect>Read more</a>
+    </div>
+    <!--Grid column-->
+
+  </div>
+  <!--Grid row-->
+
+</div>
+<!--ArticlePage-->
+<div class="container" *ngIf="page == 1">
+  <div class="row">
+    <div class="col-md-12 blogShort">
+      <h1>{{articleHeader}}</h1>
+      <img src="{{articlePicture}}" class="pull-left img-responsive img-fluid view overlay rounded z-depth-2 mb-2 waves-light" id="articleImage">
+      <article>
+        <p class="box-text">
+          {{articleText}}
+        </p>
+      </article>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="media">
+        <a class="articleAuthorPicture pull-left">
+          <img class="img-responsive img-fluid view overlay rounded z-depth-2 mb-2 waves-light" src="{{articleAuthorPicture}}" style="width: 100px;height:100px;">
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading">{{articleAuthor}}</h4>
+          <h5>{{articleDateString}}</h5>
+          <h6>Topics: {{articleTopic}}</h6>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<footer></footer>
+<!--Comments-->
+<section class="container pt-0 pb-3" *ngIf="page == 1">
+  <hr style="margin:8px auto">
+  <h4>Comments</h4>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="mdb-feed">
+        <div class="news row">
+          <div class="label col-2">
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(17)-mini.jpg" class="rounded-circle z-depth-1-half" style="width: 75px;height:75px;"/>
+          </div>
+          <div class="label col-9">
+            <div class="author">
+              <a class="font-weight-bold dark-grey-text">{{allArticles[2].author}} </a> posted 1 hour(s) ago
+            </div>
+            <div class="comment">
+              <a class="name">Here is a super fancy comment about the article just read</a>
+            </div>
+          </div>
+        </div>
+        <div class="news row">
+          <div class="label col-2">
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9)-mini.jpg" class="rounded-circle z-depth-1-half" style="width: 75px;height:75px;"/>
+          </div>
+          <div class="label col-9">
+            <div class="author">
+              <a class="font-weight-bold dark-grey-text">{{allArticles[1].author}} </a> posted 2 hour(s) ago
+            </div>
+            <div class="comment">
+              <a class="name">Another fancy comment from me about this article</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
