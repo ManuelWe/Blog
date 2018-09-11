@@ -7,7 +7,7 @@ import {RecordsService} from './records.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  page = 0; // mainPage = 0 articles = 1
+  page = 0; // mainPage = 0 articles = 1 allArticles = 2
   articleHeader;
   articlePicture;
   articleId;
@@ -32,7 +32,10 @@ export class AppComponent {
     });
   }
   randomArticle() {
-
+    this.readMore(Math.floor(Math.random() * (this.allArticles.length + 1)));
+  }
+  showAllArticles() {
+    this.page = 2;
   }
   readMore(id) {
     this.article = this.allArticles[id];
@@ -73,7 +76,7 @@ export class AppComponent {
       }
     }
   }
-  mainPage(){
+  mainPage() {
     this.page = 0;
   }
 }

@@ -9,22 +9,21 @@
 
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active" (click)="mainPage()">
-        <a class="nav-link waves-light" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
+      <li class="nav-item" (click)="mainPage()">
+        <a class="nav-link waves-light" mdbWavesEffect>Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Features</a>
+      <li class="nav-item" (click)="randomArticle()">
+        <a class="nav-link waves-light" mdbWavesEffect>Random article</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Pricing</a>
+      <li class="nav-item" (click)="showAllArticles()">
+        <a class="nav-link waves-light" mdbWavesEffect>All articles</a>
       </li>
     </ul>
-    <!-- Search form
     <form class="form-inline waves-light" mdbWavesEffect>
       <div class="md-form mt-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search">
       </div>
-    </form> -->
+    </form>
   </links>
   <!-- Collapsible content -->
 </mdb-navbar>
@@ -158,3 +157,7 @@
     </div>
   </div>
 </section>
+<!--AllArticles-->
+<div class="container" *ngIf="page == 2">
+  Working in progress!!!
+</div>
