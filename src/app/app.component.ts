@@ -31,6 +31,9 @@ export class AppComponent {
       this.allComments = data;
     });
   }
+  randomArticle() {
+
+  }
   readMore(id) {
     this.article = this.allArticles[id];
     this.articleId = this.article._id;
@@ -69,5 +72,8 @@ export class AppComponent {
           '        </div>';
       }
     }
+  }
+  mainPage(){
+    this.page = 0;
   }
 }
