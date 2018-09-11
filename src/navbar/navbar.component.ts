@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {load} from '@angular/core/src/render3/instructions';
+import {main} from '@angular/compiler-cli/src/main';
 
 @Component({
   selector: 'app-navbar',
@@ -11,5 +13,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  readMore() {
+  }
+  /* TODO
+   * Fix navbar functionality (interaction between components)
+   */
 }

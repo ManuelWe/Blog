@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "ng serve",
-    "build": "ng build && node server.js",
+    "build": "ng serve && node server.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -19,6 +19,7 @@
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
+    "bcrypt": "^3.0.0",
     "@types/chart.js": "^2.7.32",
     "angular-bootstrap-md": "^6.2.3",
     "angular5-csv": "^0.2.10",
