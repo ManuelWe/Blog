@@ -20,7 +20,7 @@ import {RecordsService} from './records.service';
     MDBBootstrapModule.forRoot()
   ],
   providers: [RecordsService],
-  bootstrap: [AppComponent, NavbarComponent, FooterComponent],
+  bootstrap: [AppComponent, FooterComponent/*, NavbarComponent*/],
   schemas: [ NO_ERRORS_SCHEMA ],
 })
 export class AppModule { }

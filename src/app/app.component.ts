@@ -17,10 +17,34 @@ export class AppComponent {
   articleDate;
   articleDateString;
   articleTopic;
-  articleComments = '';
-  allArticles;
+  articleComments;
+  allArticles = [{
+    topic: [],
+    _id: '',
+    date: '',
+    author: '',
+    text: '',
+    headline: ''},
+    {
+      topic: [],
+      _id: '',
+      date: '',
+      author: '',
+      text: '',
+      headline: ''},
+    {
+      topic: [],
+      _id: '',
+      date: '',
+      author: '',
+      text: '',
+      headline: ''}];
   article;
   allComments;
+  natureArticles;
+  citiesArticles;
+  peopleArticles;
+  otherArticles;
   constructor(private myFirstService: RecordsService) {
     this.myFirstService.getArticles().subscribe(data => {
       console.log(data);
@@ -36,6 +60,26 @@ export class AppComponent {
   }
   showAllArticles() {
     this.page = 2;
+    let counter = 0;
+    this.natureArticles = '';
+    this.citiesArticles = '';
+    this.peopleArticles = '';
+    this.otherArticles = '';
+    for (let entry of this.allArticles) {
+      if (entry.topic.includes('Nature')) {
+        this.natureArticles += '<h4 (click)="readMore(' + counter + ')">' + entry.headline + '</h4>';
+      }
+      else if (entry.topic.includes('Cities')) {
+        this.citiesArticles += '<h4 (click)="readMore(' + counter + ')">' + entry.headline + '</h4>';
+      }
+      else if (entry.topic.includes('People')) {
+        this.peopleArticles += '<h4 (click)="readMore(' + counter + ')">' + entry.headline + '</h4>';
+      }
+      else {
+        this.otherArticles += '<h4 (click)="readMore(' + counter + ')">' + entry.headline + '</h4>';
+      }
+      counter++;
+    }
   }
   readMore(id) {
     this.article = this.allArticles[id];
@@ -52,8 +96,8 @@ export class AppComponent {
 
     /*console.log(this.allComments);
     console.log(this.articleId);*/
-
-    for (let entry of this.allComments) {
+    this.articleComments = '';
+    for (const entry of this.allComments) {
       /*console.log('Start');
       console.log(entry.articleId);
       console.log(this.articleId);
