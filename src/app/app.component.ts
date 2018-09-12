@@ -18,7 +18,27 @@ export class AppComponent {
   articleDateString;
   articleTopic;
   articleComments;
-  allArticles;
+  allArticles = [{
+    topic: [],
+    _id: '',
+    date: '',
+    author: '',
+    text: '',
+    headline: ''},
+    {
+      topic: [],
+      _id: '',
+      date: '',
+      author: '',
+      text: '',
+      headline: ''},
+    {
+      topic: [],
+      _id: '',
+      date: '',
+      author: '',
+      text: '',
+      headline: ''}];
   article;
   allComments;
   constructor(private myFirstService: RecordsService) {
@@ -53,7 +73,7 @@ export class AppComponent {
     /*console.log(this.allComments);
     console.log(this.articleId);*/
     this.articleComments = '';
-    for (let entry of this.allComments) {
+    for (const entry of this.allComments) {
       /*console.log('Start');
       console.log(entry.articleId);
       console.log(this.articleId);
