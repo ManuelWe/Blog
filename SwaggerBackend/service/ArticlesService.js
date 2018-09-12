@@ -2,6 +2,7 @@
 
 let Article = require('../../db/models/articles');
 let Comment = require('../../db/models/comments');
+let dateConverter = require('../utils/dateConverter');
 
 /**
  * Delete an existing article
@@ -37,7 +38,7 @@ exports.apiArticlesArticleidGET = function(articleid) {
         reject();
       } else {
         if (Object.keys(articles).length > 0) {
-          resolve(articles);
+          resolve(dateConverter.convertDate(articles));
         } else {
           resolve();
         }
@@ -61,7 +62,7 @@ exports.apiArticlesCommentsArticleidGET = function(articleid) {
         reject();
       } else {
         if (Object.keys(comments).length > 0) {
-          resolve(comments);
+          resolve(dateConverter.convertDate(comments));
         } else {
           resolve();
         }
@@ -84,7 +85,7 @@ exports.apiArticlesGET = function() {
         reject();
       } else {
         if (Object.keys(articles).length > 0) {
-          resolve(articles);
+          resolve(dateConverter.convertDate(articles));
         } else {
           resolve();
         }
