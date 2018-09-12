@@ -25,6 +25,13 @@ app.use(function(req, res, next) {
 // Get our API routes
 const api = require('./server/routes/index');
 
+// TODO remove allow cors
+app.use(function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PATCH");
+    next();
+});
 
 // Parsers for POST data
 app.use(bodyParser.json());

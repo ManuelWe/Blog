@@ -12,3 +12,6 @@ $ npm run build
 ```bash
 $ node server
 ```
+
+## Server is listening on localhost:3000
+### View api specification on localhost:3000/docs
