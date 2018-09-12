@@ -17,7 +17,7 @@ export class AppComponent {
   articleDate;
   articleDateString;
   articleTopic;
-  articleComments = '';
+  articleComments;
   allArticles;
   article;
   allComments;
@@ -52,7 +52,7 @@ export class AppComponent {
 
     /*console.log(this.allComments);
     console.log(this.articleId);*/
-
+    this.articleComments = '';
     for (let entry of this.allComments) {
       /*console.log('Start');
       console.log(entry.articleId);
