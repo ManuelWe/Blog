@@ -1,3 +1,27 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+  <mdb-navbar-brand><a class="navbar-brand" [routerLink]="['/index']">Navbar</a></mdb-navbar-brand>
+  <links>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" [routerLink]="['/index']">
+        <a class="nav-link waves-light" mdbWavesEffect>Home</a>
+      </li>
+      <li class="nav-item" [routerLink]="['/article', '5b978079fe36a1338474ce80']">
+        <a class="nav-link waves-light" mdbWavesEffect>Random article</a>
+      </li>
+      <li class="nav-item" [routerLink]="['/allArticles']">
+        <a class="nav-link waves-light" mdbWavesEffect>All articles</a>
+      </li>
+    </ul>
+    <form class="form-inline waves-light" mdbWavesEffect>
+      <div class="md-form mt-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      </div>
+    </form>
+  </links>
+  <!-- Collapsible content -->
+</mdb-navbar>
+<router-outlet></router-outlet>
 <!-- Footer -->
 <footer class="page-footer font-small indigo pt-4">
 
@@ -40,4 +64,3 @@
   <!-- Copyright -->
 
 </footer>
-<!-- Footer -->
