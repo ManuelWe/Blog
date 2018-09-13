@@ -1,18 +1,12 @@
 <!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
-
-  <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" (click)="mainPage()">Navbar</a></mdb-navbar-brand>
-
-  <!-- Collapsible content -->
+  <mdb-navbar-brand><a class="navbar-brand" [routerLink]="['/index']">Navbar</a></mdb-navbar-brand>
   <links>
-
-    <!-- Links -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" [routerLink]="['/index']">
         <a class="nav-link waves-light" mdbWavesEffect>Home</a>
       </li>
-      <li class="nav-item" (click)="randomArticle()">
+      <li class="nav-item" [routerLink]="['/article', '5b978079fe36a1338474ce80']">
         <a class="nav-link waves-light" mdbWavesEffect>Random article</a>
       </li>
       <li class="nav-item" [routerLink]="['/allArticles']">
