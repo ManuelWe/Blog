@@ -15,6 +15,9 @@ exports.apiUsersGET = function() {
         reject();
       } else {
         if (Object.keys(users).length > 0) {
+          for (let i in users) {
+            delete users[i].password;
+          }
           resolve(users);
         } else {
           resolve();
@@ -51,6 +54,27 @@ exports.apiUsersPOST = function(body) {
       } else {
         resolve(user);
       }
+    });
+  });
+};
+
+/**
+ * Authentification of a User
+ *
+ * userid String User ID
+ * body Authentification Password
+ * no response value expected for this operation
+ **/
+exports.apiUsersUseridAuthenticateGET = function(userid, body) {
+  return new Promise(function(resolve, reject) {
+    User.findById(userid, function(err, user) {
+      user.comparePassword(body.password, function(err, isMatch) {
+        console.log(isMatch);
+        if (err) throw err;
+        if (isMatch) {
+          resolve();
+        } else reject();
+      });
     });
   });
 };
@@ -102,6 +126,7 @@ exports.apiUsersUseridGET = function(userid) {
         reject();
       } else {
         if (Object.keys(user).length > 0) {
+          delete user.password;
           resolve(user);
         } else {
           resolve();

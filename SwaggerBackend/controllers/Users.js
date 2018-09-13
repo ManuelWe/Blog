@@ -24,6 +24,18 @@ module.exports.apiUsersPOST = function apiUsersPOST(req, res, next) {
       });
 };
 
+module.exports.apiUsersUseridAuthenticateGET = function apiUsersUseridAuthenticateGET(req, res, next) {
+  let userid = req.swagger.params['userid'].value;
+  let body = req.swagger.params['body'].value;
+  Users.apiUsersUseridAuthenticateGET(userid, body)
+      .then(function(response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function(response) {
+        utils.writeJson(res, response);
+      });
+};
+
 module.exports.apiUsersUseridDELETE =
   function apiUsersUseridDELETE(req, res, next) {
     let userid = req.swagger.params['userid'].value;
