@@ -12,4 +12,3 @@ exports.convertDate = function(objects) {
   }
   return objectCopy;
 };
-
