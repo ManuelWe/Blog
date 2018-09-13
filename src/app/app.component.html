@@ -27,212 +27,46 @@
   </links>
   <!-- Collapsible content -->
 </mdb-navbar>
-<!--MainPage-->
-<div class="container" *ngIf="page == 0">
+<router-outlet></router-outlet>
+<!-- Footer -->
+<footer class="page-footer font-small indigo pt-4">
 
-  <!--Section heading-->
-  <h2 class="h1 font-weight-bold mb-5 pt-4">About this blog</h2>
-  <!--Section description-->
-  <p class="mb-5 pb-3">Hey there,<br>
-  this is a fun blog where everybody can create and comment entries... something about the blog (dunno what to right here)</p>
+  <!-- Footer Elements -->
+  <div class="container">
 
-  <h2 class="h1 font-weight-bold mb-5 pt-4">Recent posts</h2>
-  <!--Grid row-->
-  <div class="row">
-
-    <!--Grid column-->
-    <div class="col-lg-4 col-md-12 mb-4">
-      <!--Featured image-->
-      <div class="view overlay rounded z-depth-2 mb-2 waves-light" mdbWavesEffect>
-        <img src="https://mdbootstrap.com/img/Photos/Others/images/81.jpg" class="img-fluid" alt="First sample image">
-        <a>
-          <div class="mask rgba-white-slight"></div>
+    <ul class="list-unstyled list-inline text-center">
+      <li class="list-inline-item">
+        <a class="btn-floating btn-fb mx-1" mdbWavesEffect>
+          <mdb-icon icon="facebook"></mdb-icon>
         </a>
-      </div>
-
-      <!--Excerpt-->
-      <a href="" class="pink-text">
-        <h6 class="mb-3 mt-4">
-          <strong>{{allArticles[0].topic.join(", ")}}</strong>
-        </h6>
-      </a>
-      <h4 class="mb-3 font-weight-bold dark-grey-text">
-        <strong>{{allArticles[0].headline}}</strong>
-      </h4>
-      by <a class="font-weight-bold dark-grey-text">{{allArticles[0].author}}</a>, {{allArticles[0].date}}
-      <p class="grey-text">{{allArticles[0].text.substring(0, 200)}} ...</p>
-      <a mdbBtn (click)="readMore(0)" color="pink" rounded="true" size="md" class="waves-light" mdbWavesEffect>Read more</a>
-    </div>
-    <!--Grid column -->
-
-    <!--Grid column-->
-    <div class="col-lg-4 col-md-6 mb-4">
-      <!--Featured image-->
-      <div class="view overlay rounded z-depth-2 mb-2 waves-light" mdbWavesEffect>
-        <img src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" class="img-fluid" alt="Second sample image">
-        <a>
-          <div class="mask rgba-white-slight"></div>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-tw mx-1" mdbWavesEffect>
+          <mdb-icon icon="twitter"></mdb-icon>
         </a>
-      </div>
-
-      <!--Excerpt-->
-      <a href="" class="deep-orange-text">
-        <h6 class="mb-3 mt-4">
-          <strong>{{allArticles[1].topic.join(", ")}}</strong>
-        </h6>
-      </a>
-      <h4 class="mb-3 font-weight-bold dark-grey-text">
-        <strong>{{allArticles[1].headline}}</strong>
-      </h4>
-      by <a class="font-weight-bold dark-grey-text">{{allArticles[1].author}}</a>, {{allArticles[1].date}}
-      <p class="grey-text">{{allArticles[1].text.substring(0, 200)}} ...</p>
-      <a mdbBtn (click)="readMore(1)" color="deep-orange" rounded="true" size="md" class="waves-light" mdbWavesEffect>Read more</a>
-    </div>
-    <!--Grid column-->
-
-    <!--Grid column-->
-    <div class="col-lg-4 col-md-6 mb-4">
-      <!--Featured image-->
-      <div class="view overlay rounded z-depth-2 mb-2 waves-light" mdbWavesEffect>
-        <img src="https://mdbootstrap.com/img/Photos/Others/images/13.jpg" class="img-fluid" alt="Thrid sample image">
-        <a>
-          <div class="mask rgba-white-slight"></div>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-gplus mx-1" mdbWavesEffect>
+          <mdb-icon icon="google-plus"></mdb-icon>
         </a>
-      </div>
-
-      <!--Excerpt-->
-      <a href="" class="cyan-text">
-        <h6 class="mb-3 mt-4">
-          <strong>{{allArticles[2].topic.join(", ")}}</strong>
-        </h6>
-      </a>
-      <h4 class="mb-3 font-weight-bold dark-grey-text">
-        <strong>{{allArticles[2].headline}}</strong>
-      </h4>
-      by <a class="font-weight-bold dark-grey-text">{{allArticles[2].author}}</a>, {{allArticles[2].date}}
-      <p class="grey-text">{{allArticles[2].text.substring(0, 200)}} ...</p>
-      <a mdbBtn (click)="readMore(2)" color="info" rounded="true" size="md" class="waves-light" mdbWavesEffect>Read more</a>
-    </div>
-    <!--Grid column-->
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-li mx-1" mdbWavesEffect>
+          <mdb-icon icon="linkedin"></mdb-icon>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-dribbble mx-1" mdbWavesEffect>
+          <mdb-icon icon="dribbble"></mdb-icon>
+        </a>
+      </li>
+    </ul>
 
   </div>
-  <!--Grid row-->
+  <!-- Footer Elements -->
 
-</div>
-<!--ArticlePage-->
-<div class="container" *ngIf="page == 1">
-  <div class="row">
-    <div class="col-md-12 blogShort">
-      <h1>{{articleHeader}}</h1>
-      <img src="{{articlePicture}}" class="pull-left img-responsive img-fluid view overlay rounded z-depth-2 mb-2 waves-light" id="articleImage">
-      <article>
-        <p class="box-text">
-          {{articleText}}
-        </p>
-      </article>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="media">
-        <a class="articleAuthorPicture pull-left">
-          <img class="img-responsive img-fluid view overlay rounded z-depth-2 mb-2 waves-light" src="{{articleAuthorPicture}}" style="width: 100px;height:100px;">
-        </a>
-        <div class="media-body">
-          <h4 class="media-heading">{{articleAuthor}}</h4>
-          <h5>{{articleDateString}}</h5>
-          <h6>Topics: {{articleTopic}}</h6>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!--Comments-->
-<section class="container pt-0 pb-3" *ngIf="page == 1">
-  <hr style="margin:8px auto">
-  <h4>Comments</h4>
-  <div class="row">
-    <div class="col-lg-10">
-      <div class="mdb-feed" [innerHtml]= "articleComments"></div>
-    </div>
-  </div>
-</section>
-<!--AllArticles-->
-<div class="container" *ngIf="page == 2">
-  <!--Section: Blog v.3-->
-  <section class="py-4">
-    <div class="row">
-      <div class="col-lg-5 col-xl-4 mb-4">
-        <div class="view overlay rounded z-depth-1-half waves-light" mdbWavesEffect>
-          <img src="https://mdbootstrap.com/img/Photos/Others/images/49.jpg" class="img-fluid" alt="First sample image">
-          <a>
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-      </div>
-      <div class="col-lg-7 col-xl-7 ml-xl-4 mb-4">
-        <h3 class="mb-3 font-weight-bold dark-grey-text">
-          <strong>Nature</strong>
-        </h3>
-        <div [innerHtml] = "natureArticles"></div>
-      </div>
-    </div>
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2018 Copyright: Wetzel/Geistler</div>
+  <!-- Copyright -->
 
-    <hr class="mb-5">
-
-    <div class="row mt-3">
-      <div class="col-lg-5 col-xl-4 mb-4">
-        <div class="view overlay rounded z-depth-1 waves-light" mdbWavesEffect>
-          <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(142).jpg" class="img-fluid" alt="Second sample image">
-          <a>
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-      </div>
-      <div class="col-lg-7 col-xl-7 ml-xl-4 mb-4">
-        <h3 class="mb-3 font-weight-bold dark-grey-text">
-          <strong>Cities</strong>
-        </h3>
-        <div [innerHtml] = "citiesArticles"></div>
-      </div>
-    </div>
-
-    <hr class="mb-5">
-
-    <div class="row">
-      <div class="col-lg-5 col-xl-4 mb-4">
-        <div class="view overlay rounded z-depth-1 waves-light" mdbWavesEffect>
-          <img src="https://mdbootstrap.com/img/Photos/Others/images/52.jpg" class="img-fluid" alt="Third sample image">
-          <a>
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-      </div>
-      <div class="col-lg-7 col-xl-7 ml-xl-4 mb-4">
-        <h3 class="mb-3 font-weight-bold dark-grey-text">
-          <strong>People</strong>
-        </h3>
-        <div [innerHtml] = "peopleArticles"></div>
-      </div>
-    </div>
-    <h4 (click)="readMore(0)">Hello world</h4>
-    <hr class="mb-5">
-
-    <div class="row">
-      <div class="col-lg-5 col-xl-4 mb-4">
-        <div class="view overlay rounded z-depth-1 waves-light" mdbWavesEffect>
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%28110%29.jpg" class="img-fluid" alt="Third sample image">
-          <a>
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-      </div>
-      <div class="col-lg-7 col-xl-7 ml-xl-4 mb-4">
-        <h3 class="mb-3 font-weight-bold dark-grey-text">
-          <strong>Other articles</strong>
-        </h3>
-        <div [innerHtml]="otherArticles"></div>
-      </div>
-    </div>
-  </section>
-</div>
+</footer>

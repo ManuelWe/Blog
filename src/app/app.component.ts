@@ -15,30 +15,9 @@ export class AppComponent {
   articleAuthor;
   articleAuthorPicture;
   articleDate;
-  articleDateString;
   articleTopic;
   articleComments;
-  allArticles = [{
-    topic: [],
-    _id: '',
-    date: '',
-    author: '',
-    text: '',
-    headline: ''},
-    {
-      topic: [],
-      _id: '',
-      date: '',
-      author: '',
-      text: '',
-      headline: ''},
-    {
-      topic: [],
-      _id: '',
-      date: '',
-      author: '',
-      text: '',
-      headline: ''}];
+  allArticles;
   article;
   allComments;
   natureArticles;
@@ -89,8 +68,7 @@ export class AppComponent {
     this.articleText = this.article.text;
     this.articleAuthorPicture = './assets/CyberEgg.jpg';
     this.articleAuthor = this.article.author;
-    this.articleDate = new Date(this.article.date);
-    this.articleDateString = this.articleDate.getDate() + '/' + (this.articleDate.getMonth() + 1) + '/' + this.articleDate.getFullYear();
+    this.articleDate = this.article.date;
     this.articleTopic = this.article.topic.join(', ');
     this.page = 1;
 
