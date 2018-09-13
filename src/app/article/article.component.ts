@@ -11,28 +11,33 @@ export class ArticleComponent implements OnInit {
   allArticles;
   allComments;
   article;
-  articleIndex;
+  articleId: string;
   articlePicture;
   articleAuthorPicture;
   articleComments = [];
+  data2;
 
   constructor(private route: ActivatedRoute, private myFirstService: RecordsService) {
-    this.myFirstService.getArticles().subscribe(data => {
-      this.allArticles = data
-      this.article = this.allArticles[this.articleIndex];
-      this.articlePicture = 'https://mdbootstrap.com/img/Photos/Others/images/81.jpg';
-      this.articleAuthorPicture = './assets/CyberEgg.jpg';
-      this.myFirstService.getComments().subscribe(data1 => {
-        this.allComments = data1;
-        for (const comment of this.allComments) {
-          if (comment.articleId === this.article._id) {
-            this.articleComments.push(comment);
-          }
-        }
-      });
-    });
     this.route.params.subscribe(params => {
-      this.articleIndex = +params['id'];
+      this.articleId = params['id'].toString();
+    });
+    this.myFirstService.getArticles().subscribe(data => {
+      this.allArticles = data;
+      for (let entry of this.allArticles) {
+        if (entry._id === this.articleId) {
+          this.article = entry;
+        }
+      }
+    });
+    this.articlePicture = 'https://mdbootstrap.com/img/Photos/Others/images/81.jpg';
+    this.articleAuthorPicture = './assets/CyberEgg.jpg';
+    this.myFirstService.getComments().subscribe(data1 => {
+      this.allComments = data1;
+      for (const comment of this.allComments) {
+        if (comment.articleId === this.articleId) {
+          this.articleComments.push(comment);
+        }
+      }
     });
   }
   ngOnInit() {

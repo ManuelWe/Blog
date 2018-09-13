@@ -14,7 +14,9 @@
         <h3 class="mb-3 font-weight-bold dark-grey-text">
           <strong>Nature</strong>
         </h3>
-        <div [innerHtml] = "natureArticles"></div>
+        <div *ngFor="let article of natureArticles">
+          <h4 [routerLink] = "['/article', article._id]"><a>{{ article?.headline }}</a></h4>
+        </div>
       </div>
     </div>
 
@@ -33,7 +35,9 @@
         <h3 class="mb-3 font-weight-bold dark-grey-text">
           <strong>Cities</strong>
         </h3>
-        <div [innerHtml] = "citiesArticles"></div>
+        <div *ngFor="let article of citiesArticles">
+          <h4 [routerLink] = "['/article', article._id]"><a>{{ article?.headline }}</a></h4>
+        </div>
       </div>
     </div>
 
@@ -52,10 +56,11 @@
         <h3 class="mb-3 font-weight-bold dark-grey-text">
           <strong>People</strong>
         </h3>
-        <div [innerHtml] = "peopleArticles"></div>
+        <div *ngFor="let article of peopleArticles">
+          <h4 [routerLink] = "['/article', article._id]"><a>{{ article?.headline }}</a></h4>
+        </div>
       </div>
     </div>
-    <h4 (click)="readMore(0)">Hello world</h4>
     <hr class="mb-5">
 
     <div class="row">
@@ -71,7 +76,9 @@
         <h3 class="mb-3 font-weight-bold dark-grey-text">
           <strong>Other articles</strong>
         </h3>
-        <div [innerHtml]="otherArticles"></div>
+        <div *ngFor="let article of otherArticles">
+          <h4 [routerLink] = "['/article', article._id]"><a>{{ article?.headline }}</a></h4>
+        </div>
       </div>
     </div>
   </section>
