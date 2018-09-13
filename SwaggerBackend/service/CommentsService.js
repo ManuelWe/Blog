@@ -1,6 +1,7 @@
 'use strict';
 
 let Comment = require('../../db/models/comments');
+let dateConverter = require('../utils/dateConverter');
 
 /**
  * Create a new comment
@@ -59,13 +60,13 @@ exports.apiCommentsCommentidDELETE = function(commentid) {
  **/
 exports.apiCommentsCommentidGET = function(commentid) {
   return new Promise(function(resolve, reject) {
-    Comment.findById(commentid, function(err, comments) {
+    Comment.findById(commentid, function(err, comment) {
       if (err) {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(comments).length > 0) {
-          resolve(comments);
+        if (Object.keys(comment).length > 0) {
+          resolve(dateConverter.convertDate(comment));
         } else {
           resolve();
         }
@@ -87,7 +88,7 @@ exports.apiCommentsGET = function() {
         reject();
       } else {
         if (Object.keys(comments).length > 0) {
-          resolve(comments);
+          resolve(dateConverter.convertDate(comments));
         } else {
           resolve();
         }
