@@ -8,6 +8,11 @@ API specification: SwaggerBackend/api/swagger.yaml
 $ npm run build
 ```
 
+## Automatic update Angular with changes
+```bash
+$ ng serve
+```
+
 ## Only start server
 ```bash
 $ node server
