@@ -15,10 +15,11 @@ exports.apiUsersGET = function() {
         reject();
       } else {
         if (Object.keys(users).length > 0) {
-          for (let i in users) {
-            delete users[i].password;
+          let usersCopy = JSON.parse(JSON.stringify(users));
+          for (let i in usersCopy) {
+            delete usersCopy[i].password;
           }
-          resolve(users);
+          resolve(usersCopy);
         } else {
           resolve();
         }
@@ -45,6 +46,7 @@ exports.apiUsersPOST = function(body) {
       streetNumber: body.streetNumber,
       email: body.email,
       password: body.password,
+      picture: body.picture,
     });
 
     newUser.save(function(err, user) {
@@ -65,15 +67,18 @@ exports.apiUsersPOST = function(body) {
  * body Authentification Password
  * no response value expected for this operation
  **/
-exports.apiUsersUseridAuthenticateGET = function(userid, body) {
+exports.apiUsersUseridAuthenticatePOST = function(userid, body) {
   return new Promise(function(resolve, reject) {
     User.findById(userid, function(err, user) {
       user.comparePassword(body.password, function(err, isMatch) {
-        console.log(isMatch);
-        if (err) throw err;
-        if (isMatch) {
-          resolve();
-        } else reject();
+        if (err) {
+          console.log(err);
+          reject();
+        } else if (!isMatch) {
+          reject({correctPassword: false});
+        } else {
+          resolve({correctPassword: true});
+        }
       });
     });
   });
@@ -109,25 +114,14 @@ exports.apiUsersUseridDELETE = function(userid) {
 exports.apiUsersUseridGET = function(userid) {
   return new Promise(function(resolve, reject) {
     User.findById(userid, function(err, user) {
-      // test a matching password
-      user.comparePassword('Password', function(err, isMatch) {
-        if (err) throw err;
-        console.log('Password:', isMatch); // -> Password123: true
-      });
-
-      // test a failing password
-      user.comparePassword('123Password', function(err, isMatch) {
-        if (err) throw err;
-        console.log('123Password:', isMatch); // -> 123Password: false
-      });
-
       if (err) {
         console.log(err);
         reject();
       } else {
         if (Object.keys(user).length > 0) {
-          delete user.password;
-          resolve(user);
+          let userCopy = JSON.parse(JSON.stringify(user));
+          delete userCopy.password;
+          resolve(userCopy);
         } else {
           resolve();
         }

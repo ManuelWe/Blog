@@ -24,10 +24,10 @@ module.exports.apiUsersPOST = function apiUsersPOST(req, res, next) {
       });
 };
 
-module.exports.apiUsersUseridAuthenticateGET = function apiUsersUseridAuthenticateGET(req, res, next) {
+module.exports.apiUsersUseridAuthenticatePOST = function apiUsersUseridAuthenticatePOST(req, res, next) {
   let userid = req.swagger.params['userid'].value;
   let body = req.swagger.params['body'].value;
-  Users.apiUsersUseridAuthenticateGET(userid, body)
+  Users.apiUsersUseridAuthenticatePOST(userid, body)
       .then(function(response) {
         utils.writeJson(res, response);
       })

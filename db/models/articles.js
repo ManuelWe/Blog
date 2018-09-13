@@ -21,6 +21,9 @@ let articleSchema = mongoose.Schema({
     type: Array,
     required: true,
   },
+  picture: {
+    type: String,
+  },
 });
 
 let Article = module.exports = mongoose.model('Article', articleSchema);
