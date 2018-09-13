@@ -98,7 +98,7 @@ paths:
         description: "User to be updated"
         required: true
         schema:
-          $ref: "#/definitions/UserUpdate"
+          $ref: "#/definitions/UserCreate"
       responses:
         200:
           description: "successful operation"
@@ -126,12 +126,14 @@ paths:
           description: "successful operation"
       x-swagger-router-controller: "Users"
   /api/users/{userid}/authenticate:
-    get:
+    post:
       tags:
       - "users"
       summary: "Authentification of a User"
-      operationId: "apiUsersUseridAuthenticateGET"
+      operationId: "apiUsersUseridAuthenticatePOST"
       consumes:
+      - "application/json"
+      produces:
       - "application/json"
       parameters:
       - name: "userid"
@@ -147,7 +149,7 @@ paths:
         schema:
           $ref: "#/definitions/Authentification"
       responses:
-        204:
+        200:
           description: "successful operation"
       x-swagger-router-controller: "Users"
   /api/articles:
@@ -395,6 +397,7 @@ definitions:
     - "email"
     - "firstname"
     - "lastname"
+    - "picture"
     - "street"
     - "streetNumber"
     - "zipCode"
@@ -415,6 +418,8 @@ definitions:
         format: "int4"
       email:
         type: "string"
+      picture:
+        type: "string"
     example:
       zipCode: 0
       firstname: "firstname"
@@ -422,6 +427,7 @@ definitions:
       streetNumber: 6
       street: "street"
       email: "email"
+      picture: "picture"
       lastname: "lastname"
   UserCreate:
     type: "object"
@@ -457,6 +463,8 @@ definitions:
         format: "password"
         minLength: 6
         maxLength: 50
+      picture:
+        type: "string"
     example:
       zipCode: 0
       firstname: "firstname"
@@ -465,38 +473,7 @@ definitions:
       streetNumber: 6
       street: "street"
       email: "email"
-      lastname: "lastname"
-  UserUpdate:
-    type: "object"
-    properties:
-      firstname:
-        type: "string"
-        maxLength: 50
-      lastname:
-        type: "string"
-        maxLength: 50
-      zipCode:
-        type: "integer"
-        format: "int4"
-      city:
-        type: "string"
-        maxLength: 50
-      street:
-        type: "string"
-        maxLength: 50
-      streetNumber:
-        type: "integer"
-        format: "int4"
-      email:
-        type: "string"
-        maxLength: 50
-    example:
-      zipCode: 0
-      firstname: "firstname"
-      city: "city"
-      streetNumber: 6
-      street: "street"
-      email: "email"
+      picture: "picture"
       lastname: "lastname"
   Article:
     type: "object"
@@ -504,6 +481,7 @@ definitions:
     - "author"
     - "date"
     - "headline"
+    - "picture"
     - "text"
     - "topic"
     properties:
@@ -519,12 +497,15 @@ definitions:
         type: "array"
         items:
           format: string
+      picture:
+        type: "string"
     example:
       date: "date"
       author: "author"
-      topic: ""
+      topic: []
       text: "text"
       headline: "headline"
+      picture: "picture"
   ArticleCreate:
     type: "object"
     required:
@@ -547,12 +528,15 @@ definitions:
         type: "array"
         items:
           format: string
+      picture:
+        type: "string"
     example:
       date: "2000-01-23"
       author: "author"
-      topic: ""
+      topic: []
       text: "text"
       headline: "headline"
+      picture: "picture"
   Comment:
     type: "object"
     required:
@@ -605,5 +589,8 @@ definitions:
     properties:
       password:
         type: "string"
+        format: "password"
+        minLength: 6
+        maxLength: 50
     example:
       password: "password"

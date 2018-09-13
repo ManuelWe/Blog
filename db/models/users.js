@@ -34,6 +34,9 @@ let userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  pictures: {
+    type: String,
+  },
 });
 
 userSchema.pre('save', function(next) {

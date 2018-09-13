@@ -109,6 +109,7 @@ exports.apiArticlesPOST = function(body) {
       topic: body.topic,
       text: body.text,
       headline: body.headline,
+      picture: body.picture,
     });
 
     newArticle.save(function(err, article) {

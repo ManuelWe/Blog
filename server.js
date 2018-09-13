@@ -12,25 +12,30 @@ const swaggerTools = require('swagger-tools');
 const jsyaml = require('js-yaml');
 const serverPort = 3000;
 
+const cors = require('cors');
 
 
 // TODO remove allow cors
-app.use(function(req, res, next) {
+app.use(cors());
+/* app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PATCH");
   next();
-});
+});*/
+
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 // Get our API routes
 const api = require('./server/routes/index');
 
 // TODO remove allow cors
 app.use(function(req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    res.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PATCH");
-    next();
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, DELETE, PATCH');
+  next();
 });
 
 // Parsers for POST data
