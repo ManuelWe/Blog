@@ -1,9 +1,13 @@
-<section class="container pt-0 pb-3" *ngIf="page == 1">
-  <hr style="margin:8px auto">
-  <h4>Comments</h4>
-  <div class="row">
-    <div class="col-lg-10">
-      <div class="mdb-feed" [innerHtml]= "articleComments"></div>
+<div class="row comments">
+  <div class="label col-2">
+    <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(17)-mini.jpg" class="rounded-circle z-depth-1-half"/>
+  </div>
+  <div class="label col-9">
+    <div class="author">
+      <a class="font-weight-bold dark-grey-text">{{comment?.author}}</a>{{comment?.date}}
+    </div>
+    <div class="comment">
+      <a class="name">{{comment?.text}}</a>
     </div>
   </div>
-</section>
+</div>

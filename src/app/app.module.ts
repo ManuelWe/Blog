@@ -9,29 +9,31 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ArticleComponent } from './article/article.component';
 import { AllarticlesComponent } from './allarticles/allarticles.component';
-import { CommentsComponent } from './comments/comments.component';
+import { CommentsComponent} from './comments/comments.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'events',
+    redirectTo: 'index',
     pathMatch: 'full'
   },
   {
-    path: '',
+    path: 'index',
     component: MainPageComponent
   },
   {
     path: 'article/:id',
     component: ArticleComponent
+  },
+  {
+    path: 'allArticles',
+    component: AllarticlesComponent
   }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
-    NavbarComponent,
     MainPageComponent,
     ArticleComponent,
     AllarticlesComponent,
@@ -40,10 +42,11 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    RouterModule.forRoot(routes)
   ],
   providers: [RecordsService],
-  bootstrap: [AppComponent, FooterComponent/*, NavbarComponent*/],
+  bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ],
 })
 export class AppModule { }

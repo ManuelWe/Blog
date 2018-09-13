@@ -26,11 +26,9 @@ export class AppComponent {
   otherArticles;
   constructor(private myFirstService: RecordsService) {
     this.myFirstService.getArticles().subscribe(data => {
-      console.log(data);
       this.allArticles = data;
     });
     this.myFirstService.getComments().subscribe(data => {
-      console.log(data);
       this.allComments = data;
     });
   }
