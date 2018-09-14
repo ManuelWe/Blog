@@ -9,7 +9,7 @@ import {RecordsService} from './records.service';
 export class AppComponent {
   allArticles;
   constructor( private myFirstService: RecordsService) {
-    this.myFirstService.getArticles().subscribe(data => {
+    this.myFirstService.getAllArticles().subscribe(data => {
       this.allArticles = data;
     });
   }
