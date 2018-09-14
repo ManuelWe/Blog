@@ -34,7 +34,7 @@ let userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  pictures: {
+  picture: {
     type: String,
   },
 });

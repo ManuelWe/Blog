@@ -14,15 +14,12 @@ exports.apiUsersGET = function() {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(users).length > 0) {
-          let usersCopy = JSON.parse(JSON.stringify(users));
-          for (let i in usersCopy) {
-            delete usersCopy[i].password;
-          }
-          resolve(usersCopy);
-        } else {
-          resolve();
+        let usersCopy = JSON.parse(JSON.stringify(users));
+        for (let i in usersCopy) {
+          delete usersCopy[i].password;
+          delete usersCopy[i].picture;
         }
+        resolve(usersCopy);
       }
     });
   });
@@ -118,13 +115,9 @@ exports.apiUsersUseridGET = function(userid) {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(user).length > 0) {
-          let userCopy = JSON.parse(JSON.stringify(user));
-          delete userCopy.password;
-          resolve(userCopy);
-        } else {
-          resolve();
-        }
+        let userCopy = JSON.parse(JSON.stringify(user));
+        delete userCopy.password;
+        resolve(userCopy);
       }
     });
   });

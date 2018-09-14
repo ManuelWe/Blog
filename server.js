@@ -24,10 +24,11 @@ app.use(cors());
   next();
 });*/
 
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+// Increase API body limit size
+app.use(bodyParser.json({limit: '2mb'}));
+app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));
 
-// Get our API routes
+// Get API routes
 const api = require('./server/routes/index');
 
 // TODO remove allow cors

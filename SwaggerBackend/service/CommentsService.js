@@ -65,11 +65,7 @@ exports.apiCommentsCommentidGET = function(commentid) {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(comment).length > 0) {
-          resolve(dateConverter.convertDate(comment));
-        } else {
-          resolve();
-        }
+        resolve(dateConverter.convertDate(comment));
       }
     });
   });
@@ -87,15 +83,11 @@ exports.apiCommentsGET = function() {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(comments).length > 0) {
-          resolve(dateConverter.convertDate(comments));
-        } else {
-          resolve();
-        }
+        resolve(dateConverter.convertDate(comments));
       }
     });
   });
-}
+};
 
 /**
  * Update an existing comment
@@ -104,7 +96,7 @@ exports.apiCommentsGET = function() {
  * body CommentCreate Comment to be updated
  * returns List
  **/
-exports.apiCommentsCommentidPUT = function(commentid,body) {
+exports.apiCommentsCommentidPUT = function(commentid, body) {
   return new Promise(function(resolve, reject) {
     Comment.findByIdAndUpdate(commentid, body, {new: true}, function(err, comment) {
       if (err) {

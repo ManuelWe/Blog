@@ -7,11 +7,18 @@ let dateConverter = require('../utils/dateConverter');
 /**
  * Delete an existing article
  *
- * @articleid String Article ID
- * @return no response value expected for this operation
+ * @param {String} articleid String Article ID
+ * @return {Promise} no response value expected for this operation
  **/
 exports.apiArticlesArticleidDELETE = function(articleid) {
   return new Promise(function(resolve, reject) {
+    // Delete all comments that belong to the article
+    Comment.deleteMany({articleId: articleid}, function(err) {
+      if (err) {
+        console.log(err);
+        reject();
+      }
+    });
     Article.findByIdAndDelete(articleid, function(err) {
       if (err) {
         console.log(err);
@@ -32,16 +39,12 @@ exports.apiArticlesArticleidDELETE = function(articleid) {
  **/
 exports.apiArticlesArticleidGET = function(articleid) {
   return new Promise(function(resolve, reject) {
-    Article.findById(articleid, function(err, articles) {
+    Article.findById(articleid, function(err, article) {
       if (err) {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(articles).length > 0) {
-          resolve(dateConverter.convertDate(articles));
-        } else {
-          resolve();
-        }
+        resolve(dateConverter.convertDate(article));
       }
     });
   });
@@ -61,11 +64,11 @@ exports.apiArticlesCommentsArticleidGET = function(articleid) {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(comments).length > 0) {
-          resolve(dateConverter.convertDate(comments));
-        } else {
-          resolve();
+        let commentsCopy = JSON.parse(JSON.stringify(comments));
+        for (let i in commentsCopy) {
+          delete commentsCopy[i].picture;
         }
+        resolve(dateConverter.convertDate(commentsCopy));
       }
     });
   });
@@ -84,11 +87,11 @@ exports.apiArticlesGET = function() {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(articles).length > 0) {
-          resolve(dateConverter.convertDate(articles));
-        } else {
-          resolve();
+        let articlesCopy = JSON.parse(JSON.stringify(articles));
+        for (let i in articlesCopy) {
+          delete articlesCopy[i].picture;
         }
+        resolve(dateConverter.convertDate(articlesCopy));
       }
     });
   });
