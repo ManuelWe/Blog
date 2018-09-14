@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
 export class RecordsService {
   constructor(private http: HttpClient) {
   }
-
+  allArticles;
   getAllArticles() {
     return this.http.get('http://localhost:3000/api/articles');
   }
@@ -14,5 +14,8 @@ export class RecordsService {
   }
   getComments(articleId) {
     return this.http.get('http://localhost:3000/api/articles/comments/' + articleId);
+  }
+  getUser(userId) {
+    return this.http.get('http://localhost:3000/api/users/' + userId);
   }
 }

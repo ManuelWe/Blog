@@ -9,7 +9,7 @@ import { RouterModule, Routes} from '@angular/router';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ArticleComponent } from './article/article.component';
 import { AllarticlesComponent } from './allarticles/allarticles.component';
-import { CommentsComponent} from './comments/comments.component';
+import { CommentsComponent } from './comments/comments.component';
 
 const routes: Routes = [
   {

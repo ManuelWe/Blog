@@ -9,10 +9,9 @@ import {RecordsService} from '../records.service';
 })
 export class ArticleComponent implements OnInit {
   article;
+  user;
   articleId: string;
-  articlePicture;
-  articleAuthorPicture;
-  articleComments;
+  comments;
 
   constructor(private route: ActivatedRoute, private myFirstService: RecordsService) {
     this.route.params.subscribe(params => {
@@ -20,11 +19,12 @@ export class ArticleComponent implements OnInit {
     });
     this.myFirstService.getArticle(this.articleId).subscribe(data => {
       this.article = data;
+      this.myFirstService.getUser(this.article.author).subscribe(data1 => {
+        this.user = data1;
+      });
     });
-    this.articlePicture = 'https://mdbootstrap.com/img/Photos/Others/images/81.jpg';
-    this.articleAuthorPicture = './assets/CyberEgg.jpg';
     this.myFirstService.getComments(this.articleId).subscribe(data => {
-      this.articleComments = data;
+      this.comments = data;
     });
   }
   ngOnInit() {
