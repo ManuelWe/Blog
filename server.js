@@ -1,10 +1,10 @@
 // Get dependencies
-var SwaggerExpress = require('swagger-express-mw');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const db = require('./db').db;
+const util = require('util');
+const mongoose = require('mongoose');
 
 const app = require('connect')();
 const serveStatic = require('serve-static');
@@ -14,6 +14,15 @@ const serverPort = 3000;
 
 const cors = require('cors');
 
+// Establish connection to MongoDB Atlas
+// Use test DB in test mode
+if (module.parent) {
+  mongoose.connect('mongodb://default:ZwEH48nlOrSoe3Vd@cluster0-shard-00-00-ze2l5.mongodb.net:27017,cluster0-shard-00-01-ze2l5.mongodb.net:27017,cluster0-shard-00-02-ze2l5.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',
+      {useNewUrlParser: true});
+} else {
+  mongoose.connect('mongodb://DBforBlog:saCIYJedcumCeNzP@cluster0-shard-00-00-j76b6.mongodb.net:27017,cluster0-shard-00-01-j76b6.mongodb.net:27017,cluster0-shard-00-02-j76b6.mongodb.net:27017/blog?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',
+      {useNewUrlParser: true});
+}
 
 // TODO remove allow cors
 app.use(cors());
@@ -24,39 +33,23 @@ app.use(cors());
   next();
 });*/
 
-// Increase API body limit size
+// Parsers for POST data
 app.use(bodyParser.json({limit: '2mb'}));
 app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));
-
-// Get API routes
-const api = require('./server/routes/index');
-
-// TODO remove allow cors
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, DELETE, PATCH');
-  next();
-});
-
-// Parsers for POST data
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
 
 // Point static path to dist
 app.use(serveStatic(path.join(__dirname, 'dist/Frontend-App')));
 
-// Set our api routes
-app.use('/api', api);
 
-// Catch all other routes and return the index file
-app.use('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/Blog-App/index.html'));
-});
+/* // Default fallback rule which is just printing a log information
+app.use(function(req, res, next) {
+  util.log(util.format('ERROR: Received unsupported request: URL=%s, Method=%s', req.url, req.method));
+  next();
+});*/
 
 
 // swaggerRouter configuration
-var options = {
+const options = {
   swaggerUi: path.join(__dirname, '/SwaggerBackend/swagger.json'),
   controllers: path.join(__dirname, './SwaggerBackend/controllers'),
   useStubs: process.env.NODE_ENV === 'development', // Conditionally turn on stubs (mock mode)
@@ -81,10 +74,12 @@ swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
   app.use(middleware.swaggerUi());
 
   // Start the server
-  http.createServer(app).listen(serverPort, function() {
-    console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
-    console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
-  });
+  if (!module.parent) {
+    http.createServer(app).listen(serverPort, function() {
+      console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
+      console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
+    });
+  }
 });
 
 module.exports = app; // for testing
