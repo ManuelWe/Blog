@@ -10,12 +10,13 @@ import {FormControl, Validators} from '@angular/forms';
 export class AppComponent {
   allArticles;
   randomArticle = '';
+  loggedIn: boolean;
 
-  modalFormLoginEmail = new FormControl('', Validators.email);
-  modalFormLoginPassword = new FormControl('', Validators.required);
-  modalFormRegisterEmail = new FormControl('', Validators.email);
-  modalFormRegisterPassword = new FormControl('', Validators.required);
-  modalFormRegisterRepeatPassword = new FormControl('', Validators.required);
+  loginPassword = new FormControl('', Validators.email);
+  loginEmail = new FormControl('', Validators.required);
+  signupFormModalName = new FormControl('', Validators.required);
+  signupFormModalEmail = new FormControl('', Validators.email);
+  signupFormModalPassword = new FormControl('', Validators.required);
 
   constructor( private myFirstService: RecordsService) {
     this.myFirstService.getAllArticles().subscribe(data => {
@@ -24,6 +25,13 @@ export class AppComponent {
   }
   setRandomArticle() {
     this.randomArticle = this.allArticles[Math.floor(Math.random() * (this.allArticles.length + 1))]._id;
+  }
+  login() {
+
+    this.loggedIn = true;
+  }
+  logout() {
+    this.loggedIn = false;
   }
 }
 

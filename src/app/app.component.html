@@ -17,10 +17,11 @@
         <input class="form-control mr-sm-2" type="text" placeholder="Search">
     </div>-->
     <div class="md-form mt-0">
-      <a mdbBtn color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect>Sign up!</a>
+      <a mdbBtn *ngIf="!loggedIn" color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="loginFrame.show()">Login</a>
+      <a mdbBtn *ngIf="!loggedIn" color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="registerFrame.show()">Register</a>
+      <a mdbBtn *ngIf="loggedIn" color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="logout()">Logout</a>
     </div>
   </links>
-  <!-- Collapsible content -->
 </mdb-navbar>
 <router-outlet></router-outlet>
 <!-- Footer -->
@@ -66,102 +67,105 @@
 
 </footer>
 <!-- Login -->
-<!--<button type="button" mdbBtn color="default" rounded="true" data-toggle="modal" data-target="#basicExample" (click)="frame.show()"
-        mdbWavesEffect>Launch Modal</button>-->
-<div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div mdbModal #loginFrame="mdbModal" class="modal fade left" id="logrinFrameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
-  <div class="modal-dialog cascading-modal" role="document">
-    <!--Content-->
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Login</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="loginFrame.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <i class="fa fa-envelope prefix grey-text"></i>
+          <input type="email" id="defaultForm-email" [formControl]="loginEmail" class="form-control validate" mdbInputDirective placeholder="email">
+        </div>
 
-      <!--Modal cascading tabs-->
-      <div class="modal-c-tabs">
-
-        <!-- Tab panels -->
-        <mdb-tabset #staticTabs [buttonClass]="'nav nav-tabs tabs-2 light-blue darken-3'" [contentClass]="''" class="tab-content">
-          <!--Panel 7-->
-          <mdb-tab class="tab-pane fade in show active" id="panel7" role="tabpanel" heading="<i class='fa fa-user mr-1'></i> Login">
-
-            <!--Body-->
-            <div class="modal-body mb-1">
-              <div class="md-form form-sm">
-                <i class="fa fa-envelope prefix"></i>
-                <input mdbInputDirective type="text" id="form22" class="form-control" [formControl]="modalFormLoginEmail">
-                <label for="form22">Your email</label>
-              </div>
-
-              <div class="md-form form-sm">
-                <i class="fa fa-lock prefix"></i>
-                <input mdbInputDirective type="password" id="form23" class="form-control" [formControl]="modalFormLoginPassword">
-                <label for="form23">Your password</label>
-              </div>
-              <div class="text-center mt-2">
-                <button mdbBtn color="info" class="waves-light" mdbWavesEffect>Log in
-                  <i class="fa fa-sign-in ml-1"></i>
-                </button>
-              </div>
-            </div>
-            <!--Footer-->
-            <div class="modal-footer display-footer">
-              <div class="options text-center text-md-right mt-1">
-                <p>Not a member?
-                  <a href="#" class="blue-text">Sign Up</a>
-                </p>
-                <p>Forgot
-                  <a href="#" class="blue-text">Password?</a>
-                </p>
-              </div>
-              <button type="button" mdbBtn color="info" outline="true" class="ml-auto" data-dismiss="modal" (click)="frame.hide()" mdbWavesEffect>Close</button>
-            </div>
-
-          </mdb-tab>
-          <!--/.Panel 7-->
-
-          <!--Panel 8-->
-          <mdb-tab class="tab-pane fade" id="panel8" role="tabpanel" heading="<i class='fa fa-user-plus mr-1'></i> Register">
-
-            <!--Body-->
-            <div class="modal-body">
-              <div class="md-form form-sm">
-                <i class="fa fa-envelope prefix"></i>
-                <input mdbInputDirective type="text" id="form24" class="form-control" [formControl]="modalFormRegisterEmail">
-                <label for="form24">Your email</label>
-              </div>
-
-              <div class="md-form form-sm">
-                <i class="fa fa-lock prefix"></i>
-                <input mdbInputDirective type="password" id="form25" class="form-control" [formControl]="modalFormRegisterPassword">
-                <label for="form25">Your password</label>
-              </div>
-
-              <div class="md-form form-sm">
-                <i class="fa fa-lock prefix"></i>
-                <input mdbInputDirective type="password" id="form26" class="form-control" [formControl]="modalFormRegisterRepeatPassword">
-                <label for="form26">Repeat password</label>
-              </div>
-
-              <div class="text-center form-sm mt-2">
-                <button mdbBtn color="info" class="waves-light" mdbWavesEffect>Sign up
-                  <i class="fa fa-sign-in ml-1"></i>
-                </button>
-              </div>
-
-            </div>
-            <!--Footer-->
-            <div class="modal-footer">
-              <div class="options text-right">
-                <p class="pt-1">Already have an account?
-                  <a href="#" class="blue-text">Log In</a>
-                </p>
-              </div>
-              <button type="button" mdbBtn color="info" outline="true" class="ml-auto" data-dismiss="modal" (click)="frame.hide()" mdbWavesEffect>Close</button>
-            </div>
-          </mdb-tab>
-          <!--/.Panel 8-->
-        </mdb-tabset>
+        <div class="md-form mb-4">
+          <i class="fa fa-lock prefix grey-text"></i>
+          <input type="password" id="defaultForm-pass" [formControl]="loginPassword" class="form-control validate" mdbInputDirective placeholder="password">
+        </div>
 
       </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect (click)="login();loginFrame.hide()">Login</button>
+      </div>
     </div>
-    <!--/.Content-->
+  </div>
+</div>
+<!-- Register -->
+<div mdbModal #registerFrame="mdbModal" class="modal fade left" id="regristerFrameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Register</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="registerFrame.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-7">
+          <div class="row">
+            <div class="col-lg-6">
+              <i class="fa fa-user prefix grey-text"></i>
+              <input type="text" id="orangeForm-firstname" class="form-control validate" [formControl]="signupFormModalName" mdbInputDirective  placeholder="firstname">
+            </div>
+            <div class="col-lg-6">
+              <input type="text" id="orangeForm-lastname" class="form-control validate" [formControl]="signupFormModalEmail" mdbInputDirective placeholder="lastname">
+            </div>
+          </div>
+        </div>
+
+        <div class="md-form mb-7">
+          <div class="row">
+            <div class="col-lg-12">
+              <i class="fa fa-envelope prefix grey-text"></i>
+              <input type="email" id="orangeForm-email" class="form-control validate" [formControl]="signupFormModalEmail" mdbInputDirective  placeholder="email">
+            </div>
+          </div>
+        </div>
+
+        <div class="md-form mb-7">
+          <div class="row">
+            <div class="col-lg-6">
+              <i class="fa fa-address-card prefix grey-text"></i>
+              <input type="text" id="orangeForm-zipcode" class="form-control validate" [formControl]="signupFormModalName" mdbInputDirective  placeholder="zipcode">
+            </div>
+            <div class="col-lg-6">
+              <input type="text" id="orangeForm-city" class="form-control validate" [formControl]="signupFormModalEmail" mdbInputDirective  placeholder="city">
+            </div>
+          </div>
+        </div>
+
+        <div class="md-form mb-7">
+          <div class="row">
+            <div class="col-lg-9">
+              <i class="fa fa-home prefix grey-text"></i>
+              <input type="text" id="orangeForm-street" class="form-control validate" [formControl]="signupFormModalEmail" mdbInputDirective placeholder="street">
+            </div>
+            <div class="col-lg-3">
+              <input type="text" id="orangeForm-streetnumber" class="form-control validate" [formControl]="signupFormModalEmail" mdbInputDirective placeholder="number">
+            </div>
+          </div>
+        </div>
+
+        <div class="md-form mb-7">
+          <div class="row">
+            <div class="col-lg-6">
+              <i class="fa fa-lock prefix grey-text"></i>
+              <input type="text" id="orangeForm-picture" class="form-control validate" [formControl]="signupFormModalEmail" mdbInputDirective placeholder="picture">
+            </div>
+            <div class="col-lg-6">
+              <input type="password" id="orangeForm-pass" class="form-control validate" [formControl]="signupFormModalPassword" mdbInputDirective placeholder="password">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+          <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect>Register</button>
+      </div>
+    </div>
   </div>
 </div>

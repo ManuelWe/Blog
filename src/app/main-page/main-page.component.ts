@@ -31,21 +31,3 @@ export class MainPageComponent implements OnInit {
   ngOnInit() {
   }
 }
-/*this.myFirstService.getArticle('5b9ba476305e3d1dd8781615').subscribe(data => {
-      this.articles.push(data);
-    });
-    this.myFirstService.getArticle('5b9ba4c9305e3d1dd8781616').subscribe(data => {
-      this.articles.push(data);
-    });
-    this.myFirstService.getArticle('5b9ba595305e3d1dd8781618').subscribe(data => {
-      this.articles.push(data);
-    });
-    this.myFirstService.getUser(this.articles[0].author).subscribe(data => {
-      this.authors.push(data);
-    });
-    this.myFirstService.getUser(this.articles[1].author).subscribe(data => {
-      this.authors.push(data);
-    });
-    this.myFirstService.getUser(this.articles[2].author).subscribe(data => {
-      this.authors.push(data);
-    });*/

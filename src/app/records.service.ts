@@ -18,4 +18,7 @@ export class RecordsService {
   getUser(userId) {
     return this.http.get('http://localhost:3000/api/users/' + userId);
   }
+  login(userId, password) {
+    console.log(this.http.post('http://localhost:3000/api/users/' + userId + '/authenticate', '{ password: ' + password + '}'));
+  }
 }
