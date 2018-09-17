@@ -6,10 +6,8 @@ let dateConverter = require('../utils/dateConverter');
 /**
  * Create a new comment
  *
- * articleid String Article ID
- * commentid String Comment ID
- * body CommentCreate Comment to be created
- * returns Comment
+ * @param {Comment} body new comment
+ * @return {Promise.Comment} comment object
  **/
 exports.apiCommentsPOST = function(body) {
   return new Promise(function(resolve, reject) {
@@ -35,8 +33,8 @@ exports.apiCommentsPOST = function(body) {
 /**
  * Delete an existing comment
  *
- * commentid String Comment ID
- * no response value expected for this operation
+ * @param {String} commentid
+ * @return {Promise} no response value expected for this operation
  **/
 exports.apiCommentsCommentidDELETE = function(commentid) {
   return new Promise(function(resolve, reject) {
@@ -55,8 +53,8 @@ exports.apiCommentsCommentidDELETE = function(commentid) {
 /**
  * Retrieve a specific comment
  *
- * commentid String Comment ID
- * returns Comment
+ * @param {String} commentid
+ * @return {Promise.Comment} comment object
  **/
 exports.apiCommentsCommentidGET = function(commentid) {
   return new Promise(function(resolve, reject) {
@@ -65,11 +63,7 @@ exports.apiCommentsCommentidGET = function(commentid) {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(comment).length > 0) {
-          resolve(dateConverter.convertDate(comment));
-        } else {
-          resolve();
-        }
+        resolve(dateConverter.convertDate(comment));
       }
     });
   });
@@ -78,7 +72,7 @@ exports.apiCommentsCommentidGET = function(commentid) {
 /**
  * Retrieve all comments
  *
- * returns List
+ * @return {Promise.Comment[]} array of comment objects
  **/
 exports.apiCommentsGET = function() {
   return new Promise(function(resolve, reject) {
@@ -87,24 +81,20 @@ exports.apiCommentsGET = function() {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(comments).length > 0) {
-          resolve(dateConverter.convertDate(comments));
-        } else {
-          resolve();
-        }
+        resolve(dateConverter.convertDate(comments));
       }
     });
   });
-}
+};
 
 /**
  * Update an existing comment
  *
- * commentid String Comment ID
- * body CommentCreate Comment to be updated
- * returns List
+ * @param {String} commentid
+ * @param {Comment} body updated comment object
+ * @return {Promise.Comment} new comment object
  **/
-exports.apiCommentsCommentidPUT = function(commentid,body) {
+exports.apiCommentsCommentidPUT = function(commentid, body) {
   return new Promise(function(resolve, reject) {
     Comment.findByIdAndUpdate(commentid, body, {new: true}, function(err, comment) {
       if (err) {

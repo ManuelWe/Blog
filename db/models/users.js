@@ -34,7 +34,7 @@ let userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  pictures: {
+  picture: {
     type: String,
   },
 });
@@ -67,4 +67,4 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
   });
 };
 
-let User = module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);

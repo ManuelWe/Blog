@@ -7,11 +7,18 @@ let dateConverter = require('../utils/dateConverter');
 /**
  * Delete an existing article
  *
- * @articleid String Article ID
- * @return no response value expected for this operation
+ * @param {String} articleid
+ * @return {Promise} no response value expected for this operation
  **/
 exports.apiArticlesArticleidDELETE = function(articleid) {
   return new Promise(function(resolve, reject) {
+    // Delete all comments that belong to the article
+    Comment.deleteMany({articleId: articleid}, function(err) {
+      if (err) {
+        console.log(err);
+        reject();
+      }
+    });
     Article.findByIdAndDelete(articleid, function(err) {
       if (err) {
         console.log(err);
@@ -27,21 +34,17 @@ exports.apiArticlesArticleidDELETE = function(articleid) {
 /**
  * Retrieve a specific article
  *
- * articleid String Article ID
- * returns Article
+ * @param {String} articleid
+ * @return {Promise.Article} article object
  **/
 exports.apiArticlesArticleidGET = function(articleid) {
   return new Promise(function(resolve, reject) {
-    Article.findById(articleid, function(err, articles) {
+    Article.findById(articleid, function(err, article) {
       if (err) {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(articles).length > 0) {
-          resolve(dateConverter.convertDate(articles));
-        } else {
-          resolve();
-        }
+        resolve(dateConverter.convertDate(article));
       }
     });
   });
@@ -51,8 +54,8 @@ exports.apiArticlesArticleidGET = function(articleid) {
 /**
  * Retrieve all comments from an article
  *
- * articleid String Article ID
- * returns List
+ * @param {String} articleid
+ * @return {Promise.Comment[]} array of comment objects
  **/
 exports.apiArticlesCommentsArticleidGET = function(articleid) {
   return new Promise(function(resolve, reject) {
@@ -61,11 +64,13 @@ exports.apiArticlesCommentsArticleidGET = function(articleid) {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(comments).length > 0) {
-          resolve(dateConverter.convertDate(comments));
-        } else {
-          resolve();
+        let commentsCopy = JSON.parse(JSON.stringify(comments));
+        for (let i in commentsCopy) {
+          if ({}.hasOwnProperty.call(commentsCopy, i)) {
+            delete commentsCopy[i].picture;
+          }
         }
+        resolve(dateConverter.convertDate(commentsCopy));
       }
     });
   });
@@ -75,7 +80,7 @@ exports.apiArticlesCommentsArticleidGET = function(articleid) {
 /**
  * Retrieve all available articles
  *
- * returns List
+ * @return {Promise.Article[]} array of article objects
  **/
 exports.apiArticlesGET = function() {
   return new Promise(function(resolve, reject) {
@@ -84,11 +89,13 @@ exports.apiArticlesGET = function() {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(articles).length > 0) {
-          resolve(dateConverter.convertDate(articles));
-        } else {
-          resolve();
+        let articlesCopy = JSON.parse(JSON.stringify(articles));
+        for (let i in articlesCopy) {
+          if ({}.hasOwnProperty.call(articlesCopy, i)) {
+            delete articlesCopy[i].picture;
+          }
         }
+        resolve(dateConverter.convertDate(articlesCopy));
       }
     });
   });
@@ -98,8 +105,8 @@ exports.apiArticlesGET = function() {
 /**
  * Create a new article
  *
- * body ArticleCreate Article to be created
- * returns List
+ * @param {Article} body new article
+ * @return {Promise.Article} article object
  **/
 exports.apiArticlesPOST = function(body) {
   return new Promise(function(resolve, reject) {
@@ -126,9 +133,9 @@ exports.apiArticlesPOST = function(body) {
 /**
  * Update an existing article
  *
- * articleid String Article ID
- * body ArticleCreate Article to be updated
- * returns List
+ * @param {String} articleid
+ * @param {Article} body updated article object
+ * @return {Promise.Article} updated article object
  **/
 exports.apiArticlesArticleidPUT = function(articleid, body) {
   return new Promise(function(resolve, reject) {

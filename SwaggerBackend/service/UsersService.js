@@ -5,7 +5,7 @@ let User = require('../../db/models/users');
 /**
  * Retrieve all users
  *
- * returns List
+ * @return {Promise.User[]} array of user objects
  **/
 exports.apiUsersGET = function() {
   return new Promise(function(resolve, reject) {
@@ -14,15 +14,14 @@ exports.apiUsersGET = function() {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(users).length > 0) {
-          let usersCopy = JSON.parse(JSON.stringify(users));
-          for (let i in usersCopy) {
+        let usersCopy = JSON.parse(JSON.stringify(users));
+        for (let i in usersCopy) {
+          if ({}.hasOwnProperty.call(usersCopy, i)) {
             delete usersCopy[i].password;
+            delete usersCopy[i].picture;
           }
-          resolve(usersCopy);
-        } else {
-          resolve();
         }
+        resolve(usersCopy);
       }
     });
   });
@@ -32,8 +31,8 @@ exports.apiUsersGET = function() {
 /**
  * Create a new user
  *
- * body UserCreate User to be created
- * returns List
+ * @param {User} body new user
+ * @return {Promise.User} user object
  **/
 exports.apiUsersPOST = function(body) {
   return new Promise(function(resolve, reject) {
@@ -63,9 +62,9 @@ exports.apiUsersPOST = function(body) {
 /**
  * Authentification of a User
  *
- * userid String User ID
- * body Authentification Password
- * no response value expected for this operation
+ * @param {String} userid
+ * @param {Object} body object containing password
+ * @return {Promise} no response value expected for this operation
  **/
 exports.apiUsersUseridAuthenticatePOST = function(userid, body) {
   return new Promise(function(resolve, reject) {
@@ -88,8 +87,8 @@ exports.apiUsersUseridAuthenticatePOST = function(userid, body) {
 /**
  * Delete an existing user
  *
- * userid String User ID
- * no response value expected for this operation
+ * @param {String} userid
+ * @return {Promise} no response value expected for this operation
  **/
 exports.apiUsersUseridDELETE = function(userid) {
   return new Promise(function(resolve, reject) {
@@ -108,8 +107,8 @@ exports.apiUsersUseridDELETE = function(userid) {
 /**
  * Retrieve a specific user
  *
- * userid String User ID
- * returns User
+ * @param {String} userid
+ * @return {Promise.User} user object
  **/
 exports.apiUsersUseridGET = function(userid) {
   return new Promise(function(resolve, reject) {
@@ -118,13 +117,9 @@ exports.apiUsersUseridGET = function(userid) {
         console.log(err);
         reject();
       } else {
-        if (Object.keys(user).length > 0) {
-          let userCopy = JSON.parse(JSON.stringify(user));
-          delete userCopy.password;
-          resolve(userCopy);
-        } else {
-          resolve();
-        }
+        let userCopy = JSON.parse(JSON.stringify(user));
+        delete userCopy.password;
+        resolve(userCopy);
       }
     });
   });
@@ -134,9 +129,9 @@ exports.apiUsersUseridGET = function(userid) {
 /**
  * Update an existing user
  *
- * userid String User ID
- * body UserCreate User to be updated
- * returns List
+ * @param {String} userid
+ * @param {User} body updated user
+ * @return {Promise.User} user object
  **/
 exports.apiUsersUseridPUT = function(userid, body) {
   return new Promise(function(resolve, reject) {
@@ -145,6 +140,8 @@ exports.apiUsersUseridPUT = function(userid, body) {
         console.log(err);
         reject();
       } else {
+        let userCopy = JSON.parse(JSON.stringify(user));
+        delete userCopy.password;
         resolve(user);
       }
     });
