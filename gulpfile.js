@@ -1,52 +1,61 @@
 const gulp = require('gulp');
-// const del = require('del');
+const del = require('del');
 const eslint = require('gulp-eslint');
+const jsdoc = require('gulp-jsdoc3');
+const tslint = require('gulp-tslint');
+const typedoc = require('gulp-typedoc');
+const mocha = require('gulp-mocha');
 
-// Configuration
 
 const files = {
-  projectSources: [
+  projectJsSources: [
     'server.js',
     'src/**/*.js',
     'SwaggerBackend/**/*.js',
     'db/models/*.js',
     'e2e/*.js',
   ],
-  projectTestSources: [
-    'src/**/*.spec.js',
-    'e2e-tests/**/*.js',
-  ],
-  projectAssets: [
-    'src/assets/**',
-  ],
-  vendorAssets: [
-    'node_modules/bootstrap/fonts/*',
+  projectTsSources: [
+    'e2e/src/*.ts',
+    'src/**/*.ts',
   ],
 };
 
-// const compilationMode = 'dev';
-// const targetDirectory = 'build/';
-// const tempDirectory = 'build/';
-
-// Cleanup
-
-/* function clean() {
-  return del(['build', 'bin', 'dist', 'test-results']);
-}*/
 
 /**
- * Code validation
- * @return {Pipe}
+ * Cleanup
+ * @return {*}
+ */
+function clean() {
+  return del(['build', 'bin', 'dist', 'test-results']);
+}
+
+/**
+ * Javascript Code validation
+ * @return {*}
  **/
-function validateSources() {
-  return gulp.src(files.projectSources)
+function validateJsSources() {
+  return gulp.src(files.projectJsSources)
       .pipe(eslint({configFile: '.eslintrc.js'}))
       .pipe(eslint.format())
       .pipe(eslint.failAfterError());
 }
 
 /**
- * @return {Pipe}
+ * Typescript Code validation
+ * @return {*}
+ */
+function validateTsSources() {
+  return gulp.src(files.projectTsSources)
+      .pipe(tslint({
+        formatter: 'verbose',
+      }))
+      .pipe(tslint.report());
+}
+
+/**
+ * gulpfile validation
+ * @return {*}
  */
 function validateGulpfile() {
   return gulp.src(['gulpfile.js'])
@@ -55,30 +64,47 @@ function validateGulpfile() {
       .pipe(eslint.failAfterError());
 }
 
-const codeValidation = gulp.parallel(validateSources, validateGulpfile);
+const codeValidation = gulp.parallel(validateJsSources, validateTsSources, validateGulpfile);
 
 
-// /**
-//  * Assets
-//  * @return {Pipe}
-//  */
-// function copyProjectAssets() {
-//   return gulp.src(files.projectAssets)
-//       .pipe(gulp.dest(targetDirectory + 'assets'));
-// }
-//
-// /**
-//  * @return {Pipe}
-//  */
-// function copyVendorAssets() {
-//   return gulp.src(files.vendorAssets)
-//       .pipe(gulp.dest(targetDirectory + 'fonts'));
-// }
-//
-// const copyAssets = gulp.parallel(copyProjectAssets, copyVendorAssets);
+/**
+ * @return {*}
+ */
+function executeBackendUnitTests() {
+  return gulp.src(files.projectJsSources, {read: false})
+      .pipe(mocha({exit: true}));
+}
+
+const executeTests = gulp.parallel(executeBackendUnitTests);
+
+
+/**
+ * @return {*}
+ */
+function generateJsDocumentation() {
+  return gulp.src(['README.md', './SwaggerBackend/**/*.js'], {read: false})
+      .pipe(jsdoc());
+}
+
+/**
+ * @return {*}
+ */
+function generateTsDocumentation() {
+  return gulp
+      .src(files.projectTsSources)
+      .pipe(typedoc({
+        module: 'commonjs',
+        target: 'es5',
+        out: 'docs/typedoc',
+        name: 'Blog',
+      }))
+  ;
+}
+
+const documentation = gulp.parallel(generateJsDocumentation, generateTsDocumentation);
 
 
 // Common task definition
-
-gulp.task('default', codeValidation);
-// gulp.task('default', gulp.series('build'));
+// TODO validation
+gulp.task('build', gulp.series(clean, executeTests, documentation));
+gulp.task('default', gulp.series('protractor-install', 'protractor-run', 'build'));

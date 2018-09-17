@@ -31,7 +31,7 @@ exports.apiUsersGET = function() {
 /**
  * Create a new user
  *
- * @param {User} body; new user
+ * @param {User} body new user
  * @return {Promise.User} user object
  **/
 exports.apiUsersPOST = function(body) {
@@ -63,8 +63,8 @@ exports.apiUsersPOST = function(body) {
  * Authentification of a User
  *
  * @param {String} userid
- * @param {Object} body; object containing password
- * @return {Promise}; no response value expected for this operation
+ * @param {Object} body object containing password
+ * @return {Promise} no response value expected for this operation
  **/
 exports.apiUsersUseridAuthenticatePOST = function(userid, body) {
   return new Promise(function(resolve, reject) {
@@ -88,7 +88,7 @@ exports.apiUsersUseridAuthenticatePOST = function(userid, body) {
  * Delete an existing user
  *
  * @param {String} userid
- * @return {Promise}; no response value expected for this operation
+ * @return {Promise} no response value expected for this operation
  **/
 exports.apiUsersUseridDELETE = function(userid) {
   return new Promise(function(resolve, reject) {
@@ -130,7 +130,7 @@ exports.apiUsersUseridGET = function(userid) {
  * Update an existing user
  *
  * @param {String} userid
- * @param {User} body; updated user
+ * @param {User} body updated user
  * @return {Promise.User} user object
  **/
 exports.apiUsersUseridPUT = function(userid, body) {

@@ -8,7 +8,7 @@ let dateConverter = require('../utils/dateConverter');
  * Delete an existing article
  *
  * @param {String} articleid
- * @return {Promise}; no response value expected for this operation
+ * @return {Promise} no response value expected for this operation
  **/
 exports.apiArticlesArticleidDELETE = function(articleid) {
   return new Promise(function(resolve, reject) {
@@ -105,7 +105,7 @@ exports.apiArticlesGET = function() {
 /**
  * Create a new article
  *
- * @param {Article} body; new article
+ * @param {Article} body new article
  * @return {Promise.Article} article object
  **/
 exports.apiArticlesPOST = function(body) {
@@ -134,7 +134,7 @@ exports.apiArticlesPOST = function(body) {
  * Update an existing article
  *
  * @param {String} articleid
- * @param {Article} body; updated article object
+ * @param {Article} body updated article object
  * @return {Promise.Article} updated article object
  **/
 exports.apiArticlesArticleidPUT = function(articleid, body) {

@@ -6,7 +6,7 @@ let dateConverter = require('../utils/dateConverter');
 /**
  * Create a new comment
  *
- * @param {Comment} body; new comment
+ * @param {Comment} body new comment
  * @return {Promise.Comment} comment object
  **/
 exports.apiCommentsPOST = function(body) {
@@ -34,7 +34,7 @@ exports.apiCommentsPOST = function(body) {
  * Delete an existing comment
  *
  * @param {String} commentid
- * @return {Promise}; no response value expected for this operation
+ * @return {Promise} no response value expected for this operation
  **/
 exports.apiCommentsCommentidDELETE = function(commentid) {
   return new Promise(function(resolve, reject) {
@@ -91,7 +91,7 @@ exports.apiCommentsGET = function() {
  * Update an existing comment
  *
  * @param {String} commentid
- * @param {Comment} body; updated comment object
+ * @param {Comment} body updated comment object
  * @return {Promise.Comment} new comment object
  **/
 exports.apiCommentsCommentidPUT = function(commentid, body) {
