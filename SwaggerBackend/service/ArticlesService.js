@@ -7,8 +7,8 @@ let dateConverter = require('../utils/dateConverter');
 /**
  * Delete an existing article
  *
- * @param {String} articleid String Article ID
- * @return {Promise} no response value expected for this operation
+ * @param {String} articleid
+ * @return {Promise}; no response value expected for this operation
  **/
 exports.apiArticlesArticleidDELETE = function(articleid) {
   return new Promise(function(resolve, reject) {
@@ -34,8 +34,8 @@ exports.apiArticlesArticleidDELETE = function(articleid) {
 /**
  * Retrieve a specific article
  *
- * articleid String Article ID
- * returns Article
+ * @param {String} articleid
+ * @return {Promise.Article} article object
  **/
 exports.apiArticlesArticleidGET = function(articleid) {
   return new Promise(function(resolve, reject) {
@@ -54,8 +54,8 @@ exports.apiArticlesArticleidGET = function(articleid) {
 /**
  * Retrieve all comments from an article
  *
- * articleid String Article ID
- * returns List
+ * @param {String} articleid
+ * @return {Promise.Comment[]} array of comment objects
  **/
 exports.apiArticlesCommentsArticleidGET = function(articleid) {
   return new Promise(function(resolve, reject) {
@@ -66,7 +66,9 @@ exports.apiArticlesCommentsArticleidGET = function(articleid) {
       } else {
         let commentsCopy = JSON.parse(JSON.stringify(comments));
         for (let i in commentsCopy) {
-          delete commentsCopy[i].picture;
+          if ({}.hasOwnProperty.call(commentsCopy, i)) {
+            delete commentsCopy[i].picture;
+          }
         }
         resolve(dateConverter.convertDate(commentsCopy));
       }
@@ -78,7 +80,7 @@ exports.apiArticlesCommentsArticleidGET = function(articleid) {
 /**
  * Retrieve all available articles
  *
- * returns List
+ * @return {Promise.Article[]} array of article objects
  **/
 exports.apiArticlesGET = function() {
   return new Promise(function(resolve, reject) {
@@ -89,7 +91,9 @@ exports.apiArticlesGET = function() {
       } else {
         let articlesCopy = JSON.parse(JSON.stringify(articles));
         for (let i in articlesCopy) {
-          delete articlesCopy[i].picture;
+          if ({}.hasOwnProperty.call(articlesCopy, i)) {
+            delete articlesCopy[i].picture;
+          }
         }
         resolve(dateConverter.convertDate(articlesCopy));
       }
@@ -101,8 +105,8 @@ exports.apiArticlesGET = function() {
 /**
  * Create a new article
  *
- * body ArticleCreate Article to be created
- * returns List
+ * @param {Article} body; new article
+ * @return {Promise.Article} article object
  **/
 exports.apiArticlesPOST = function(body) {
   return new Promise(function(resolve, reject) {
@@ -129,9 +133,9 @@ exports.apiArticlesPOST = function(body) {
 /**
  * Update an existing article
  *
- * articleid String Article ID
- * body ArticleCreate Article to be updated
- * returns List
+ * @param {String} articleid
+ * @param {Article} body; updated article object
+ * @return {Promise.Article} updated article object
  **/
 exports.apiArticlesArticleidPUT = function(articleid, body) {
   return new Promise(function(resolve, reject) {

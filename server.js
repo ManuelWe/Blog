@@ -3,7 +3,6 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const util = require('util');
 const mongoose = require('mongoose');
 
 const app = require('connect')();
@@ -17,11 +16,17 @@ const cors = require('cors');
 // Establish connection to MongoDB Atlas
 // Use test DB in test mode
 if (module.parent) {
-  mongoose.connect('mongodb://default:ZwEH48nlOrSoe3Vd@cluster0-shard-00-00-ze2l5.mongodb.net:27017,cluster0-shard-00-01-ze2l5.mongodb.net:27017,cluster0-shard-00-02-ze2l5.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',
-      {useNewUrlParser: true});
+  // Test DB
+  mongoose.connect('mongodb://default:ZwEH48nlOrSoe3Vd@cluster0-shard-00-00-ze2l5.mongodb.net:27017,' +
+    'cluster0-shard-00-01-ze2l5.mongodb.net:27017,cluster0-shard-00-02-ze2l5.mongodb.net:27017/test?ssl' +
+    '=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',
+  {useNewUrlParser: true});
 } else {
-  mongoose.connect('mongodb://DBforBlog:saCIYJedcumCeNzP@cluster0-shard-00-00-j76b6.mongodb.net:27017,cluster0-shard-00-01-j76b6.mongodb.net:27017,cluster0-shard-00-02-j76b6.mongodb.net:27017/blog?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',
-      {useNewUrlParser: true});
+  // Regular DB
+  mongoose.connect('mongodb://DBforBlog:saCIYJedcumCeNzP@cluster0-shard-00-00-j76b6.mongodb.net:27017' +
+    ',cluster0-shard-00-01-j76b6.mongodb.net:27017,cluster0-shard-00-02-j76b6.mongodb.net:27017/blog?' +
+    'ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',
+  {useNewUrlParser: true});
 }
 
 // TODO remove allow cors
@@ -61,7 +66,8 @@ const swaggerDoc = jsyaml.safeLoad(spec);
 
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
-  // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
+  // Interpret Swagger resources and attach metadata to request -
+  // must be first in swagger-tools middleware chain
   app.use(middleware.swaggerMetadata());
 
   // Validate Swagger requests

@@ -1,13 +1,16 @@
-var gulp = require('gulp');
-var del = require('del');
-var eslint = require('gulp-eslint');
+const gulp = require('gulp');
+// const del = require('del');
+const eslint = require('gulp-eslint');
 
 // Configuration
 
-var files = {
+const files = {
   projectSources: [
+    'server.js',
     'src/**/*.js',
-    '!src/**/*.spec.js',
+    'SwaggerBackend/**/*.js',
+    'db/models/*.js',
+    'e2e/*.js',
   ],
   projectTestSources: [
     'src/**/*.spec.js',
@@ -21,51 +24,61 @@ var files = {
   ],
 };
 
-var compilationMode = 'dev';
-var targetDirectory = 'build/';
-var tempDirectory = 'build/';
-var webConfigDirectory;
+// const compilationMode = 'dev';
+// const targetDirectory = 'build/';
+// const tempDirectory = 'build/';
 
 // Cleanup
 
-function clean() {
+/* function clean() {
   return del(['build', 'bin', 'dist', 'test-results']);
-}
+}*/
 
-// Code validation
-
+/**
+ * Code validation
+ * @return {Pipe}
+ **/
 function validateSources() {
   return gulp.src(files.projectSources)
-    .pipe(eslint({ configFile: '.eslintrc.json' }))
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+      .pipe(eslint({configFile: '.eslintrc.js'}))
+      .pipe(eslint.format())
+      .pipe(eslint.failAfterError());
 }
 
+/**
+ * @return {Pipe}
+ */
 function validateGulpfile() {
   return gulp.src(['gulpfile.js'])
-    .pipe(eslint({ configFile: '.eslintrc.json' }))
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+      .pipe(eslint({configFile: '.eslintrc.js'}))
+      .pipe(eslint.format())
+      .pipe(eslint.failAfterError());
 }
 
-var codeValidation = gulp.parallel(validateSources, validateGulpfile);
+const codeValidation = gulp.parallel(validateSources, validateGulpfile);
 
-// Assets
 
-function copyProjectAssets() {
-  return gulp.src(files.projectAssets)
-    .pipe(gulp.dest(targetDirectory + 'assets'));
-}
-
-function copyVendorAssets() {
-  return gulp.src(files.vendorAssets)
-    .pipe(gulp.dest(targetDirectory + 'fonts'));
-}
-
-var copyAssets = gulp.parallel(copyProjectAssets, copyVendorAssets);
+// /**
+//  * Assets
+//  * @return {Pipe}
+//  */
+// function copyProjectAssets() {
+//   return gulp.src(files.projectAssets)
+//       .pipe(gulp.dest(targetDirectory + 'assets'));
+// }
+//
+// /**
+//  * @return {Pipe}
+//  */
+// function copyVendorAssets() {
+//   return gulp.src(files.vendorAssets)
+//       .pipe(gulp.dest(targetDirectory + 'fonts'));
+// }
+//
+// const copyAssets = gulp.parallel(copyProjectAssets, copyVendorAssets);
 
 
 // Common task definition
 
-gulp.task('build', gulp.series(clean, codeValidation, codeCompilation));
-gulp.task('default', gulp.series('build'));
+gulp.task('default', codeValidation);
+// gulp.task('default', gulp.series('build'));
