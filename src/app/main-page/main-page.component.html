@@ -1,7 +1,7 @@
 <div class="container">
 
   <!--Section heading-->
-  <h2 class="h1 font-weight-bold mb-5 pt-4">About this blog</h2>
+  <h2 id="heading" class="h1 font-weight-bold mb-5 pt-4">About this blog</h2>
   <!--Section description-->
   <p class="mb-5 pb-3">Hey there,<br>
     this is a fun blog where everybody can create and comment entries... something about the blog (dunno what to right here)</p>
@@ -26,12 +26,12 @@
           <strong>{{mainPageArticles[0]?.topic.join(", ")}}</strong>
         </h6>
       </a>
-      <h4 class="mb-3 font-weight-bold dark-grey-text">
+      <h4 id="articleHeader" class="mb-3 font-weight-bold dark-grey-text">
         <strong>{{mainPageArticles[0]?.headline}}</strong>
       </h4>
       by <a class="font-weight-bold dark-grey-text">{{mainPageArticles[0]?.author}}</a>, {{mainPageArticles[0]?.date}}
       <p class="grey-text">{{mainPageArticles[0]?.text.substring(0, 200)}} ...</p>
-      <a mdbBtn [routerLink]="['/article', mainPageArticles[0]?._id]" color="pink" rounded="true" size="md" class="waves-light" mdbWavesEffect>Read more</a>
+      <a mdbBtn id="readMoreBtn" [routerLink]="['/article', mainPageArticles[0]?._id]" color="pink" rounded="true" size="md" class="waves-light" mdbWavesEffect>Read more</a>
     </div>
     <!--Grid column -->
 

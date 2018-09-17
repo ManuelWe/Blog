@@ -138,6 +138,8 @@ exports.apiUsersUseridPUT = function(userid, body) {
         console.log(err);
         reject();
       } else {
+        let userCopy = JSON.parse(JSON.stringify(user));
+        delete userCopy.password;
         resolve(user);
       }
     });

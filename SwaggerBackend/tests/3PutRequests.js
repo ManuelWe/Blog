@@ -1,27 +1,17 @@
 const should = require('should');
 const request = require('supertest');
 const server = require('../../server');
+const variables = require('./1PostRequests');
 
-exports.idVariables = idVariables = {
-  articleID: '',
-  commentID: '',
-  userID: '',
-};
-
-describe('POST mock data', function() {
+describe('Update content', function() {
   this.timeout(10000);
-  it('should create a user object', function(done) {
+  it('should update one user', function(done) {
     request(server)
-        .post('/api/users')
+        .put('/api/users/' + variables.idVariables.userID)
         .send({
-          zipCode: 0,
-          firstname: 'Test',
-          password: 'Pa$$w0rd',
-          city: 'Berlin',
-          streetNumber: 6,
-          street: 'Waterstreet',
-          email: 'bla@blog.com',
-          picture: 'kdpowkKOKPkodkpo3i40239402394023ipokoskoksdpokwpokpojfop',
+          firstname: 'Updated firstname',
+          password: 'test123',
+          email: 'Maier@blog.com',
           lastname: 'Maier',
         })
         .set('Accept', 'application/json')
@@ -29,44 +19,42 @@ describe('POST mock data', function() {
         .end(function(err, res) {
           should.not.exist(err);
 
-          res.body.should.have.property('firstname', 'Test');
-          idVariables.userID = res.body._id;
+          res.body.should.have.property('firstname', 'Updated firstname');
+          res.body.should.have.property('street', 'Waterstreet');
 
           done();
         });
   });
 
-  it('should create a article object', function(done) {
+  it('should update one article', function(done) {
     request(server)
-        .post('/api/articles')
+        .put('/api/articles/' + variables.idVariables.articleID)
         .send({
           headline: 'Test Headline',
-          author: idVariables.userID,
           text: 'Lorem ipsum........',
           date: '2000-01-23',
           topic: [
             'Nature',
-            'Trees',
+            'Water',
           ],
-          picture: 'string',
         })
         .set('Accept', 'application/json')
         .expect(200)
         .end(function(err, res) {
           should.not.exist(err);
 
-          res.body.should.have.property('headline', 'Test Headline');
-          idVariables.articleID = res.body._id;
+          res.body.should.have.property('author', variables.idVariables.userID);
+          should.deepEqual(res.body.topic[1], 'Water');
 
           done();
         });
   });
 
-  it('should create a comment object', function(done) {
+  it('should update one comment', function(done) {
     request(server)
-        .post('/api/comments')
+        .put('/api/comments/' + variables.idVariables.commentID)
         .send({
-          date: '2000-01-23',
+          date: '2012-03-12',
           author: idVariables.userID,
           articleId: idVariables.articleID,
           text: 'Very nice article bla bla.....',
@@ -77,7 +65,7 @@ describe('POST mock data', function() {
           should.not.exist(err);
 
           res.body.should.have.property('author', idVariables.userID);
-          idVariables.commentID = res.body._id;
+          res.body.should.have.property('date', '2012-03-12T00:00:00.000Z');
 
           done();
         });
