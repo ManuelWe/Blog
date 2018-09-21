@@ -13,10 +13,8 @@ export class AppComponent {
   randomArticle = '';
 
   loggedIn: boolean;
-  loginPasswordFC = new FormControl('', Validators.required);
-  loginEmailFC = new FormControl('', Validators.email);
-  loginEmail = 'bernd@blog.com';
-  loginPassword = 'Pa$$w0rd';
+  loginEmail /*= 'bernd@blog.com'*/;
+  loginPassword /*= 'Pa$$w0rd'*/;
   loginUserId;
 
   registerObject;
@@ -48,19 +46,25 @@ export class AppComponent {
   }
   login() {
     for (let user of this.allUsers) {
-      console.log(user.email);
-      console.log(this.loginEmail);
       if (user.email === this.loginEmail) {
         this.loginUserId = user._id;
       }
     }
-    this.myFirstService.login(this.loginUserId, this.loginPassword);
-    this.loggedIn = true;
+    this.myFirstService.login(this.loginUserId, this.loginPassword).subscribe(data => {
+      // @ts-ignore
+      this.loggedIn = data.correctPassword;
+    });
+  }
+  getLoginPassword(loginPassword1) {
+    this.loginPassword = loginPassword1;
+  }
+  getLoginEmail(loginEmail) {
+    this.loginEmail = loginEmail;
   }
   logout() {
-    /*this.loginEmail = '';
+    this.loginEmail = '';
     this.loginPassword = '';
-    this.loginUserId = '';*/
+    this.loginUserId = '';
     this.loggedIn = false;
   }
   register() {
