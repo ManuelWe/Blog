@@ -6,21 +6,21 @@
       <li class="nav-item" [routerLink]="['/index']">
         <a class="nav-link waves-light" mdbWavesEffect>Home</a>
       </li>
-      <li class="nav-item" [routerLink]="['/article', '5b978079fe36a1338474ce80']">
+      <li class="nav-item" [routerLink]="['/article', randomArticle]" (click)="setRandomArticle()">
         <a class="nav-link waves-light" mdbWavesEffect>Random article</a>
       </li>
       <li class="nav-item" [routerLink]="['/allArticles']">
         <a class="nav-link waves-light" mdbWavesEffect>All articles</a>
       </li>
     </ul>
-    <form class="form-inline waves-light" mdbWavesEffect>
-      <div class="md-form mt-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      </div>
-    </form>
+    <div class="md-form mt-0">
+      <a mdbBtn *ngIf="!loggedIn" color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="loginFrame.show()">Login</a>
+      <a mdbBtn *ngIf="!loggedIn" color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="registerFrame.show()">Register</a>
+      <a mdbBtn *ngIf="loggedIn" color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="logout()">Logout</a>
+    </div>
   </links>
-  <!-- Collapsible content -->
 </mdb-navbar>
+<!--MainBody-->
 <router-outlet></router-outlet>
 <!-- Footer -->
 <footer class="page-footer font-small indigo pt-4">
@@ -64,3 +64,115 @@
   <!-- Copyright -->
 
 </footer>
+<!-- Login -->
+<div mdbModal #loginFrame="mdbModal" class="modal fade left" id="logrinFrameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Login</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="loginFrame.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <i class="fa fa-envelope prefix grey-text"></i>
+          <input #loginEmail (keyup)="getLoginEmail(loginEmail.value)" (value)="loginEmail" type="email" placeholder="email" > <!--TODO: fix inputfield  -->
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fa fa-lock prefix grey-text"></i>
+          <input #loginPassword (keyup)="getLoginPassword(loginPassword.value)" (value)="loginPassword" type="password" placeholder="password">
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect (click)="login();loginFrame.hide()">Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Register -->
+<div mdbModal #registerFrame="mdbModal" class="modal fade left" id="regristerFrameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Register</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="registerFrame.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-12">
+          <div class="row">
+            <div class="col-lg-1">
+              <i class="fa fa-user prefix grey-text"></i>
+            </div>
+            <div class="col-lg-5">
+              <input type="text" #registerFirstname (keyup)="getRegisterFirstname(registerFirstname.value)" placeholder="firstname">
+            </div>
+            <div class="col-lg-5">
+              <input type="text" #registerLastname (keyup)="getRegisterLastname(registerLastname.value)" placeholder="lastname">
+            </div>
+          </div>
+        </div>
+
+        <div class="md-form mb-12">
+          <div class="row">
+            <div class="col-lg-1">
+              <i class="fa fa-envelope prefix grey-text"></i>
+            </div>
+            <div class="col-lg-5">
+              <input type="email" #registerEmail (keyup)="getRegisterEmail(registerEmail.value)"  placeholder="email">
+            </div>
+            <div class="col-lg-5">
+              <input type="text" #registerPicture (keyup)="getRegisterPicture(registerPicture.value)" placeholder="picture">
+            </div>
+          </div>
+        </div>
+
+        <div class="md-form mb-12">
+          <div class="row">
+            <div class="col-lg-1">
+              <i class="fa fa-address-card prefix grey-text"></i>
+            </div>
+            <div class="col-lg-5">
+              <input type="text" #registerZipcode (keyup)="getRegisterZipcode(registerZipcode.value)"  placeholder="zipcode">
+            </div>
+            <div class="col-lg-5">
+              <input type="text" #registerCity (keyup)="getRegisterCity(registerCity.value)"  placeholder="city">
+            </div>
+          </div>
+        </div>
+
+        <div class="md-form mb-12">
+          <div class="row">
+            <div class="col-lg-1">
+              <i class="fa fa-home prefix grey-text"></i>
+            </div>
+            <div class="col-lg-5">
+              <input type="text" #registerStreet (keyup)="getRegisterStreet(registerStreet.value)" placeholder="street">
+            </div>
+            <div class="col-lg-5">
+              <input type="text" #registerStreetNumber (keyup)="getRegisterStreetNumber(registerStreetNumber.value)" placeholder="number">
+            </div>
+          </div>
+        </div>
+
+        <div class="md-form mb-12">
+          <div class="row">
+            <div class="col-lg-1">
+              <i class="fa fa-lock prefix grey-text"></i>
+            </div>
+            <div class="col-lg-5">
+              <input type="password" #registerPassword (keyup)="getRegisterPassword(registerPassword.value)" placeholder="password">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+          <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect (click)="register();registerFrame.hide()">Register</button>
+      </div>
+    </div>
+  </div>
+</div>

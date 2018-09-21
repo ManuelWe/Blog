@@ -8,36 +8,23 @@ import {RecordsService} from '../records.service';
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
-  allArticles;
-  allComments;
   article;
+  user;
   articleId: string;
-  articlePicture;
-  articleAuthorPicture;
-  articleComments = [];
-  data2;
+  comments;
 
   constructor(private route: ActivatedRoute, private myFirstService: RecordsService) {
     this.route.params.subscribe(params => {
       this.articleId = params['id'].toString();
     });
-    this.myFirstService.getArticles().subscribe(data => {
-      this.allArticles = data;
-      for (let entry of this.allArticles) {
-        if (entry._id === this.articleId) {
-          this.article = entry;
-        }
-      }
+    this.myFirstService.getArticle(this.articleId).subscribe(data => {
+      this.article = data;
+      this.myFirstService.getUser(this.article.author).subscribe(data1 => {
+        this.user = data1;
+      });
     });
-    this.articlePicture = 'https://mdbootstrap.com/img/Photos/Others/images/81.jpg';
-    this.articleAuthorPicture = './assets/CyberEgg.jpg';
-    this.myFirstService.getComments().subscribe(data1 => {
-      this.allComments = data1;
-      for (const comment of this.allComments) {
-        if (comment.articleId === this.articleId) {
-          this.articleComments.push(comment);
-        }
-      }
+    this.myFirstService.getComments(this.articleId).subscribe(data => {
+      this.comments = data;
     });
   }
   ngOnInit() {
