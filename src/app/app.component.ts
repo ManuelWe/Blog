@@ -40,6 +40,15 @@ export class AppComponent {
       this.allUsers = data;
     });
   }
+  onFileChanged(event) {
+    const file: File = event.target.files[0];
+    const myReader: FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.registerObject.picture = myReader.result;
+    };
+    myReader.readAsDataURL(file);
+  }
   setRandomArticle() {
     this.randomArticle = this.allArticles[Math.floor(Math.random() * (this.allArticles.length + 1))]._id;
   }
