@@ -17,21 +17,17 @@ export class AppComponent {
   loginPassword /*= 'Pa$$w0rd'*/;
   loginUserId;
 
-  registerObject;
-  registerFirstname;
-  registerLastname;
-  registerEmail;
-  registerCity;
-  registerZipcode;
-  registerStreet;
-  registerStreetnumber;
-  registerPicture;
-  registerPassword;
-
-
-  signupFormModalName = new FormControl('', Validators.required);
-  signupFormModalEmail = new FormControl('', Validators.email);
-  signupFormModalPassword = new FormControl('', Validators.required);
+  registerObject  = {
+    'zipCode': null,
+    'firstname': '',
+    'password': '',
+    'city': '',
+    'streetNumber': null,
+    'street': '',
+    'email': '',
+    'picture': '',
+    'lastname': ''
+  };
 
   constructor( private myFirstService: RecordsService) {
     this.myFirstService.getAllArticles().subscribe(data => {
@@ -44,47 +40,70 @@ export class AppComponent {
   setRandomArticle() {
     this.randomArticle = this.allArticles[Math.floor(Math.random() * (this.allArticles.length + 1))]._id;
   }
-  login() {
-    for (let user of this.allUsers) {
-      if (user.email === this.loginEmail) {
-        this.loginUserId = user._id;
-      }
-    }
-    this.myFirstService.login(this.loginUserId, this.loginPassword).subscribe(data => {
-      // @ts-ignore
-      this.loggedIn = data.correctPassword;
-    });
-  }
   getLoginPassword(loginPassword1) {
     this.loginPassword = loginPassword1;
   }
   getLoginEmail(loginEmail) {
     this.loginEmail = loginEmail;
   }
-  logout() {
-    this.loginEmail = '';
-    this.loginPassword = '';
-    this.loginUserId = '';
-    this.loggedIn = false;
-  }
-  register() {
-    for (let user of this.allUsers) {
+  login() {
+    this.myFirstService.getAllUsers().subscribe(data => {
+      this.allUsers = data;
+    });
+    for (const user of this.allUsers) {
       if (user.email === this.loginEmail) {
-        return; // do a e-mail validation here
+        this.loginUserId = user._id;
       }
     }
-    this.registerObject = {
-      "zipCode": this.registerZipcode,
-      "firstname": this.registerFirstname,
-      "password": this.registerPassword,
-      "city": this.registerCity,
-      "streetNumber": this.registerStreetnumber,
-      "street": this.registerStreet,
-      "email": this.registerEmail,
-      "picture": this.registerPicture,
-      "lastname": this.registerLastname
+    if (this.loginUserId != null) {
+      this.myFirstService.login(this.loginUserId, this.loginPassword).subscribe(data => {
+        // @ts-ignore
+        this.loggedIn = data.correctPassword;
+      });
     }
-    this.myFirstService.register(this.registerObject);
+  }
+  logout() {
+    /*this.loginEmail = '';
+    this.loginPassword = '';*/
+    this.loginUserId = null;
+    this.loggedIn = false;
+  }
+  getRegisterZipcode(registerZipcode) {
+    this.registerObject.zipCode = +registerZipcode;
+  }
+  getRegisterFirstname(registerFirstname) {
+    this.registerObject.firstname = registerFirstname;
+  }
+  getRegisterPassword(registerPassword) {
+    this.registerObject.password = registerPassword;
+  }
+  getRegisterCity(registerCity) {
+    this.registerObject.city = registerCity;
+  }
+  getRegisterStreetNumber(registerStreetNumber) {
+    this.registerObject.streetNumber = +registerStreetNumber;
+  }
+  getRegisterStreet(registerStreet) {
+    this.registerObject.street = registerStreet;
+  }
+  getRegisterEmail(registerEmail) {
+    this.registerObject.email = registerEmail;
+  }
+  getRegisterPicture(registerPicture) {
+    this.registerObject.picture = registerPicture;
+  }
+  getRegisterLastname(registerLastname) {
+    this.registerObject.lastname = registerLastname;
+  }
+  register() {
+    for (const user of this.allUsers) {
+      /*if (user.email === this.loginEmail) {
+        return; // do a e-mail validation here
+      }*/
+    }
+    this.myFirstService.register(this.registerObject).subscribe(data => {
+      console.log(data); // do something with the return value
+    });
   }
 }
 

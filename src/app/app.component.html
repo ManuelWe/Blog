@@ -87,7 +87,6 @@
           <i class="fa fa-lock prefix grey-text"></i>
           <input #loginPassword (keyup)="getLoginPassword(loginPassword.value)" (value)="loginPassword" type="password" placeholder="password">
         </div>
-
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect (click)="login();loginFrame.hide()">Login</button>
@@ -110,10 +109,10 @@
           <div class="row">
             <div class="col-lg-6">
               <i class="fa fa-user prefix grey-text"></i>
-              <input type="text" id="orangeForm-firstname" class="form-control validate" [formControl]="signupFormModalName" mdbInputDirective  placeholder="firstname">
+              <input type="text" #registerFirstname (keyup)="getRegisterFirstname(registerFirstname.value)" placeholder="firstname">
             </div>
             <div class="col-lg-6">
-              <input type="text" id="orangeForm-lastname" class="form-control validate" [formControl]="signupFormModalEmail" mdbInputDirective placeholder="lastname">
+              <input type="text" #registerLastname (keyup)="getRegisterLastname(registerLastname.value)" placeholder="lastname">
             </div>
           </div>
         </div>
@@ -122,7 +121,7 @@
           <div class="row">
             <div class="col-lg-12">
               <i class="fa fa-envelope prefix grey-text"></i>
-              <input type="email" id="orangeForm-email" class="form-control validate" [formControl]="signupFormModalEmail" mdbInputDirective  placeholder="email">
+              <input type="email" #registerEmail (keyup)="getRegisterEmail(registerEmail.value)"  placeholder="email">
             </div>
           </div>
         </div>
@@ -131,10 +130,10 @@
           <div class="row">
             <div class="col-lg-6">
               <i class="fa fa-address-card prefix grey-text"></i>
-              <input type="text" id="orangeForm-zipcode" class="form-control validate" [formControl]="signupFormModalName" mdbInputDirective  placeholder="zipcode">
+              <input type="text" #registerZipcode (keyup)="getRegisterZipcode(registerZipcode.value)"  placeholder="zipcode">
             </div>
             <div class="col-lg-6">
-              <input type="text" id="orangeForm-city" class="form-control validate" [formControl]="signupFormModalEmail" mdbInputDirective  placeholder="city">
+              <input type="text" #registerCity (keyup)="getRegisterCity(registerCity.value)"  placeholder="city">
             </div>
           </div>
         </div>
@@ -143,10 +142,10 @@
           <div class="row">
             <div class="col-lg-9">
               <i class="fa fa-home prefix grey-text"></i>
-              <input type="text" id="orangeForm-street" class="form-control validate" [formControl]="signupFormModalEmail" mdbInputDirective placeholder="street">
+              <input type="text" #registerStreet (keyup)="getRegisterStreet(registerStreet.value)" placeholder="street">
             </div>
             <div class="col-lg-3">
-              <input type="text" id="orangeForm-streetnumber" class="form-control validate" [formControl]="signupFormModalEmail" mdbInputDirective placeholder="number">
+              <input type="text" #registerStreetNumber (keyup)="getRegisterStreetNumber(registerStreetNumber.value)" placeholder="number">
             </div>
           </div>
         </div>
@@ -155,16 +154,16 @@
           <div class="row">
             <div class="col-lg-6">
               <i class="fa fa-lock prefix grey-text"></i>
-              <input type="text" id="orangeForm-picture" class="form-control validate" [formControl]="signupFormModalEmail" mdbInputDirective placeholder="picture">
+              <input type="text" #registerPicture (keyup)="getRegisterPicture(registerPicture.value)" placeholder="picture">
             </div>
             <div class="col-lg-6">
-              <input type="password" id="orangeForm-pass" class="form-control validate" [formControl]="signupFormModalPassword" mdbInputDirective placeholder="password">
+              <input type="password" #registerPassword (keyup)="getRegisterPassword(registerPassword.value)" placeholder="password">
             </div>
           </div>
         </div>
       </div>
       <div class="md-form mb-1">
-          <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect (click)="register()">Register</button>
+          <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect (click)="register();registerFrame.hide()">Register</button>
       </div>
     </div>
   </div>
