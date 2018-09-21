@@ -13,9 +13,6 @@
         <a class="nav-link waves-light" mdbWavesEffect>All articles</a>
       </li>
     </ul>
-    <!--<div class="md-form mt-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-    </div>-->
     <div class="md-form mt-0">
       <a mdbBtn *ngIf="!loggedIn" color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="loginFrame.show()">Login</a>
       <a mdbBtn *ngIf="!loggedIn" color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="registerFrame.show()">Register</a>
@@ -23,6 +20,7 @@
     </div>
   </links>
 </mdb-navbar>
+<!--MainBody-->
 <router-outlet></router-outlet>
 <!-- Footer -->
 <footer class="page-footer font-small indigo pt-4">
@@ -105,64 +103,74 @@
         </button>
       </div>
       <div class="modal-body mx-3">
-        <div class="md-form mb-7">
+        <div class="md-form mb-12">
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-1">
               <i class="fa fa-user prefix grey-text"></i>
+            </div>
+            <div class="col-lg-5">
               <input type="text" #registerFirstname (keyup)="getRegisterFirstname(registerFirstname.value)" placeholder="firstname">
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
               <input type="text" #registerLastname (keyup)="getRegisterLastname(registerLastname.value)" placeholder="lastname">
             </div>
           </div>
         </div>
 
-        <div class="md-form mb-7">
+        <div class="md-form mb-12">
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-1">
               <i class="fa fa-envelope prefix grey-text"></i>
+            </div>
+            <div class="col-lg-5">
               <input type="email" #registerEmail (keyup)="getRegisterEmail(registerEmail.value)"  placeholder="email">
+            </div>
+            <div class="col-lg-5">
+              <input type="text" #registerPicture (keyup)="getRegisterPicture(registerPicture.value)" placeholder="picture">
             </div>
           </div>
         </div>
 
-        <div class="md-form mb-7">
+        <div class="md-form mb-12">
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-1">
               <i class="fa fa-address-card prefix grey-text"></i>
+            </div>
+            <div class="col-lg-5">
               <input type="text" #registerZipcode (keyup)="getRegisterZipcode(registerZipcode.value)"  placeholder="zipcode">
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
               <input type="text" #registerCity (keyup)="getRegisterCity(registerCity.value)"  placeholder="city">
             </div>
           </div>
         </div>
 
-        <div class="md-form mb-7">
+        <div class="md-form mb-12">
           <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-1">
               <i class="fa fa-home prefix grey-text"></i>
+            </div>
+            <div class="col-lg-5">
               <input type="text" #registerStreet (keyup)="getRegisterStreet(registerStreet.value)" placeholder="street">
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-5">
               <input type="text" #registerStreetNumber (keyup)="getRegisterStreetNumber(registerStreetNumber.value)" placeholder="number">
             </div>
           </div>
         </div>
 
-        <div class="md-form mb-7">
+        <div class="md-form mb-12">
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-1">
               <i class="fa fa-lock prefix grey-text"></i>
-              <input type="text" #registerPicture (keyup)="getRegisterPicture(registerPicture.value)" placeholder="picture">
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
               <input type="password" #registerPassword (keyup)="getRegisterPassword(registerPassword.value)" placeholder="password">
             </div>
           </div>
         </div>
       </div>
-      <div class="md-form mb-1">
+      <div class="modal-footer d-flex justify-content-center">
           <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect (click)="register();registerFrame.hide()">Register</button>
       </div>
     </div>

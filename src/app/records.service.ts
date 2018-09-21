@@ -21,14 +21,10 @@ export class RecordsService {
   getUser(userId) {
     return this.http.get('http://localhost:3000/api/users/' + userId);
   }
-  login(userId, password) {
-    const loginObject = {
-      'password': password
-    };
-    return this.http.post('http://localhost:3000/api/users/' + userId + '/authenticate', loginObject);
+  login(loginObject) {
+    return this.http.post('http://localhost:3000/api/users/' + loginObject.id + '/authenticate', loginObject);
   }
   register(registerObject) {
-    console.log(registerObject);
     return this.http.post('http://localhost:3000/api/users/', registerObject);
   }
 }

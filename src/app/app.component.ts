@@ -13,9 +13,12 @@ export class AppComponent {
   randomArticle = '';
 
   loggedIn: boolean;
-  loginEmail /*= 'bernd@blog.com'*/;
-  loginPassword /*= 'Pa$$w0rd'*/;
-  loginUserId;
+  loginObject = {
+    'email': ''/* 'bernd@blog.com' */,
+    'id': '',
+    'password': ''/* 'Pa$$w0rd' */,
+    'loggedIn': false
+  };
 
   registerObject  = {
     'zipCode': null,
@@ -40,33 +43,31 @@ export class AppComponent {
   setRandomArticle() {
     this.randomArticle = this.allArticles[Math.floor(Math.random() * (this.allArticles.length + 1))]._id;
   }
-  getLoginPassword(loginPassword1) {
-    this.loginPassword = loginPassword1;
+  getLoginPassword(loginPassword) {
+    this.loginObject.password = loginPassword;
   }
   getLoginEmail(loginEmail) {
-    this.loginEmail = loginEmail;
+    this.loginObject.email = loginEmail;
   }
   login() {
     this.myFirstService.getAllUsers().subscribe(data => {
       this.allUsers = data;
     });
     for (const user of this.allUsers) {
-      if (user.email === this.loginEmail) {
-        this.loginUserId = user._id;
+      if (user.email === this.loginObject.email) {
+        this.loginObject.id = user._id;
       }
     }
-    if (this.loginUserId != null) {
-      this.myFirstService.login(this.loginUserId, this.loginPassword).subscribe(data => {
+    if (this.loginObject != null) {
+      this.myFirstService.login(this.loginObject).subscribe(data => {
         // @ts-ignore
-        this.loggedIn = data.correctPassword;
+        this.loginObject.loggedIn = data.correctPassword;
       });
     }
   }
   logout() {
-    /*this.loginEmail = '';
-    this.loginPassword = '';*/
-    this.loginUserId = null;
-    this.loggedIn = false;
+    this.loginObject.id = null;
+    this.loginObject.loggedIn = false;
   }
   getRegisterZipcode(registerZipcode) {
     this.registerObject.zipCode = +registerZipcode;
