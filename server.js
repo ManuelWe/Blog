@@ -14,7 +14,7 @@ const serverPort = 3000;
 const cors = require('cors');
 
 // Establish connection to MongoDB Atlas
-// Use test DB in test mode
+// Use test DB in testing mode
 if (module.parent) {
   // Test DB
   mongoose.connect('mongodb://default:ZwEH48nlOrSoe3Vd@cluster0-shard-00-00-ze2l5.mongodb.net:27017,' +
@@ -39,13 +39,6 @@ app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));
 
 // Point static path to dist
 app.use(serveStatic(path.join(__dirname, 'dist/Frontend-App')));
-
-
-/* // Default fallback rule which is just printing a log information
-app.use(function(req, res, next) {
-  util.log(util.format('ERROR: Received unsupported request: URL=%s, Method=%s', req.url, req.method));
-  next();
-});*/
 
 
 // swaggerRouter configuration
@@ -74,7 +67,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
   // Serve the Swagger documents and Swagger UI
   app.use(middleware.swaggerUi());
 
-  // Start the server
+  // Start the server, if not in testing mode
   if (!module.parent) {
     http.createServer(app).listen(serverPort, function() {
       console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);

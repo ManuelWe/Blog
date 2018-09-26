@@ -55,6 +55,8 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/User"
+        400:
+          description: "Invalid body"
       x-swagger-router-controller: "Users"
   /api/users/{userid}:
     get:
@@ -98,7 +100,7 @@ paths:
         description: "User to be updated"
         required: true
         schema:
-          $ref: "#/definitions/UserCreate"
+          $ref: "#/definitions/UserUpdate"
       responses:
         200:
           description: "successful operation"
@@ -475,6 +477,41 @@ definitions:
       email: "email"
       picture: "picture"
       lastname: "lastname"
+  UserUpdate:
+    type: "object"
+    properties:
+      firstname:
+        type: "string"
+        maxLength: 50
+      lastname:
+        type: "string"
+        maxLength: 50
+      zipCode:
+        type: "integer"
+        format: "int4"
+      city:
+        type: "string"
+        maxLength: 50
+      street:
+        type: "string"
+        maxLength: 50
+      streetNumber:
+        type: "integer"
+        format: "int4"
+      email:
+        type: "string"
+        maxLength: 50
+      picture:
+        type: "string"
+    example:
+      zipCode: 0
+      firstname: "firstname"
+      city: "city"
+      streetNumber: 6
+      street: "street"
+      email: "email"
+      picture: "picture"
+      lastname: "lastname"
   Article:
     type: "object"
     required:
@@ -502,7 +539,7 @@ definitions:
     example:
       date: "date"
       author: "author"
-      topic: []
+      topic: ""
       text: "text"
       headline: "headline"
       picture: "picture"
@@ -533,7 +570,7 @@ definitions:
     example:
       date: "2000-01-23"
       author: "author"
-      topic: []
+      topic: ""
       text: "text"
       headline: "headline"
       picture: "picture"

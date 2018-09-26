@@ -1,6 +1,6 @@
 'use strict';
 
-let User = require('../../db/models/users');
+const User = require('../../db/models/users');
 
 /**
  * Retrieve all users
@@ -53,7 +53,9 @@ exports.apiUsersPOST = function(body) {
         console.log(err);
         reject();
       } else {
-        resolve(user);
+        let userCopy = JSON.parse(JSON.stringify(user));
+        delete userCopy.password;
+        resolve(userCopy);
       }
     });
   });
@@ -142,7 +144,7 @@ exports.apiUsersUseridPUT = function(userid, body) {
       } else {
         let userCopy = JSON.parse(JSON.stringify(user));
         delete userCopy.password;
-        resolve(user);
+        resolve(userCopy);
       }
     });
   });
