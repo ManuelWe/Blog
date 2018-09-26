@@ -112,10 +112,10 @@
               <i class="fa fa-user prefix grey-text"></i>
             </div>
             <div class="col-lg-5">
-              <input type="text" #registerFirstname (keyup)="getRegisterFirstname(registerFirstname.value)" placeholder="firstname">
+              <input type="text" [(ngModel)]="registerObject.firstname" placeholder="firstname">
             </div>
             <div class="col-lg-5">
-              <input type="text" #registerLastname (keyup)="getRegisterLastname(registerLastname.value)" placeholder="lastname">
+              <input type="text" [(ngModel)]="registerObject.lastname" placeholder="lastname">
             </div>
           </div>
         </div>
@@ -126,7 +126,7 @@
               <i class="fa fa-envelope prefix grey-text"></i>
             </div>
             <div class="col-lg-5">
-              <input type="email" #registerEmail (keyup)="getRegisterEmail(registerEmail.value)"  placeholder="email">
+              <input type="email" [(ngModel)]="registerObject.email"  placeholder="email">
             </div>
             <div class="col-lg-5">
               <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
@@ -141,10 +141,10 @@
               <i class="fa fa-address-card prefix grey-text"></i>
             </div>
             <div class="col-lg-5">
-              <input type="text" #registerZipcode (keyup)="getRegisterZipcode(registerZipcode.value)"  placeholder="zipcode">
+              <input type="text" [(ngModel)]="registerObject.zipCode"  placeholder="zipcode">
             </div>
             <div class="col-lg-5">
-              <input type="text" #registerCity (keyup)="getRegisterCity(registerCity.value)"  placeholder="city">
+              <input type="text" [(ngModel)]="registerObject.city"  placeholder="city">
             </div>
           </div>
         </div>
@@ -155,10 +155,10 @@
               <i class="fa fa-home prefix grey-text"></i>
             </div>
             <div class="col-lg-5">
-              <input type="text" #registerStreet (keyup)="getRegisterStreet(registerStreet.value)" placeholder="street">
+              <input type="text" [(ngModel)]="registerObject.street" placeholder="street">
             </div>
             <div class="col-lg-5">
-              <input type="text" #registerStreetNumber (keyup)="getRegisterStreetNumber(registerStreetNumber.value)" placeholder="number">
+              <input type="text" [(ngModel)]="registerObject.streetNumber" placeholder="number">
             </div>
           </div>
         </div>
@@ -169,7 +169,7 @@
               <i class="fa fa-lock prefix grey-text"></i>
             </div>
             <div class="col-lg-5">
-              <input type="password" #registerPassword (keyup)="getRegisterPassword(registerPassword.value)" placeholder="password">
+              <input type="password" [(ngModel)]="registerObject.password" placeholder="password">
             </div>
           </div>
         </div>

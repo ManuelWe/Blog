@@ -72,33 +72,6 @@ export class AppComponent {
     this.loginObject.password = null;
     this.loginObject.loggedIn = false;
   }
-  getRegisterZipcode(registerZipcode) {
-    this.registerObject.zipCode = +registerZipcode;
-  }
-  getRegisterFirstname(registerFirstname) {
-    this.registerObject.firstname = registerFirstname;
-  }
-  getRegisterPassword(registerPassword) {
-    this.registerObject.password = registerPassword;
-  }
-  getRegisterCity(registerCity) {
-    this.registerObject.city = registerCity;
-  }
-  getRegisterStreetNumber(registerStreetNumber) {
-    this.registerObject.streetNumber = +registerStreetNumber;
-  }
-  getRegisterStreet(registerStreet) {
-    this.registerObject.street = registerStreet;
-  }
-  getRegisterEmail(registerEmail) {
-    this.registerObject.email = registerEmail;
-  }
-  getRegisterPicture(registerPicture) {
-    this.registerObject.picture = registerPicture;
-  }
-  getRegisterLastname(registerLastname) {
-    this.registerObject.lastname = registerLastname;
-  }
   register() {
     for (const user of this.allUsers) {
       /*if (user.email === this.loginEmail) {
