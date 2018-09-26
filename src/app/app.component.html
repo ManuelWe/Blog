@@ -12,16 +12,19 @@
       <li class="nav-item" [routerLink]="['/allArticles']">
         <a class="nav-link waves-light" mdbWavesEffect>All articles</a>
       </li>
+      <li class="nav-item" [routerLink]="['/createArticle', {author: loginObject.id}]" *ngIf="loginObject.loggedIn">
+        <a class="nav-link waves-light" mdbWavesEffect>Create article</a>
+      </li>
     </ul>
     <div class="md-form mt-0">
-      <a mdbBtn *ngIf="!loggedIn" color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="loginFrame.show()">Login</a>
-      <a mdbBtn *ngIf="!loggedIn" color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="registerFrame.show()">Register</a>
-      <a mdbBtn *ngIf="loggedIn" color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="logout()">Logout</a>
+      <a mdbBtn *ngIf="!loginObject.loggedIn" color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="loginFrame.show()">Login</a>
+      <a mdbBtn *ngIf="!loginObject.loggedIn" color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="registerFrame.show()">Register</a>
+      <a mdbBtn *ngIf="loginObject.loggedIn" color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="logout()">Logout</a>
     </div>
   </links>
 </mdb-navbar>
 <!--MainBody-->
-<router-outlet></router-outlet>
+<router-outlet [loginObject]="loginObject"></router-outlet>
 <!-- Footer -->
 <footer class="page-footer font-small indigo pt-4">
 
@@ -78,12 +81,12 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <i class="fa fa-envelope prefix grey-text"></i>
-          <input #loginEmail (keyup)="getLoginEmail(loginEmail.value)" (value)="loginEmail" type="email" placeholder="email" > <!--TODO: fix inputfield  -->
+          <input [(ngModel)]="loginObject.email" type="email" placeholder="email" >
         </div>
 
         <div class="md-form mb-4">
           <i class="fa fa-lock prefix grey-text"></i>
-          <input #loginPassword (keyup)="getLoginPassword(loginPassword.value)" (value)="loginPassword" type="password" placeholder="password">
+          <input [(ngModel)]="loginObject.password" type="password" placeholder="password">
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">

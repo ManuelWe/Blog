@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {RecordsService} from './records.service';
-import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +11,10 @@ export class AppComponent {
   allUsers;
   randomArticle = '';
 
-  loggedIn: boolean;
   loginObject = {
-    'email': ''/* 'bernd@blog.com' */,
+    'email': ''/*Klaus@blog.com*/,
     'id': '',
-    'password': ''/* 'Pa$$w0rd' */,
+    'password': ''/*Pa$$w0rd*/,
     'loggedIn': false
   };
 
@@ -52,12 +50,6 @@ export class AppComponent {
   setRandomArticle() {
     this.randomArticle = this.allArticles[Math.floor(Math.random() * (this.allArticles.length + 1))]._id;
   }
-  getLoginPassword(loginPassword) {
-    this.loginObject.password = loginPassword;
-  }
-  getLoginEmail(loginEmail) {
-    this.loginObject.email = loginEmail;
-  }
   login() {
     this.myFirstService.getAllUsers().subscribe(data => {
       this.allUsers = data;
@@ -76,6 +68,8 @@ export class AppComponent {
   }
   logout() {
     this.loginObject.id = null;
+    this.loginObject.email = null;
+    this.loginObject.password = null;
     this.loginObject.loggedIn = false;
   }
   getRegisterZipcode(registerZipcode) {
