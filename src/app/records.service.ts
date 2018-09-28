@@ -30,4 +30,7 @@ export class RecordsService {
   createArticle(createArticleObject) {
     return this.http.post('http://localhost:3000/api/articles', createArticleObject);
   }
+  createComment(createCommentObject) {
+    return this.http.post('http://localhost:3000/api/comments', createCommentObject);
+  }
 }

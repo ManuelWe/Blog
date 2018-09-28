@@ -29,12 +29,15 @@ export class MainPageComponent implements OnInit {
         this.authors.push(data1);
       });
       this.myFirstService.getArticle(this.articles[0]._id).subscribe( data1 => {
+        // @ts-ignore
         this.pictures.push(data1.picture);
       });
       this.myFirstService.getArticle(this.articles[1]._id).subscribe(data1 => {
+        // @ts-ignore
         this.pictures.push(data1.picture);
       });
       this.myFirstService.getArticle(this.articles[2]._id).subscribe(data1 => {
+        // @ts-ignore
         this.pictures.push(data1.picture);
       });
     });

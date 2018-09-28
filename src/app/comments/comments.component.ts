@@ -17,5 +17,4 @@ export class CommentsComponent implements OnInit {
       this.commentAuthor = data;
     });
   }
-
 }

@@ -4,6 +4,15 @@
   <textarea class="md-textarea form-control" type="text" [(ngModel)]="createArticleObject.text" placeholder="text"></textarea>
   <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
   <button (click)="fileInput.click()">Select File</button>
-  <button [disabled]="createArticleObject.headline == '' || topicString == '' ||
-  createArticleObject.picture == '' || createArticleObject.text == ''" (click)="upload()">Send</button>
+  <div class="form-inline">
+    <div class="md-form form-group">
+      <input class="form-control" type="text" [(ngModel)]="author.email" placeholder="email">
+    </div>
+    <div class="md-form form-group">
+      <input class="form-control" type="password" [(ngModel)]="author.password" placeholder="password">
+    </div>
+    <div class="md-form form-group">
+      <button [disabled]="createArticleObject.headline == '' || topicString == '' || createArticleObject.picture == '' || createArticleObject.text == ''" (click)="login()">Create</button>
+    </div>
+  </div>
 </div>
