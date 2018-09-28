@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {RecordsService} from './records.service';
-import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +11,10 @@ export class AppComponent {
   allUsers;
   randomArticle = '';
 
-  loggedIn: boolean;
   loginObject = {
-    'email': ''/* 'bernd@blog.com' */,
+    'email': ''/*Klaus@blog.com*/,
     'id': '',
-    'password': ''/* 'Pa$$w0rd' */,
+    'password': ''/*Pa$$w0rd*/,
     'loggedIn': false
   };
 
@@ -40,14 +38,17 @@ export class AppComponent {
       this.allUsers = data;
     });
   }
+  onFileChanged(event) {
+    const file: File = event.target.files[0];
+    const myReader: FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.registerObject.picture = myReader.result;
+    };
+    myReader.readAsDataURL(file);
+  }
   setRandomArticle() {
     this.randomArticle = this.allArticles[Math.floor(Math.random() * (this.allArticles.length + 1))]._id;
-  }
-  getLoginPassword(loginPassword) {
-    this.loginObject.password = loginPassword;
-  }
-  getLoginEmail(loginEmail) {
-    this.loginObject.email = loginEmail;
   }
   login() {
     this.myFirstService.getAllUsers().subscribe(data => {
@@ -67,34 +68,9 @@ export class AppComponent {
   }
   logout() {
     this.loginObject.id = null;
+    this.loginObject.email = null;
+    this.loginObject.password = null;
     this.loginObject.loggedIn = false;
-  }
-  getRegisterZipcode(registerZipcode) {
-    this.registerObject.zipCode = +registerZipcode;
-  }
-  getRegisterFirstname(registerFirstname) {
-    this.registerObject.firstname = registerFirstname;
-  }
-  getRegisterPassword(registerPassword) {
-    this.registerObject.password = registerPassword;
-  }
-  getRegisterCity(registerCity) {
-    this.registerObject.city = registerCity;
-  }
-  getRegisterStreetNumber(registerStreetNumber) {
-    this.registerObject.streetNumber = +registerStreetNumber;
-  }
-  getRegisterStreet(registerStreet) {
-    this.registerObject.street = registerStreet;
-  }
-  getRegisterEmail(registerEmail) {
-    this.registerObject.email = registerEmail;
-  }
-  getRegisterPicture(registerPicture) {
-    this.registerObject.picture = registerPicture;
-  }
-  getRegisterLastname(registerLastname) {
-    this.registerObject.lastname = registerLastname;
   }
   register() {
     for (const user of this.allUsers) {
