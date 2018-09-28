@@ -11,6 +11,7 @@ import { ArticleComponent } from './article/article.component';
 import { AllarticlesComponent } from './allarticles/allarticles.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CreateArticleComponent } from './create-article/create-article.component';
+import { CreateCommentComponent } from './create-comment/create-comment.component';
 
 const routes: Routes = [
   {
@@ -43,7 +44,8 @@ const routes: Routes = [
     ArticleComponent,
     AllarticlesComponent,
     CommentsComponent,
-    CreateArticleComponent
+    CreateArticleComponent,
+    CreateCommentComponent
   ],
   imports: [
     BrowserModule,

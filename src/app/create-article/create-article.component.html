@@ -1,9 +1,29 @@
 <div class="container md-form">
-  <input class="form-control" type="text" [(ngModel)]="createArticleObject.headline" placeholder="headline">
-  <input class="form-control" type="text" [(ngModel)]="topicString" placeholder="topic1;topic2;...">
-  <textarea class="md-textarea form-control" type="text" [(ngModel)]="createArticleObject.text" placeholder="text"></textarea>
-  <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-  <button (click)="fileInput.click()">Select File</button>
-  <button [disabled]="createArticleObject.headline == '' || topicString == '' ||
-  createArticleObject.picture == '' || createArticleObject.text == ''" (click)="upload()">Send</button>
+  <h3 class="mb-3 font-weight-bold dark-grey-text">
+    <strong>Create Article</strong>
+  </h3>
+  <div class="createArticle">
+    <input class="form-control" type="text" [(ngModel)]="createArticleObject.headline" placeholder="headline">
+    <input class="form-control" type="text" [(ngModel)]="topicString" placeholder="topic1;topic2;...">
+    <textarea class="md-textarea form-control" type="text" [(ngModel)]="createArticleObject.text" placeholder="text"></textarea>
+    <input type="file" (change)="onFileChanged($event)">
+  </div>
+  <div class="form-inline border">
+    <div class="md-form form-group">
+      <input class="form-control" type="text" [(ngModel)]="author.email" placeholder="email">
+    </div>
+    <div class="md-form form-group">
+      <input class="form-control" type="password" [(ngModel)]="author.password" placeholder="password">
+    </div>
+    <div class="md-form form-group">
+      <button class="btn btn-dark btn-sm" [disabled]="createArticleObject.headline == '' || topicString == '' || createArticleObject.picture == '' || createArticleObject.text == '' || author.email == '' || author.password ==''" (click)="login()">Create article</button>
+    </div>
+  </div>
+  <div class="error">
+    {{ errorText }}
+  </div>
+  <div class="success">
+    {{ successText }}
+  </div>
 </div>
+
