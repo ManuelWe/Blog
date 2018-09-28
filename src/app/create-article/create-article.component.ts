@@ -10,13 +10,13 @@ import {RecordsService} from '../records.service';
 export class CreateArticleComponent implements OnInit {
   createArticleObject = {
     'headline': '',
-    'topicString': '',
     'author': '',
     'topic': [],
     'text': '',
     'picture': '',
     'date': ''
 };
+  topicString;
   constructor(private route: ActivatedRoute, private myFirstService: RecordsService) {
     this.createArticleObject.author = this.route.snapshot.params['author'];
   }
@@ -34,9 +34,9 @@ export class CreateArticleComponent implements OnInit {
   }
   upload() {
     this.createArticleObject.date = new Date().toISOString();
-    this.createArticleObject.topic = this.createArticleObject.topicString.split(';');
+    this.createArticleObject.topic = this.topicString.split(';');
     console.log(this.createArticleObject);
-    this.myFirstService.register(this.createArticleObject).subscribe(data => {
+    this.myFirstService.createArticle(this.createArticleObject).subscribe(data => {
       console.log(data); // do something with the return value
     });
   }
