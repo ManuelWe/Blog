@@ -28,7 +28,7 @@ export class MainPageComponent implements OnInit {
       this.myFirstService.getUser(this.articles[2].author).subscribe(data1 => {
         this.authors.push(data1);
       });
-      this.myFirstService.getArticle(this.articles[0]._id).subscribe(data1 => {
+      this.myFirstService.getArticle(this.articles[0]._id).subscribe( data1 => {
         this.pictures.push(data1.picture);
       });
       this.myFirstService.getArticle(this.articles[1]._id).subscribe(data1 => {
