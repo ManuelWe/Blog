@@ -5,11 +5,12 @@ import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {HttpClientModule} from '@angular/common/http';
 import {RecordsService} from './records.service';
 import { RouterModule, Routes} from '@angular/router';
-
+import {FormsModule} from '@angular/forms';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ArticleComponent } from './article/article.component';
 import { AllarticlesComponent } from './allarticles/allarticles.component';
 import { CommentsComponent } from './comments/comments.component';
+import { CreateArticleComponent } from './create-article/create-article.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'allArticles',
     component: AllarticlesComponent
+  },
+  {
+    path: 'createArticle',
+    component: CreateArticleComponent,
   }
 ];
 
@@ -37,10 +42,12 @@ const routes: Routes = [
     MainPageComponent,
     ArticleComponent,
     AllarticlesComponent,
-    CommentsComponent
+    CommentsComponent,
+    CreateArticleComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
     RouterModule.forRoot(routes)

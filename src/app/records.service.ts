@@ -27,4 +27,7 @@ export class RecordsService {
   register(registerObject) {
     return this.http.post('http://localhost:3000/api/users/', registerObject);
   }
+  createArticle(createArticleObject) {
+    return this.http.post('http://localhost:3000/api/articles', createArticleObject);
+  }
 }
