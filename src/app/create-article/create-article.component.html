@@ -1,9 +1,9 @@
 <div class="container md-form">
   <input class="form-control" type="text" [(ngModel)]="createArticleObject.headline" placeholder="headline">
-  <input class="form-control" type="text" [(ngModel)]="createArticleObject.topicString" placeholder="topic1;topic2;...">
+  <input class="form-control" type="text" [(ngModel)]="topicString" placeholder="topic1;topic2;...">
   <textarea class="md-textarea form-control" type="text" [(ngModel)]="createArticleObject.text" placeholder="text"></textarea>
   <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
   <button (click)="fileInput.click()">Select File</button>
-  <button [disabled]="createArticleObject.headline == '' || createArticleObject.topicString == '' ||
+  <button [disabled]="createArticleObject.headline == '' || topicString == '' ||
   createArticleObject.picture == '' || createArticleObject.text == ''" (click)="upload()">Send</button>
 </div>
