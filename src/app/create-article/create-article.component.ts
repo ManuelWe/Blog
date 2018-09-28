@@ -20,13 +20,15 @@ export class CreateArticleComponent implements OnInit {
     'text': '',
     'picture': '',
     'date': ''
-};
+  };
   topicString;
   constructor(private myFirstService: RecordsService) {
     this.myFirstService.getAllUsers().subscribe(data => {
       this.allUsers = data;
     });
   }
+  errorText;
+  successText;
   ngOnInit() {
   }
   onFileChanged(event) {
@@ -39,6 +41,7 @@ export class CreateArticleComponent implements OnInit {
     myReader.readAsDataURL(file);
   }
   login() {
+    this.successText = '';
     for (const user of this.allUsers) {
       if (user.email === this.author.email) {
         this.author.id = user._id;
@@ -49,11 +52,12 @@ export class CreateArticleComponent implements OnInit {
         // @ts-ignore
         if (data1.correctPassword) {
           this.upload();
-        }
-        else {
-          console.log('login Failed'); // do something with the authentication error
+        } else {
+          this.errorText = 'Authentication failed: E-Mail incorrect or password';
         }
       });
+    } else {
+      this.errorText = 'Authentication failed: E-Mail incorrect or password';
     }
   }
   upload() {
@@ -61,7 +65,14 @@ export class CreateArticleComponent implements OnInit {
     this.createArticleObject.date = new Date().toISOString();
     this.createArticleObject.topic = this.topicString.split(';');
     this.myFirstService.createArticle(this.createArticleObject).subscribe(data => {
-      console.log(data); // do something with the return value
+      this.errorText = ''; // do something with the return value
+      /*this.author.email = '';
+      this.author.password = '';*/
+      this.createArticleObject.headline = '';
+      this.createArticleObject.text = '';
+      this.createArticleObject.author = '';
+      this.topicString = '';
+      this.successText = 'Article successful created';
     });
   }
 }

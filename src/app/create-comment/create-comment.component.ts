@@ -7,6 +7,8 @@ import {RecordsService} from '../records.service';
   styleUrls: ['./create-comment.component.scss']
 })
 export class CreateCommentComponent implements OnInit {
+  errorText;
+  successText;
   allUsers;
   author = {
     'id': null,
@@ -16,7 +18,7 @@ export class CreateCommentComponent implements OnInit {
   createCommentObject = {
     'date': '',
     'author': '',
-    'articleId': '1234',
+    'articleId': '',
     'text': ''
   };
   @Input()
@@ -30,6 +32,7 @@ export class CreateCommentComponent implements OnInit {
   ngOnInit() {
   }
   createComment() {
+    this.successText = '';
     for (const user of this.allUsers) {
       if (user.email === this.author.email) {
         this.author.id = user._id;
@@ -40,11 +43,12 @@ export class CreateCommentComponent implements OnInit {
         // @ts-ignore
         if (data1.correctPassword) {
           this.upload();
-        }
-        else {
-          console.log('login Failed'); // do something with the authentication error
+        } else {
+          this.errorText = 'Authentication failed: E-Mail incorrect or password';
         }
       });
+    } else {
+      this.errorText = 'Authentication failed: E-Mail incorrect or password';
     }
   }
   upload() {
@@ -52,7 +56,16 @@ export class CreateCommentComponent implements OnInit {
     this.createCommentObject.date = new Date().toISOString();
     this.createCommentObject.articleId = this.articleId;
     this.myFirstService.createComment(this.createCommentObject).subscribe(data => {
-      console.log(data); // do something with the return value
+      this.errorText = ''; // do something with the return value
+      this.author.email = '';
+      this.author.password = '';
+      this.createCommentObject = {
+        'date': '',
+        'author': '',
+        'articleId': '',
+        'text': ''
+      };
+      this.successText = 'Comment successful created';
     });
   }
 

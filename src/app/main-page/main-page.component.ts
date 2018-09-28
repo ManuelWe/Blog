@@ -18,7 +18,6 @@ export class MainPageComponent implements OnInit {
       this.articles.push(this.allArticles[0]);
       this.articles.push(this.allArticles[1]);
       this.articles.push(this.allArticles[2]);
-      console.log(this.articles[0]._id);
       this.myFirstService.getUser(this.articles[0].author).subscribe(data1 => {
         this.authors.push(data1);
       });

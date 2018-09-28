@@ -1,5 +1,5 @@
 <textarea class="md-textarea form-control" type="text" [(ngModel)]="createCommentObject.text" placeholder="text"></textarea>
-<div class="form-inline">
+<div class="form-inline border">
   <div class="md-form form-group">
     <input class="form-control" type="text" [(ngModel)]="author.email" placeholder="email">
   </div>
@@ -7,6 +7,12 @@
     <input class="form-control" type="password" [(ngModel)]="author.password" placeholder="password">
   </div>
   <div class="md-form form-group">
-    <button [disabled]="false" (click)="createComment()">Comment</button>
+    <button class="btn btn-dark btn-sm" [disabled]="createCommentObject.text == '' || author.email == '' || author.password == ''" (click)="createComment()">Comment</button>
   </div>
+</div>
+<div class="error">
+  {{ errorText }}
+</div>
+<div class="success">
+  {{ successText }}
 </div>
