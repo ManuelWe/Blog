@@ -539,7 +539,7 @@ definitions:
     example:
       date: "date"
       author: "author"
-      topic: ""
+      topic: []
       text: "text"
       headline: "headline"
       picture: "picture"
@@ -560,7 +560,6 @@ definitions:
         type: "string"
       date:
         type: "string"
-        format: "date"
       topic:
         type: "array"
         items:
@@ -570,7 +569,7 @@ definitions:
     example:
       date: "2000-01-23"
       author: "author"
-      topic: ""
+      topic: []
       text: "text"
       headline: "headline"
       picture: "picture"
@@ -613,7 +612,6 @@ definitions:
         type: "string"
       date:
         type: "string"
-        format: "date"
     example:
       date: "2000-01-23"
       author: "author"
