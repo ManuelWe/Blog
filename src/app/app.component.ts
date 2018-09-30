@@ -47,31 +47,9 @@ export class AppComponent {
     };
     myReader.readAsDataURL(file);
   }
-  setRandomArticle() {
+  /*setRandomArticle() {
     this.randomArticle = this.allArticles[Math.floor(Math.random() * (this.allArticles.length + 1))]._id;
-  }
-  login() {
-    this.myFirstService.getAllUsers().subscribe(data => {
-      this.allUsers = data;
-    });
-    for (const user of this.allUsers) {
-      if (user.email === this.loginObject.email) {
-        this.loginObject.id = user._id;
-      }
-    }
-    if (this.loginObject != null) {
-      this.myFirstService.login(this.loginObject).subscribe(data => {
-        // @ts-ignore
-        this.loginObject.loggedIn = data.correctPassword;
-      });
-    }
-  }
-  logout() {
-    this.loginObject.id = null;
-    this.loginObject.email = null;
-    this.loginObject.password = null;
-    this.loginObject.loggedIn = false;
-  }
+  }*/
   register() {
     for (const user of this.allUsers) {
       /*if (user.email === this.loginEmail) {

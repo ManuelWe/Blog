@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
 import {RecordsService} from '../records.service';
 
 @Component({
@@ -8,6 +7,12 @@ import {RecordsService} from '../records.service';
   styleUrls: ['./create-article.component.scss']
 })
 export class CreateArticleComponent implements OnInit {
+  allUsers;
+  author = {
+    'id': null,
+    'email': '',
+    'password': ''
+  };
   createArticleObject = {
     'headline': '',
     'author': '',
@@ -15,12 +20,15 @@ export class CreateArticleComponent implements OnInit {
     'text': '',
     'picture': '',
     'date': ''
-};
+  };
   topicString;
-  constructor(private route: ActivatedRoute, private myFirstService: RecordsService) {
-    this.createArticleObject.author = this.route.snapshot.params['author'];
+  constructor(private myFirstService: RecordsService) {
+    this.myFirstService.getAllUsers().subscribe(data => {
+      this.allUsers = data;
+    });
   }
-
+  errorText;
+  successText;
   ngOnInit() {
   }
   onFileChanged(event) {
@@ -32,12 +40,39 @@ export class CreateArticleComponent implements OnInit {
     };
     myReader.readAsDataURL(file);
   }
+  login() {
+    this.successText = '';
+    for (const user of this.allUsers) {
+      if (user.email === this.author.email) {
+        this.author.id = user._id;
+      }
+    }
+    if (this.author.id != null) {
+      this.myFirstService.login(this.author).subscribe(data1 => {
+        // @ts-ignore
+        if (data1.correctPassword) {
+          this.upload();
+        } else {
+          this.errorText = 'Authentication failed: E-Mail incorrect or password';
+        }
+      });
+    } else {
+      this.errorText = 'Authentication failed: E-Mail incorrect or password';
+    }
+  }
   upload() {
+    this.createArticleObject.author = this.author.id;
     this.createArticleObject.date = new Date().toISOString();
     this.createArticleObject.topic = this.topicString.split(';');
-    console.log(this.createArticleObject);
     this.myFirstService.createArticle(this.createArticleObject).subscribe(data => {
-      console.log(data); // do something with the return value
+      this.errorText = ''; // do something with the return value
+      /*this.author.email = '';
+      this.author.password = '';*/
+      this.createArticleObject.headline = '';
+      this.createArticleObject.text = '';
+      this.createArticleObject.author = '';
+      this.topicString = '';
+      this.successText = 'Article successful created';
     });
   }
 }

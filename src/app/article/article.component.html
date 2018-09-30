@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 blogShort">
-      <h2>{{article?.headline}}</h2>
+      <h3 class="mb-3 font-weight-bold dark-grey-text">
+        <strong>{{ article?.headline }}</strong>
+      </h3>
       <img src="{{ article?.picture }}" class="pull-left img-responsive img-fluid view overlay rounded z-depth-2 mb-2 waves-light" id="articleImage">
       <article>
         <p class="box-text">
@@ -25,13 +27,18 @@
     </div>
   </div>
 </div>
+<!--Comments input-->
+<div class="container md-form">
+  <hr style="margin:8px auto">
+  <app-create-comment [articleId]="articleId"></app-create-comment>
+</div>
 <!--Comments-->
 <section class="container pt-0 pb-3">
   <hr style="margin:8px auto">
   <h4>Comments</h4>
   <div class="row">
     <div class="col-lg-10">
-      <div class="mdb-feed" *ngFor="let comment of articleComments">
+      <div class="mdb-feed" *ngFor="let comment of comments">
         <app-comments [comment]="comment"></app-comments>
       </div>
     </div>
