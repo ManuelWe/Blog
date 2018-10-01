@@ -44,11 +44,11 @@ export class CreateCommentComponent implements OnInit {
         if (data1.correctPassword) {
           this.upload();
         } else {
-          this.errorText = 'Authentication failed: E-Mail incorrect or password';
+          this.errorText = 'Authentication failed: E-Mail or password incorrect';
         }
       });
     } else {
-      this.errorText = 'Authentication failed: E-Mail incorrect or password';
+      this.errorText = 'Authentication failed: E-Mail or password incorrect';
     }
   }
   upload() {
