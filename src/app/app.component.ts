@@ -9,7 +9,6 @@ import {RecordsService} from './records.service';
 export class AppComponent {
   allArticles;
   allUsers;
-  randomArticle = '';
 
   loginObject = {
     'email': ''/*Klaus@blog.com*/,
@@ -47,9 +46,6 @@ export class AppComponent {
     };
     myReader.readAsDataURL(file);
   }
-  /*setRandomArticle() {
-    this.randomArticle = this.allArticles[Math.floor(Math.random() * (this.allArticles.length + 1))]._id;
-  }*/
   register() {
     for (const user of this.allUsers) {
       /*if (user.email === this.loginEmail) {
