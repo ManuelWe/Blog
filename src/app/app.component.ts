@@ -53,6 +53,10 @@ export class AppComponent {
       this.errorText = 'Register failed: E-mail is not valid';
       return;
     }
+    if (this.registerObject.password.length < 8) {
+      this.errorText = 'Register failed: Password must be at least 8 characters';
+      return;
+    }
     this.myFirstService.register(this.registerObject).subscribe(data => {
       console.log(data); // do something with the return value
     });

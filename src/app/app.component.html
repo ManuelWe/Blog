@@ -72,8 +72,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body center" align="center">
-        <div class="form">
+      <div class="modal-body" align="center">
+        <div align="center">
           <div class="form-inline">
             <div class="md-form form-group">
               <input class="form-group" type="text" [(ngModel)]="registerObject.firstname" placeholder="firstname">
@@ -116,7 +116,7 @@
 
       <div class="modal-footer d-flex justify-content-center">
           <button mdbBtn [disabled]="registerObject.firstname == '' || registerObject.lastname == '' ||
-          registerObject.email == '' || registerObject.password.length < 8 || registerObject.zipCode == '' ||
+          registerObject.email == '' || registerObject.password == ''|| registerObject.zipCode == '' ||
           registerObject.city == '' || registerObject.street == '' || registerObject.streetNumber == '' ||
           registerObject.picture == ''" color="indigo" class="waves-light" mdbWavesEffect (click)="register()">Register</button>
       </div>
