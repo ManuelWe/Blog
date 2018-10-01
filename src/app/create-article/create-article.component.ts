@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {RecordsService} from '../records.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-article',
@@ -22,7 +23,7 @@ export class CreateArticleComponent implements OnInit {
     'date': ''
   };
   topicString;
-  constructor(private myFirstService: RecordsService) {
+  constructor(private myFirstService: RecordsService, private router: Router) {
     this.myFirstService.getAllUsers().subscribe(data => {
       this.allUsers = data;
     });
@@ -53,11 +54,11 @@ export class CreateArticleComponent implements OnInit {
         if (data1.correctPassword) {
           this.upload();
         } else {
-          this.errorText = 'Authentication failed: E-Mail incorrect or password';
+          this.errorText = 'Authentication failed: E-Mail or password incorrect';
         }
       });
     } else {
-      this.errorText = 'Authentication failed: E-Mail incorrect or password';
+      this.errorText = 'Authentication failed: E-Mail or password incorrect';
     }
   }
   upload() {
@@ -65,6 +66,7 @@ export class CreateArticleComponent implements OnInit {
     this.createArticleObject.date = new Date().toISOString();
     this.createArticleObject.topic = this.topicString.split(';');
     this.myFirstService.createArticle(this.createArticleObject).subscribe(data => {
+      console.log(data);
       this.errorText = ''; // do something with the return value
       /*this.author.email = '';
       this.author.password = '';*/
@@ -73,6 +75,8 @@ export class CreateArticleComponent implements OnInit {
       this.createArticleObject.author = '';
       this.topicString = '';
       this.successText = 'Article successful created';
+      // @ts-ignore
+      this.router.navigateByUrl('/article/' + data._id);
     });
   }
 }
