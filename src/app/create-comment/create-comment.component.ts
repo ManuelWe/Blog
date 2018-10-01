@@ -66,6 +66,7 @@ export class CreateCommentComponent implements OnInit {
         'text': ''
       };
       this.successText = 'Comment successful created';
+      location.reload();
     });
   }
 
