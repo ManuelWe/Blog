@@ -48,7 +48,7 @@ export class AppComponent {
     myReader.readAsDataURL(file);
   }
   register() {
-    this.errorText = ''
+    this.errorText = '';
     if (!this.isValidEmail()) {
       this.errorText = 'Register failed: E-mail is not valid';
       return;
@@ -68,7 +68,8 @@ export class AppComponent {
         return false;
       }
     }
-    this.regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    this.regexp = new RegExp('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@' +
+        '((\[[0-9]{1, 3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/');
     return this.regexp.test(this.registerObject.email);
   }
 }

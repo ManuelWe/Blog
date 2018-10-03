@@ -106,5 +106,5 @@ const documentation = gulp.parallel(generateJsDocumentation, generateTsDocumenta
 
 // Common task definition
 // TODO validation
-gulp.task('build', gulp.series(clean, executeTests, documentation));
-gulp.task('default', gulp.series('protractor-install', 'protractor-run', 'build'));
+gulp.task('build', gulp.series(clean, codeValidation, executeTests, documentation));
+gulp.task('default', gulp.series(codeValidation));

@@ -1,7 +1,7 @@
 'use strict';
 
-let Article = require('../../db/models/articles');
-let Comment = require('../../db/models/comments');
+let Article = require('../db/models/articles');
+let Comment = require('../db/models/comments');
 let dateConverter = require('../utils/dateConverter');
 
 /**

@@ -1,6 +1,6 @@
 'use strict';
 
-const User = require('../../db/models/users');
+const User = require('../db/models/users');
 
 /**
  * Retrieve all users
