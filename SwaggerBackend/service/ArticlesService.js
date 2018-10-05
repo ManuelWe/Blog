@@ -1,11 +1,11 @@
 'use strict';
 
-let Article = require('../db/models/articles');
-let Comment = require('../db/models/comments');
-let dateConverter = require('../utils/dateConverter');
+const Article = require('../db/models/articles');
+const Comment = require('../db/models/comments');
+const dateConverter = require('../utils/dateConverter');
 
 /**
- * Delete an existing article
+ * Delete an existing article and all of his comments
  *
  * @param {String} articleid
  * @return {Promise} no response value expected for this operation
