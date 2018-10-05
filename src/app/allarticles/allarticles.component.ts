@@ -15,17 +15,14 @@ export class AllarticlesComponent implements OnInit {
   constructor(private myFirstService: RecordsService) {
     this.myFirstService.getAllArticles().subscribe(data => {
       this.allArticles = data;
-      for (let article of this.allArticles) {
+      for (const article of this.allArticles) {
         if (article.topic.includes('Nature')) {
           this.natureArticles.push(article);
-        }
-        else if (article.topic.includes('Cities')) {
+        } else if (article.topic.includes('Cities')) {
           this.citiesArticles.push(article);
-        }
-        else if (article.topic.includes('People')) {
+        } else if (article.topic.includes('People')) {
           this.peopleArticles.push(article);
-        }
-        else {
+        } else {
           this.otherArticles.push(article);
         }
       }

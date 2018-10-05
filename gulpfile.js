@@ -82,8 +82,9 @@ const executeTests = gulp.parallel(executeBackendUnitTests);
  * @return {*}
  */
 function generateJsDocumentation() {
+  let config = require('./jsdocConfig');
   return gulp.src(['README.md', './SwaggerBackend/**/*.js'], {read: false})
-      .pipe(jsdoc());
+      .pipe(jsdoc(config));
 }
 
 /**
@@ -94,9 +95,10 @@ function generateTsDocumentation() {
       .src(files.projectTsSources)
       .pipe(typedoc({
         module: 'commonjs',
-        target: 'es5',
-        out: 'docs/typedoc',
+        target: 'es6',
+        out: 'docs/Frontend',
         name: 'Blog',
+        experimentalDecorators: true,
       }))
   ;
 }
@@ -106,5 +108,5 @@ const documentation = gulp.parallel(generateJsDocumentation, generateTsDocumenta
 
 // Common task definition
 // TODO validation
-gulp.task('build', gulp.series(clean, executeTests, documentation));
-gulp.task('default', gulp.series('protractor-install', 'protractor-run', 'build'));
+gulp.task('build', gulp.series(clean, codeValidation, executeTests, documentation));
+gulp.task('default', gulp.series(codeValidation));

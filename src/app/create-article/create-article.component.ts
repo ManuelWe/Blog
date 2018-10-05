@@ -19,7 +19,7 @@ export class CreateArticleComponent implements OnInit {
     'author': '',
     'topic': [],
     'text': '',
-    'picture': '',
+    'picture': null,
     'date': ''
   };
   topicString;

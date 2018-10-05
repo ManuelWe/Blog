@@ -9,7 +9,8 @@ import {RecordsService} from './records.service';
 export class AppComponent {
   allArticles;
   allUsers;
-
+  errorText;
+  regexp;
   loginObject = {
     'email': ''/*Klaus@blog.com*/,
     'id': '',
@@ -25,7 +26,7 @@ export class AppComponent {
     'streetNumber': null,
     'street': '',
     'email': '',
-    'picture': '',
+    'picture': null,
     'lastname': ''
   };
 
@@ -47,14 +48,30 @@ export class AppComponent {
     myReader.readAsDataURL(file);
   }
   register() {
-    for (const user of this.allUsers) {
-      /*if (user.email === this.loginEmail) {
-        return; // do a e-mail validation here
-      }*/
+    this.errorText = '';
+    if (!this.isValidEmail()) {
+      this.errorText = 'Register failed: E-mail is not valid';
+      return;
+    }
+    if (this.registerObject.password.length < 8) {
+      this.errorText = 'Register failed: Password must be at least 8 characters';
+      return;
     }
     this.myFirstService.register(this.registerObject).subscribe(data => {
       console.log(data); // do something with the return value
     });
+  }
+
+  isValidEmail(): boolean {
+    for (const user of this.allUsers) {
+      if (user.email === this.registerObject.email) {
+        return false;
+      }
+    }
+
+    // tslint:disable-next-line:max-line-length
+      this.regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    return this.regexp.test(this.registerObject.email);
   }
 }
 

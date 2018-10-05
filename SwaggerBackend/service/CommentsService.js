@@ -1,7 +1,7 @@
 'use strict';
 
-let Comment = require('../../db/models/comments');
-let dateConverter = require('../utils/dateConverter');
+const Comment = require('../db/models/comments');
+const dateConverter = require('../utils/dateConverter');
 
 /**
  * Create a new comment

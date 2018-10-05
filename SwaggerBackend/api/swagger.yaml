@@ -435,8 +435,7 @@ definitions:
     type: "object"
     required:
     - "email"
-    - "firstname"
-    - "lastname"
+    - "picture"
     - "password"
     properties:
       firstname:
@@ -550,6 +549,8 @@ definitions:
     - "headline"
     - "text"
     - "topic"
+    - "author"
+    - "picture"
     properties:
       headline:
         type: "string"

@@ -16,7 +16,7 @@
       <input class="form-control" type="password" [(ngModel)]="author.password" placeholder="password">
     </div>
     <div class="md-form form-group">
-      <button class="btn btn-dark btn-sm" [disabled]="createArticleObject.headline == '' || topicString == '' || createArticleObject.picture == '' || createArticleObject.text == '' || author.email == '' || author.password ==''" (click)="login()">Create article</button>
+      <button class="btn btn-dark btn-sm" [disabled]="createArticleObject.headline == '' || topicString == '' || createArticleObject.picture == '' || createArticleObject.text == '' || author.email == '' || author.password.length < 8" (click)="login()">Create article</button>
     </div>
   </div>
   <div class="error">
