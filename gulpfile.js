@@ -82,8 +82,9 @@ const executeTests = gulp.parallel(executeBackendUnitTests);
  * @return {*}
  */
 function generateJsDocumentation() {
+  let config = require('./jsdocConfig');
   return gulp.src(['README.md', './SwaggerBackend/**/*.js'], {read: false})
-      .pipe(jsdoc());
+      .pipe(jsdoc(config));
 }
 
 /**
@@ -94,9 +95,10 @@ function generateTsDocumentation() {
       .src(files.projectTsSources)
       .pipe(typedoc({
         module: 'commonjs',
-        target: 'es5',
-        out: 'docs/typedoc',
+        target: 'es6',
+        out: 'docs/Frontend',
         name: 'Blog',
+        experimentalDecorators: true,
       }))
   ;
 }

@@ -8,11 +8,9 @@ const SALT_WORK_FACTOR = 10;
 let userSchema = mongoose.Schema({
   firstname: {
     type: String,
-    required: true,
   },
   lastname: {
     type: String,
-    required: true,
   },
   zipCode: {
     type: Number,
@@ -36,6 +34,7 @@ let userSchema = mongoose.Schema({
   },
   picture: {
     type: String,
+    required: true,
   },
 });
 
