@@ -37,6 +37,8 @@ describe('Update content', function() {
             'Nature',
             'Water',
           ],
+          author: idVariables.userID,
+          picture: 'base64/nsoasdkoajsodd33892839283928398293898392',
         })
         .set('Accept', 'application/json')
         .expect(200)
