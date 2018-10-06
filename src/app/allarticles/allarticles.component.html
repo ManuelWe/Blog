@@ -15,7 +15,7 @@
           <strong>Nature</strong>
         </h3>
         <div *ngFor="let article of natureArticles">
-          <h4 [routerLink] = "['/article', article._id]"><a>{{ article?.headline }}</a></h4>
+          <h4 [routerLink]="['/article', article._id]"><a>{{ article?.headline }}</a></h4>
         </div>
       </div>
     </div>
@@ -25,7 +25,8 @@
     <div class="row mt-3">
       <div class="col-lg-5 col-xl-4 mb-4">
         <div class="view overlay rounded z-depth-1 waves-light" mdbWavesEffect>
-          <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(142).jpg" class="img-fluid" alt="Second sample image">
+          <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(142).jpg" class="img-fluid"
+               alt="Second sample image">
           <a>
             <div class="mask rgba-white-slight"></div>
           </a>
@@ -36,7 +37,7 @@
           <strong>Cities</strong>
         </h3>
         <div *ngFor="let article of citiesArticles">
-          <h4 [routerLink] = "['/article', article._id]"><a>{{ article?.headline }}</a></h4>
+          <h4 [routerLink]="['/article', article._id]"><a>{{ article?.headline }}</a></h4>
         </div>
       </div>
     </div>
@@ -57,7 +58,7 @@
           <strong>People</strong>
         </h3>
         <div *ngFor="let article of peopleArticles">
-          <h4 [routerLink] = "['/article', article._id]"><a>{{ article?.headline }}</a></h4>
+          <h4 [routerLink]="['/article', article._id]"><a>{{ article?.headline }}</a></h4>
         </div>
       </div>
     </div>
@@ -66,7 +67,8 @@
     <div class="row">
       <div class="col-lg-5 col-xl-4 mb-4">
         <div class="view overlay rounded z-depth-1 waves-light" mdbWavesEffect>
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%28110%29.jpg" class="img-fluid" alt="Third sample image">
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%28110%29.jpg" class="img-fluid"
+               alt="Third sample image">
           <a>
             <div class="mask rgba-white-slight"></div>
           </a>
@@ -77,7 +79,7 @@
           <strong>Other articles</strong>
         </h3>
         <div *ngFor="let article of otherArticles">
-          <h4 [routerLink] = "['/article', article._id]"><a>{{ article?.headline }}</a></h4>
+          <h4 [routerLink]="['/article', article._id]"><a>{{ article?.headline }}</a></h4>
         </div>
       </div>
     </div>

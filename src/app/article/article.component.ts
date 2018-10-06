@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {RecordsService} from '../records.service';
 
@@ -27,6 +27,7 @@ export class ArticleComponent implements OnInit {
       this.comments = data;
     });
   }
+
   ngOnInit() {
   }
 }

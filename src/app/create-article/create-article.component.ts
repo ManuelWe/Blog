@@ -23,15 +23,19 @@ export class CreateArticleComponent implements OnInit {
     'date': ''
   };
   topicString;
+
   constructor(private blogService: RecordsService, private router: Router) {
     this.blogService.getAllUsers().subscribe(data => {
       this.allUsers = data;
     });
   }
+
   errorText;
   successText;
+
   ngOnInit() {
   }
+
   onFileChanged(event) {
     const file: File = event.target.files[0];
     const myReader: FileReader = new FileReader();
@@ -41,6 +45,7 @@ export class CreateArticleComponent implements OnInit {
     };
     myReader.readAsDataURL(file);
   }
+
   login() {
     this.successText = '';
     for (const user of this.allUsers) {
@@ -61,6 +66,7 @@ export class CreateArticleComponent implements OnInit {
       this.errorText = 'Authentication failed: E-Mail or password incorrect';
     }
   }
+
   upload() {
     this.createArticleObject.author = this.author.id;
     this.createArticleObject.date = new Date().toISOString();

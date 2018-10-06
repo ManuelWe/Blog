@@ -10,10 +10,12 @@ export class CommentsComponent implements OnInit {
   @Input()
   comment;
   commentAuthor;
+
   constructor(private blogService: RecordsService) {
   }
+
   ngOnInit() {
-    this.blogService.getUser(this.comment.author).subscribe( data => {
+    this.blogService.getUser(this.comment.author).subscribe(data => {
       this.commentAuthor = data;
     });
   }

@@ -1,6 +1,5 @@
 import {Component, Injectable} from '@angular/core';
 import {RecordsService} from './records.service';
-import {timeout} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +20,7 @@ export class AppComponent {
     'loggedIn': false
   };
 
-  registerObject  = {
+  registerObject = {
     'zipCode': null,
     'firstname': '',
     'password': '',
@@ -33,7 +32,7 @@ export class AppComponent {
     'lastname': ''
   };
 
-  constructor( private blogService: RecordsService) {
+  constructor(private blogService: RecordsService) {
     this.blogService.getAllArticles().subscribe(data => {
       this.allArticles = data;
     });
@@ -57,6 +56,7 @@ export class AppComponent {
     };
     myReader.readAsDataURL(file);
   }
+
   register() {
     this.errorText = '';
     if (!this.isValidEmail()) {
@@ -80,7 +80,7 @@ export class AppComponent {
     }
 
     // tslint:disable-next-line:max-line-length
-      this.regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    this.regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     return this.regexp.test(this.registerObject.email);
   }
 }

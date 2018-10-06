@@ -23,6 +23,7 @@ export class CreateCommentComponent implements OnInit {
   };
   @Input()
   articleId;
+
   constructor(private blogService: RecordsService) {
     this.blogService.getAllUsers().subscribe(data => {
       this.allUsers = data;
@@ -31,6 +32,7 @@ export class CreateCommentComponent implements OnInit {
 
   ngOnInit() {
   }
+
   createComment() {
     this.successText = '';
     for (const user of this.allUsers) {
@@ -51,6 +53,7 @@ export class CreateCommentComponent implements OnInit {
       this.errorText = 'Authentication failed: E-Mail or password incorrect';
     }
   }
+
   upload() {
     this.createCommentObject.author = this.author.id;
     this.createCommentObject.date = new Date().toISOString();
