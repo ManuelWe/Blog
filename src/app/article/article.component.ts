@@ -14,18 +14,22 @@ export class ArticleComponent implements OnInit {
   comments;
 
   constructor(private route: ActivatedRoute, private myFirstService: RecordsService) {
+    console.log('Hello world');
     this.route.params.subscribe(params => {
       this.articleId = params['id'].toString();
     });
-    this.myFirstService.getArticle(this.articleId).subscribe(data => {
+    this.myFirstService.getComments(this.articleId).subscribe(data => {
+      this.comments = data;
+      console.log(this.comments);
+    });
+    console.log(this.articleId);
+    /*this.myFirstService.getArticle(this.articleId).subscribe(data => {
       this.article = data;
+      console.log(this.article.author);
       this.myFirstService.getUser(this.article.author).subscribe(data1 => {
         this.user = data1;
       });
-    });
-    this.myFirstService.getComments(this.articleId).subscribe(data => {
-      this.comments = data;
-    });
+    });*/
   }
   ngOnInit() {
   }

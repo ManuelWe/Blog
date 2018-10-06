@@ -1,15 +1,15 @@
 <!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
-  <mdb-navbar-brand><a class="navbar-brand" [routerLink]="['/index']">Navbar</a></mdb-navbar-brand>
+  <mdb-navbar-brand><a class="navbar-brand" routerLink="['/index']">Navbar</a></mdb-navbar-brand>
   <links>
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" [routerLink]="['/index']">
+      <li class="nav-item" routerLink="['/index']">
         <a class="nav-link waves-light" mdbWavesEffect>Home</a>
       </li>
-      <li class="nav-item" [routerLink]="['/allArticles']">
+      <li class="nav-item" routerLink="['/allArticles']">
         <a class="nav-link waves-light" mdbWavesEffect>All articles</a>
       </li>
-      <li class="nav-item" [routerLink]="['/createArticle']">
+      <li class="nav-item" routerLink="['/createArticle']">
         <a class="nav-link waves-light" mdbWavesEffect>Create article</a>
       </li>
     </ul>
@@ -63,7 +63,7 @@
 
 </footer>
 <!-- Register -->
-<div mdbModal #registerFrame="mdbModal" class="modal fade left" id="regristerFrameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div mdbModal #registerFrame class="modal fade left" id="regristerFrameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -113,16 +113,18 @@
           </div>
         </div>
       </div>
-
       <div class="modal-footer d-flex justify-content-center">
           <button mdbBtn [disabled]="registerObject.firstname == '' || registerObject.lastname == '' ||
           registerObject.email == '' || registerObject.password == ''|| registerObject.zipCode == '' ||
           registerObject.city == '' || registerObject.street == '' || registerObject.streetNumber == '' ||
           registerObject.picture == ''" color="indigo" class="waves-light" mdbWavesEffect (click)="register()">Register</button>
       </div>
-    <div class="error" align="center" style="margin-bottom: 4px">
-      {{ errorText }}
-    </div>
+      <div class="error" align="center" style="margin-bottom: 4px">
+        {{ errorText }}
+      </div>
+      <div class="success" align="center" style="margin-bottom: 4px">
+        {{ successText }}
+      </div>
     </div>
   </div>
 </div>

@@ -68,8 +68,8 @@ export class CreateArticleComponent implements OnInit {
     this.myFirstService.createArticle(this.createArticleObject).subscribe(data => {
       console.log(data);
       this.errorText = ''; // do something with the return value
-      /*this.author.email = '';
-      this.author.password = '';*/
+      this.author.email = '';
+      this.author.password = '';
       this.createArticleObject.headline = '';
       this.createArticleObject.text = '';
       this.createArticleObject.author = '';

@@ -1,3 +1,4 @@
+
 import {Component, Input, OnInit} from '@angular/core';
 import {RecordsService} from '../records.service';
 
@@ -7,14 +8,15 @@ import {RecordsService} from '../records.service';
   styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent implements OnInit {
+  commentAuthor;
   @Input()
   comment;
-  commentAuthor;
   constructor(private myFirstService: RecordsService) {
   }
   ngOnInit() {
-    this.myFirstService.getUser(this.comment.author).subscribe( data => {
+    console.log(this.comment);
+    /*this.myFirstService.getUser(this.comment.author).subscribe( data => {
       this.commentAuthor = data;
-    });
+    });*/
   }
 }

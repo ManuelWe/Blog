@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {RecordsService} from './records.service';
 
 @Component({
@@ -10,6 +10,7 @@ export class AppComponent {
   allArticles;
   allUsers;
   errorText;
+  successText;
   regexp;
   loginObject = {
     'email': ''/*Klaus@blog.com*/,
@@ -51,14 +52,24 @@ export class AppComponent {
     this.errorText = '';
     if (!this.isValidEmail()) {
       this.errorText = 'Register failed: E-mail is not valid';
-      return;
+      return false;
     }
     if (this.registerObject.password.length < 8) {
       this.errorText = 'Register failed: Password must be at least 8 characters';
-      return;
+      return false;
     }
     this.myFirstService.register(this.registerObject).subscribe(data => {
       console.log(data); // do something with the return value
+        this.successText = 'Success: User created';
+        this.registerObject.zipCode = null;
+        this.registerObject.firstname = '';
+        this.registerObject.password = '';
+        this.registerObject.city = '';
+        this.registerObject.streetNumber = null;
+        this.registerObject.street = '';
+        this.registerObject.email = '';
+        this.registerObject.lastname = '';
+        return true;
     });
   }
 
@@ -68,10 +79,7 @@ export class AppComponent {
         return false;
       }
     }
-    this.regexp = new RegExp('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@' +
-        '((\[[0-9]{1, 3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/');
+    this.regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1, 3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     return this.regexp.test(this.registerObject.email);
   }
 }
-
-
