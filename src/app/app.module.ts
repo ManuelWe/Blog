@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import {ErrorHandler, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {HttpClientModule} from '@angular/common/http';
 import {RecordsService} from './records.service';
@@ -12,6 +12,8 @@ import { AllarticlesComponent } from './allarticles/allarticles.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CreateArticleComponent } from './create-article/create-article.component';
 import { CreateCommentComponent } from './create-comment/create-comment.component';
+import {ErrorsHandler} from './errorHandler.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -34,8 +36,17 @@ const routes: Routes = [
   {
     path: 'createArticle',
     component: CreateArticleComponent,
+  },
+  {
+    path: 'not-found',
+    component: PageNotFoundComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found',
   }
 ];
+
 
 @NgModule({
   declarations: [
@@ -45,7 +56,8 @@ const routes: Routes = [
     AllarticlesComponent,
     CommentsComponent,
     CreateArticleComponent,
-    CreateCommentComponent
+    CreateCommentComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +66,12 @@ const routes: Routes = [
     MDBBootstrapModule.forRoot(),
     RouterModule.forRoot(routes)
   ],
-  providers: [RecordsService],
+  providers: [RecordsService,
+    AppComponent,
+    {
+    provide: ErrorHandler,
+    useClass: ErrorsHandler
+    }],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ],
 })

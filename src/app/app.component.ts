@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import {RecordsService} from './records.service';
+import {timeout} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+@Injectable()
 export class AppComponent {
   allArticles;
   allUsers;
   errorText;
+  httpResponse = '';
   regexp;
   loginObject = {
     'email': ''/*Klaus@blog.com*/,
@@ -30,14 +33,21 @@ export class AppComponent {
     'lastname': ''
   };
 
-  constructor( private myFirstService: RecordsService) {
-    this.myFirstService.getAllArticles().subscribe(data => {
+  constructor( private blogService: RecordsService) {
+    this.blogService.getAllArticles().subscribe(data => {
       this.allArticles = data;
     });
-    this.myFirstService.getAllUsers().subscribe(data => {
+    this.blogService.getAllUsers().subscribe(data => {
       this.allUsers = data;
     });
   }
+
+  openErrorModal(error) {
+    document.getElementById('errorMessage').innerHTML = error;
+    const errorModal: HTMLElement = document.getElementById('showErrorModal') as HTMLElement;
+    errorModal.click();
+  }
+
   onFileChanged(event) {
     const file: File = event.target.files[0];
     const myReader: FileReader = new FileReader();
@@ -57,7 +67,7 @@ export class AppComponent {
       this.errorText = 'Register failed: Password must be at least 8 characters';
       return;
     }
-    this.myFirstService.register(this.registerObject).subscribe(data => {
+    this.blogService.register(this.registerObject).subscribe(data => {
       console.log(data); // do something with the return value
     });
   }

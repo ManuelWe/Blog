@@ -126,3 +126,24 @@
     </div>
   </div>
 </div>
+<!-- Error Modal -->
+<div mdbModal #errorModal="mdbModal" class="modal fade top" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-frame modal-top" role="document">
+
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row d-flex justify-content-center align-items-center">
+
+          <div id="errorMessage" class="pt-3 pr-2">
+          </div>
+
+          <button type="button" class="btn btn-secondary" (click)="errorModal.hide()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<a mdbBtn hidden id="showErrorModal" type="button" class="btn btn-primary" (click)="errorModal.show()"></a>
+
+

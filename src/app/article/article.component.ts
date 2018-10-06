@@ -13,17 +13,17 @@ export class ArticleComponent implements OnInit {
   articleId: string;
   comments;
 
-  constructor(private route: ActivatedRoute, private myFirstService: RecordsService) {
+  constructor(private route: ActivatedRoute, private blogService: RecordsService) {
     this.route.params.subscribe(params => {
       this.articleId = params['id'].toString();
     });
-    this.myFirstService.getArticle(this.articleId).subscribe(data => {
+    this.blogService.getArticle(this.articleId).subscribe(data => {
       this.article = data;
-      this.myFirstService.getUser(this.article.author).subscribe(data1 => {
+      this.blogService.getUser(this.article.author).subscribe(data1 => {
         this.user = data1;
       });
     });
-    this.myFirstService.getComments(this.articleId).subscribe(data => {
+    this.blogService.getComments(this.articleId).subscribe(data => {
       this.comments = data;
     });
   }
