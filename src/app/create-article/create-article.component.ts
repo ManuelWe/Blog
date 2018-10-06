@@ -23,15 +23,19 @@ export class CreateArticleComponent implements OnInit {
     'date': ''
   };
   topicString;
-  constructor(private myFirstService: RecordsService, private router: Router) {
-    this.myFirstService.getAllUsers().subscribe(data => {
+
+  constructor(private blogService: RecordsService, private router: Router) {
+    this.blogService.getAllUsers().subscribe(data => {
       this.allUsers = data;
     });
   }
+
   errorText;
   successText;
+
   ngOnInit() {
   }
+
   onFileChanged(event) {
     const file: File = event.target.files[0];
     const myReader: FileReader = new FileReader();
@@ -41,6 +45,7 @@ export class CreateArticleComponent implements OnInit {
     };
     myReader.readAsDataURL(file);
   }
+
   login() {
     this.successText = '';
     for (const user of this.allUsers) {
@@ -49,7 +54,7 @@ export class CreateArticleComponent implements OnInit {
       }
     }
     if (this.author.id != null) {
-      this.myFirstService.login(this.author).subscribe(data1 => {
+      this.blogService.login(this.author).subscribe(data1 => {
         // @ts-ignore
         if (data1.correctPassword) {
           this.upload();
@@ -61,11 +66,12 @@ export class CreateArticleComponent implements OnInit {
       this.errorText = 'Authentication failed: E-Mail or password incorrect';
     }
   }
+
   upload() {
     this.createArticleObject.author = this.author.id;
     this.createArticleObject.date = new Date().toISOString();
     this.createArticleObject.topic = this.topicString.split(';');
-    this.myFirstService.createArticle(this.createArticleObject).subscribe(data => {
+    this.blogService.createArticle(this.createArticleObject).subscribe(data => {
       console.log(data);
       this.errorText = ''; // do something with the return value
       /*this.author.email = '';

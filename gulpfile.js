@@ -27,7 +27,7 @@ const files = {
  * @return {*}
  */
 function clean() {
-  return del(['build', 'bin', 'dist', 'test-results']);
+  return del(['build', 'bin', 'dist', 'docs']);
 }
 
 /**
