@@ -3,24 +3,23 @@
   <mdb-navbar-brand><a class="navbar-brand" routerLink="['/index']">Navbar</a></mdb-navbar-brand>
   <links>
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" routerLink="['/index']">
+      <li class="nav-item" [routerLink]="['/index']">
         <a class="nav-link waves-light" mdbWavesEffect>Home</a>
       </li>
-      <li class="nav-item" routerLink="['/allArticles']">
+      <li class="nav-item" [routerLink]="['/allArticles']">
         <a class="nav-link waves-light" mdbWavesEffect>All articles</a>
       </li>
-      <li class="nav-item" routerLink="['/createArticle']">
+      <li class="nav-item" [routerLink]="['/createArticle']">
         <a class="nav-link waves-light" mdbWavesEffect>Create article</a>
       </li>
     </ul>
     <div class="md-form mt-0">
-      <a mdbBtn *ngIf="!loginObject.loggedIn" color="white" outline="true" rounded="true" class="waves-light"
-         mdbWavesEffect (click)="registerFrame.show()">Register</a>
+      <a mdbBtn color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="registerFrame.show()">Register</a>
     </div>
   </links>
 </mdb-navbar>
 <!--MainBody-->
-<router-outlet [loginObject]="loginObject"></router-outlet>
+<router-outlet></router-outlet>
 <!-- Footer -->
 <footer class="page-footer font-small indigo pt-4">
 

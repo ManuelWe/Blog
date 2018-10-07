@@ -1,31 +1,87 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import { AllarticlesComponent } from './allarticles.component';
-/*describe('AllarticlesComponent', () => {
-  it('test name', () => {
+import {AppComponent} from '../app.component';
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import {RecordsService} from '../records.service';
+import {MDBBootstrapModule} from 'angular-bootstrap-md';
+import {RouterModule, Routes} from '@angular/router';
+import {MainPageComponent} from '../main-page/main-page.component';
+import {ArticleComponent} from '../article/article.component';
+import {CreateArticleComponent} from '../create-article/create-article.component';
+import {CommentsComponent} from '../comments/comments.component';
+import {CreateCommentComponent} from '../create-comment/create-comment.component';
+import {APP_BASE_HREF} from '@angular/common';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {PageNotFoundComponent} from '../page-not-found/page-not-found.component';
 
-  });
-});*/
+describe('AllarticlesComponent', () => {
+    const routes: Routes = [
+        {
+            path: '',
+            redirectTo: 'index',
+            pathMatch: 'full'
+        },
+        {
+            path: 'index',
+            component: MainPageComponent
+        },
+        {
+            path: 'article/:id',
+            component: ArticleComponent
+        },
+        {
+            path: 'allArticles',
+            component: AllarticlesComponent
+        },
+        {
+            path: 'createArticle',
+            component: CreateArticleComponent,
+        }
+    ];
+    let component: AllarticlesComponent;
+    let fixture: ComponentFixture<AllarticlesComponent>;
 
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                AppComponent,
+                MainPageComponent,
+                ArticleComponent,
+                AllarticlesComponent,
+                CommentsComponent,
+                CreateArticleComponent,
+                CreateCommentComponent,
+                PageNotFoundComponent
+            ],
+            schemas: [
+                CUSTOM_ELEMENTS_SCHEMA,
+                NO_ERRORS_SCHEMA
+            ],
+            providers: [
+                RecordsService,
+                {provide: APP_BASE_HREF, useValue : '/' }
+            ],
+            imports: [
+                BrowserModule,
+                FormsModule,
+                HttpClientModule,
+                MDBBootstrapModule.forRoot(),
+                RouterModule.forRoot(routes)
+            ]
+        }).compileComponents();
 
-/*describe('AllarticlesComponent', () => {
-  let component: AllarticlesComponent;
-  let fixture: ComponentFixture<AllarticlesComponent>;
+    }));
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ AllarticlesComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(() => {
+        fixture = TestBed.createComponent(AllarticlesComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AllarticlesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});*/
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+});
