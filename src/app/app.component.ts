@@ -13,12 +13,6 @@ export class AppComponent {
   errorText;
   httpResponse = '';
   regexp;
-  loginObject = {
-    'email': ''/*Klaus@blog.com*/,
-    'id': '',
-    'password': ''/*Pa$$w0rd*/,
-    'loggedIn': false
-  };
 
   registerObject = {
     'zipCode': null,
@@ -68,7 +62,6 @@ export class AppComponent {
       return;
     }
     this.blogService.register(this.registerObject).subscribe(data => {
-      console.log(data); // do something with the return value
     });
   }
 
@@ -84,5 +77,3 @@ export class AppComponent {
     return this.regexp.test(this.registerObject.email);
   }
 }
-
-

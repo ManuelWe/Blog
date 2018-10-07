@@ -24,16 +24,16 @@ export class CreateArticleComponent implements OnInit {
   };
   topicString;
 
-  constructor(private blogService: RecordsService, private router: Router) {
-    this.blogService.getAllUsers().subscribe(data => {
-      this.allUsers = data;
-    });
+  constructor(public blogService: RecordsService, private router: Router) {
   }
 
   errorText;
   successText;
 
   ngOnInit() {
+      this.blogService.getAllUsers().subscribe(data => {
+          this.allUsers = data;
+      });
   }
 
   onFileChanged(event) {
@@ -72,17 +72,16 @@ export class CreateArticleComponent implements OnInit {
     this.createArticleObject.date = new Date().toISOString();
     this.createArticleObject.topic = this.topicString.split(';');
     this.blogService.createArticle(this.createArticleObject).subscribe(data => {
-      console.log(data);
       this.errorText = ''; // do something with the return value
-      /*this.author.email = '';
-      this.author.password = '';*/
+      this.author.email = '';
+      this.author.password = '';
       this.createArticleObject.headline = '';
       this.createArticleObject.text = '';
       this.createArticleObject.author = '';
       this.topicString = '';
-      this.successText = 'Article successful created';
       // @ts-ignore
       this.router.navigateByUrl('/article/' + data._id);
     });
+    this.successText = 'Article successful created';
   }
 }
