@@ -5,7 +5,8 @@
   <div class="createArticle">
     <input class="form-control" type="text" [(ngModel)]="createArticleObject.headline" placeholder="headline">
     <input class="form-control" type="text" [(ngModel)]="topicString" placeholder="topic1;topic2;...">
-    <textarea class="md-textarea form-control" type="text" [(ngModel)]="createArticleObject.text" placeholder="text"></textarea>
+    <textarea class="md-textarea form-control" type="text" [(ngModel)]="createArticleObject.text"
+              placeholder="text"></textarea>
     <input type="file" (change)="onFileChanged($event)">
   </div>
   <div class="form-inline border">
@@ -16,7 +17,10 @@
       <input class="form-control" type="password" [(ngModel)]="author.password" placeholder="password">
     </div>
     <div class="md-form form-group">
-      <button class="btn btn-dark btn-sm" [disabled]="createArticleObject.headline == '' || topicString == '' || createArticleObject.picture == '' || createArticleObject.text == '' || author.email == '' || author.password.length < 8" (click)="login()">Create article</button>
+      <button class="btn btn-dark btn-sm"
+              [disabled]="createArticleObject.headline == '' || topicString == '' || createArticleObject.picture == '' || createArticleObject.text == '' || author.email == '' || author.password.length < 8"
+              (click)="login()">Create article
+      </button>
     </div>
   </div>
   <div class="error">

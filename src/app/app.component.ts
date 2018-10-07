@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import { Component } from '@angular/core';
 import {RecordsService} from './records.service';
 
 @Component({
@@ -6,11 +6,12 @@ import {RecordsService} from './records.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+@Injectable()
 export class AppComponent {
   allArticles;
   allUsers;
   errorText;
-  successText;
+  httpResponse = '';
   regexp;
   loginObject = {
     'email': ''/*Klaus@blog.com*/,
@@ -19,7 +20,7 @@ export class AppComponent {
     'loggedIn': false
   };
 
-  registerObject  = {
+  registerObject = {
     'zipCode': null,
     'firstname': '',
     'password': '',
@@ -27,18 +28,25 @@ export class AppComponent {
     'streetNumber': null,
     'street': '',
     'email': '',
-    'picture': '',
+    'picture': null,
     'lastname': ''
   };
 
-  constructor( private myFirstService: RecordsService) {
-    this.myFirstService.getAllArticles().subscribe(data => {
+  constructor(private blogService: RecordsService) {
+    this.blogService.getAllArticles().subscribe(data => {
       this.allArticles = data;
     });
-    this.myFirstService.getAllUsers().subscribe(data => {
+    this.blogService.getAllUsers().subscribe(data => {
       this.allUsers = data;
     });
   }
+
+  openErrorModal(error) {
+    document.getElementById('errorMessage').innerHTML = error;
+    const errorModal: HTMLElement = document.getElementById('showErrorModal') as HTMLElement;
+    errorModal.click();
+  }
+
   onFileChanged(event) {
     const file: File = event.target.files[0];
     const myReader: FileReader = new FileReader();
@@ -48,28 +56,19 @@ export class AppComponent {
     };
     myReader.readAsDataURL(file);
   }
+
   register() {
     this.errorText = '';
     if (!this.isValidEmail()) {
       this.errorText = 'Register failed: E-mail is not valid';
-      return false;
+      return;
     }
     if (this.registerObject.password.length < 8) {
       this.errorText = 'Register failed: Password must be at least 8 characters';
-      return false;
+      return;
     }
-    this.myFirstService.register(this.registerObject).subscribe(data => {
+    this.blogService.register(this.registerObject).subscribe(data => {
       console.log(data); // do something with the return value
-        this.successText = 'Success: User created';
-        this.registerObject.zipCode = null;
-        this.registerObject.firstname = '';
-        this.registerObject.password = '';
-        this.registerObject.city = '';
-        this.registerObject.streetNumber = null;
-        this.registerObject.street = '';
-        this.registerObject.email = '';
-        this.registerObject.lastname = '';
-        return true;
     });
   }
 
@@ -79,7 +78,9 @@ export class AppComponent {
         return false;
       }
     }
-    this.regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1, 3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+    // tslint:disable-next-line:max-line-length
+    this.regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     return this.regexp.test(this.registerObject.email);
   }
 }

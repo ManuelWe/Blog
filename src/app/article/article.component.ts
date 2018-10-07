@@ -13,24 +13,21 @@ export class ArticleComponent implements OnInit {
   articleId: string;
   comments;
 
-  constructor(private route: ActivatedRoute, private myFirstService: RecordsService) {
-    console.log('Hello world');
+  constructor(private route: ActivatedRoute, private blogService: RecordsService) {
     this.route.params.subscribe(params => {
       this.articleId = params['id'].toString();
     });
-    this.myFirstService.getComments(this.articleId).subscribe(data => {
-      this.comments = data;
-      console.log(this.comments);
-    });
-    console.log(this.articleId);
-    /*this.myFirstService.getArticle(this.articleId).subscribe(data => {
+    this.blogService.getArticle(this.articleId).subscribe(data => {
       this.article = data;
-      console.log(this.article.author);
-      this.myFirstService.getUser(this.article.author).subscribe(data1 => {
+      this.blogService.getUser(this.article.author).subscribe(data1 => {
         this.user = data1;
       });
-    });*/
+    });
+    this.blogService.getComments(this.articleId).subscribe(data => {
+      this.comments = data;
+    });
   }
+
   ngOnInit() {
   }
 }

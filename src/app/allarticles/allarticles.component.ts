@@ -12,8 +12,9 @@ export class AllarticlesComponent implements OnInit {
   citiesArticles = [];
   peopleArticles = [];
   otherArticles = [];
-  constructor(private myFirstService: RecordsService) {
-    this.myFirstService.getAllArticles().subscribe(data => {
+
+  constructor(private blogService: RecordsService) {
+    this.blogService.getAllArticles().subscribe(data => {
       this.allArticles = data;
       for (const article of this.allArticles) {
         if (article.topic.includes('Nature')) {
@@ -28,6 +29,7 @@ export class AllarticlesComponent implements OnInit {
       }
     });
   }
+
   ngOnInit() {
   }
 

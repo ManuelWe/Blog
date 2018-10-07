@@ -8,6 +8,7 @@ let articleSchema = mongoose.Schema({
   },
   author: {
     type: String,
+    required: true,
   },
   text: {
     type: String,
@@ -23,6 +24,7 @@ let articleSchema = mongoose.Schema({
   },
   picture: {
     type: String,
+    required: true,
   },
 });
 

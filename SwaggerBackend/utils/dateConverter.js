@@ -1,4 +1,3 @@
-
 exports.convertDate = function(objects) {
   let objectCopy = JSON.parse(JSON.stringify(objects));
   if (Array.isArray(objectCopy)) {

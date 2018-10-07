@@ -1,6 +1,8 @@
 'use strict';
 
 const User = require('../db/models/users');
+const Article = require('../db/models/articles');
+const Comment = require('../db/models/comments');
 
 /**
  * Retrieve all users
@@ -87,13 +89,27 @@ exports.apiUsersUseridAuthenticatePOST = function(userid, body) {
 
 
 /**
- * Delete an existing user
+ * Delete an existing user and all of his comments and articles
  *
  * @param {String} userid
  * @return {Promise} no response value expected for this operation
  **/
 exports.apiUsersUseridDELETE = function(userid) {
   return new Promise(function(resolve, reject) {
+    // Delete all comments that belong to the user
+    Comment.deleteMany({author: userid}, function(err) {
+      if (err) {
+        console.log(err);
+        reject();
+      }
+    });
+    // Delete all articles that belong to the user
+    Article.deleteMany({author: userid}, function(err) {
+      if (err) {
+        console.log(err);
+        reject();
+      }
+    });
     User.findByIdAndDelete(userid, function(err) {
       if (err) {
         console.log(err);

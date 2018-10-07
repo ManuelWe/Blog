@@ -23,14 +23,16 @@ export class CreateCommentComponent implements OnInit {
   };
   @Input()
   articleId;
-  constructor(private myFirstService: RecordsService) {
-    this.myFirstService.getAllUsers().subscribe(data => {
+
+  constructor(private blogService: RecordsService) {
+    this.blogService.getAllUsers().subscribe(data => {
       this.allUsers = data;
     });
   }
 
   ngOnInit() {
   }
+
   createComment() {
     this.successText = '';
     for (const user of this.allUsers) {
@@ -39,7 +41,7 @@ export class CreateCommentComponent implements OnInit {
       }
     }
     if (this.author.id != null) {
-      this.myFirstService.login(this.author).subscribe(data1 => {
+      this.blogService.login(this.author).subscribe(data1 => {
         // @ts-ignore
         if (data1.correctPassword) {
           this.upload();
@@ -51,11 +53,12 @@ export class CreateCommentComponent implements OnInit {
       this.errorText = 'Authentication failed: E-Mail or password incorrect';
     }
   }
+
   upload() {
     this.createCommentObject.author = this.author.id;
     this.createCommentObject.date = new Date().toISOString();
     this.createCommentObject.articleId = this.articleId;
-    this.myFirstService.createComment(this.createCommentObject).subscribe(data => {
+    this.blogService.createComment(this.createCommentObject).subscribe(data => {
       this.errorText = ''; // do something with the return value
       this.author.email = '';
       this.author.password = '';
