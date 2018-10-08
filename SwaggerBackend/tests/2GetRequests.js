@@ -62,7 +62,7 @@ describe('GET Calls', function() {
           .end(function(err, res) {
             should.not.exist(err);
 
-            res.body.should.have.property('text', 'Lorem ipsum........');
+            res.body[0].should.have.property('text', 'Lorem ipsum........');
 
             done();
           });

@@ -1,6 +1,6 @@
 'use strict';
 
-const Comment = require('../db/models/comments');
+const db = require('../utils/db').db;
 const dateConverter = require('../utils/dateConverter');
 
 /**
@@ -11,16 +11,11 @@ const dateConverter = require('../utils/dateConverter');
  **/
 exports.apiCommentsPOST = function(body) {
   return new Promise(function(resolve, reject) {
-    let newComment = new Comment({
-      articleId: body.articleId,
-      author: body.author,
-      text: body.text,
-      date: body.date,
-    });
+    const comments = db.collection('Comments');
 
-    newComment.save(function(err, comment) {
-      if (err) {
-        console.log(err);
+    comments.insert(body, function(error, comment) {
+      if (error) {
+        console.log(error);
         reject();
       } else {
         resolve(comment);
@@ -38,9 +33,11 @@ exports.apiCommentsPOST = function(body) {
  **/
 exports.apiCommentsCommentidDELETE = function(commentid) {
   return new Promise(function(resolve, reject) {
-    Comment.findByIdAndDelete(commentid, function(err) {
-      if (err) {
-        console.log(err);
+    const comments = db.collection('Comments');
+
+    comments.remove({_id: commentid}, function(error, item) {
+      if (error) {
+        console.log(error);
         reject();
       } else {
         resolve();
@@ -58,9 +55,11 @@ exports.apiCommentsCommentidDELETE = function(commentid) {
  **/
 exports.apiCommentsCommentidGET = function(commentid) {
   return new Promise(function(resolve, reject) {
-    Comment.findById(commentid, function(err, comment) {
-      if (err) {
-        console.log(err);
+    const comments = db.collection('Comments');
+
+    comments.findOne({_id: commentid}, function(error, comment) {
+      if (error) {
+        console.log(error);
         reject();
       } else {
         resolve(dateConverter.convertDate(comment));
@@ -76,9 +75,11 @@ exports.apiCommentsCommentidGET = function(commentid) {
  **/
 exports.apiCommentsGET = function() {
   return new Promise(function(resolve, reject) {
-    Comment.find({}, function(err, comments) {
-      if (err) {
-        console.log(err);
+    const comments = db.collection('Comments');
+
+    comments.find({}).toArray(function(error, comments) {
+      if (error) {
+        console.log(error);
         reject();
       } else {
         resolve(dateConverter.convertDate(comments));
@@ -96,9 +97,11 @@ exports.apiCommentsGET = function() {
  **/
 exports.apiCommentsCommentidPUT = function(commentid, body) {
   return new Promise(function(resolve, reject) {
-    Comment.findByIdAndUpdate(commentid, body, {new: true}, function(err, comment) {
-      if (err) {
-        console.log(err);
+    const comments = db.collection('Comments');
+
+    comments.update({_id: commentid}, body, function(error, comment) {
+      if (error) {
+        console.log(error);
         reject();
       } else {
         resolve(comment);

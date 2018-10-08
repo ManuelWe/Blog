@@ -3,7 +3,6 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const mongoose = require('mongoose');
 
 const app = require('connect')();
 const serveStatic = require('serve-static');
@@ -12,22 +11,6 @@ const jsyaml = require('js-yaml');
 const serverPort = 3000;
 
 const cors = require('cors');
-
-// Establish connection to MongoDB Atlas
-// Use test DB in testing mode
-if (module.parent) {
-  // Test DB
-  mongoose.connect('mongodb://default:ZwEH48nlOrSoe3Vd@cluster0-shard-00-00-ze2l5.mongodb.net:27017,' +
-    'cluster0-shard-00-01-ze2l5.mongodb.net:27017,cluster0-shard-00-02-ze2l5.mongodb.net:27017/test?ssl' +
-    '=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',
-  {useNewUrlParser: true});
-} else {
-  // Regular DB
-  mongoose.connect('mongodb://DBforBlog:saCIYJedcumCeNzP@cluster0-shard-00-00-j76b6.mongodb.net:27017' +
-    ',cluster0-shard-00-01-j76b6.mongodb.net:27017,cluster0-shard-00-02-j76b6.mongodb.net:27017/blog?' +
-    'ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',
-  {useNewUrlParser: true});
-}
 
 // TODO remove allow cors
 app.use(cors());

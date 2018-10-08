@@ -1,7 +1,6 @@
 'use strict';
 
-const Article = require('../db/models/articles');
-const Comment = require('../db/models/comments');
+const db = require('../utils/db').db;
 const dateConverter = require('../utils/dateConverter');
 
 /**
@@ -13,15 +12,19 @@ const dateConverter = require('../utils/dateConverter');
 exports.apiArticlesArticleidDELETE = function(articleid) {
   return new Promise(function(resolve, reject) {
     // Delete all comments that belong to the article
-    Comment.deleteMany({articleId: articleid}, function(err) {
+    const comments = db.collection('Comments');
+    const articles = db.collection('Articles');
+
+    comments.remove({articleId: articleid}, function(err) {
       if (err) {
         console.log(err);
         reject();
       }
     });
-    Article.findByIdAndDelete(articleid, function(err) {
-      if (err) {
-        console.log(err);
+
+    articles.remove({_id: articleid}, function(error, item) {
+      if (error) {
+        console.log(error);
         reject();
       } else {
         resolve();
@@ -39,12 +42,14 @@ exports.apiArticlesArticleidDELETE = function(articleid) {
  **/
 exports.apiArticlesArticleidGET = function(articleid) {
   return new Promise(function(resolve, reject) {
-    Article.findById(articleid, function(err, article) {
-      if (err) {
-        console.log(err);
+    const articles = db.collection('Articles');
+
+    articles.findOne({_id: articleid}, function(error, article) {
+      if (error) {
+        console.log(error);
         reject();
       } else {
-        resolve(dateConverter.convertDate(article));
+        resolve(article);
       }
     });
   });
@@ -59,7 +64,9 @@ exports.apiArticlesArticleidGET = function(articleid) {
  **/
 exports.apiArticlesCommentsArticleidGET = function(articleid) {
   return new Promise(function(resolve, reject) {
-    Comment.find({articleId: articleid}, function(err, comments) {
+    const comments = db.collection('Comments');
+
+    comments.find({articleId: articleid}, function(err, comments) {
       if (err) {
         console.log(err);
         reject();
@@ -84,9 +91,11 @@ exports.apiArticlesCommentsArticleidGET = function(articleid) {
  **/
 exports.apiArticlesGET = function() {
   return new Promise(function(resolve, reject) {
-    Article.find({}, function(err, articles) {
-      if (err) {
-        console.log(err);
+    const articles = db.collection('Articles');
+
+    articles.find({}).toArray(function(error, articles) {
+      if (error) {
+        console.log(error);
         reject();
       } else {
         let articlesCopy = JSON.parse(JSON.stringify(articles));
@@ -110,21 +119,13 @@ exports.apiArticlesGET = function() {
  **/
 exports.apiArticlesPOST = function(body) {
   return new Promise(function(resolve, reject) {
-    let newArticle = new Article({
-      date: body.date,
-      author: body.author,
-      topic: body.topic,
-      text: body.text,
-      headline: body.headline,
-      picture: body.picture,
-    });
+    const articles = db.collection('Articles');
 
-    newArticle.save(function(err, article) {
-      if (err) {
-        console.log(err);
-        reject();
+    articles.insert(body, function(error, article) {
+      if (error) {
+        console.log(error);
       } else {
-        resolve(article);
+        resolve(article[0]);
       }
     });
   });
@@ -139,9 +140,11 @@ exports.apiArticlesPOST = function(body) {
  **/
 exports.apiArticlesArticleidPUT = function(articleid, body) {
   return new Promise(function(resolve, reject) {
-    Article.findByIdAndUpdate(articleid, body, {new: true}, function(err, article) {
-      if (err) {
-        console.log(err);
+    const articles = db.collection('Articles');
+
+    articles.update({_id: articleid}, body, function(error, article) {
+      if (error) {
+        console.log(error);
         reject();
       } else {
         resolve(article);

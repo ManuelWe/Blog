@@ -26,7 +26,7 @@ export class ErrorsHandler implements ErrorHandler {
       // Handle Client Error (Angular Error, ReferenceError...)
       this.appComponent.openErrorModal('Client error: ' + error);
     }
-    //%TODO Remove
+    // %TODO Remove
     // Log the error anyway
     console.error('It happens: ', error);
   }
