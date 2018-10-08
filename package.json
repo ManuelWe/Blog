@@ -19,6 +19,8 @@
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
+    "@ngx-progressbar/core": "^5.2.0",
+    "@ngx-progressbar/http": "^5.2.0",
     "@types/chart.js": "^2.7.32",
     "angular-bootstrap-md": "^6.2.3",
     "angular5-csv": "^0.2.10",

@@ -9,8 +9,6 @@ export class ErrorsHandler implements ErrorHandler {
   }
 
   handleError(error: Error) {
-    const router = this.injector.get(Router);
-
     if (error instanceof HttpErrorResponse) {
       // Server or connection error happened
       if (!navigator.onLine) {
@@ -28,6 +26,7 @@ export class ErrorsHandler implements ErrorHandler {
       // Handle Client Error (Angular Error, ReferenceError...)
       this.appComponent.openErrorModal('Client error: ' + error);
     }
+    //%TODO Remove
     // Log the error anyway
     console.error('It happens: ', error);
   }

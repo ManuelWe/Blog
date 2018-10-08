@@ -13,6 +13,8 @@ import {CommentsComponent} from './comments/comments.component';
 import {CreateArticleComponent} from './create-article/create-article.component';
 import {CreateCommentComponent} from './create-comment/create-comment.component';
 import {ErrorsHandler} from './errorHandler.service';
+import { NgProgressModule } from '@ngx-progressbar/core';
+import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
@@ -62,6 +64,8 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    NgProgressModule.forRoot(),
+    NgProgressHttpModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     RouterModule.forRoot(routes)
   ],
