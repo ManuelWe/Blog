@@ -1,6 +1,6 @@
 <!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
-  <mdb-navbar-brand><a class="navbar-brand" [routerLink]="['/index']">Navbar</a></mdb-navbar-brand>
+  <mdb-navbar-brand><a class="navbar-brand" routerLink="['/index']">Navbar</a></mdb-navbar-brand>
   <links>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" [routerLink]="['/index']">
@@ -14,13 +14,12 @@
       </li>
     </ul>
     <div class="md-form mt-0">
-      <a mdbBtn *ngIf="!loginObject.loggedIn" color="white" outline="true" rounded="true" class="waves-light"
-         mdbWavesEffect (click)="registerFrame.show()">Register</a>
+      <a mdbBtn color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="registerFrame.show()">Register</a>
     </div>
   </links>
 </mdb-navbar>
 <!--MainBody-->
-<router-outlet [loginObject]="loginObject"></router-outlet>
+<router-outlet></router-outlet>
 <!-- Footer -->
 <footer class="page-footer font-small indigo pt-4">
 
@@ -64,8 +63,7 @@
 
 </footer>
 <!-- Register -->
-<div mdbModal #registerFrame="mdbModal" class="modal fade left" id="regristerFrameModalTop" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
+<div mdbModal #registerFrame="mdbModal" class="modal fade left" id="regristerFrameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -86,7 +84,7 @@
           </div>
           <div class="form-inline">
             <div class="md-form form-group">
-              <input type="email" [(ngModel)]="registerObject.email" placeholder="email" email>
+              <input type="email" [(ngModel)]="registerObject.email"  placeholder="email" email>
             </div>
             <div class="md-form form-group">
               <input type="password" [(ngModel)]="registerObject.password" placeholder="password">
@@ -94,10 +92,10 @@
           </div>
           <div class="form-inline">
             <div class="md-form form-group">
-              <input type="number" [(ngModel)]="registerObject.zipCode" placeholder="zipcode">
+              <input type="number" [(ngModel)]="registerObject.zipCode"  placeholder="zipcode">
             </div>
             <div class="md-form form-group">
-              <input type="text" [(ngModel)]="registerObject.city" placeholder="city">
+              <input type="text" [(ngModel)]="registerObject.city"  placeholder="city">
             </div>
           </div>
           <div class="form-inline">
@@ -117,15 +115,13 @@
       </div>
 
       <div class="modal-footer d-flex justify-content-center">
-        <button mdbBtn [disabled]="registerObject.firstname == '' || registerObject.lastname == '' ||
+          <button mdbBtn [disabled]="registerObject.firstname == '' || registerObject.lastname == '' ||
           registerObject.email == '' || registerObject.password == ''|| registerObject.zipCode == '' ||
           registerObject.city == '' || registerObject.street == '' || registerObject.streetNumber == '' ||
-          registerObject.picture == ''" color="indigo" class="waves-light" mdbWavesEffect (click)="register()">Register
-        </button>
+          registerObject.picture == ''" color="indigo" class="waves-light" mdbWavesEffect (click)="register()">Register</button>
       </div>
-      <div class="error" align="center" style="margin-bottom: 4px">
-        {{ errorText }}
-      </div>
+    <div class="error" align="center" style="margin-bottom: 4px">
+      {{ errorText }}
     </div>
   </div>
 </div>
@@ -148,6 +144,3 @@
     </div>
   </div>
 </div>
-<a mdbBtn hidden id="showErrorModal" type="button" class="btn btn-primary" (click)="errorModal.show()"></a>
-
-
