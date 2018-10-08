@@ -24,7 +24,7 @@ export class CreateCommentComponent implements OnInit {
   @Input()
   articleId;
 
-  constructor(private blogService: RecordsService) {
+  constructor(public blogService: RecordsService) {
     this.blogService.getAllUsers().subscribe(data => {
       this.allUsers = data;
     });
@@ -33,7 +33,7 @@ export class CreateCommentComponent implements OnInit {
   ngOnInit() {
   }
 
-  createComment() {
+    login() {
     this.successText = '';
     for (const user of this.allUsers) {
       if (user.email === this.author.email) {
@@ -68,9 +68,9 @@ export class CreateCommentComponent implements OnInit {
         'articleId': '',
         'text': ''
       };
-      this.successText = 'Comment successful created';
       location.reload();
     });
+    this.successText = 'Comment successful created';
   }
 
 }
