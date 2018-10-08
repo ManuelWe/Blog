@@ -123,6 +123,24 @@
     <div class="error" align="center" style="margin-bottom: 4px">
       {{ errorText }}
     </div>
+  </div>
+</div>
+<!-- Error Modal -->
+<div mdbModal #errorModal="mdbModal" class="modal fade top" id="errorModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-frame modal-top" role="document">
+
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row d-flex justify-content-center align-items-center">
+
+          <div id="errorMessage" class="pt-3 pr-2">
+          </div>
+
+          <button mdbBtn type="button" rounded="true" class="waves-light" color="indigo" mdbWavesEffect (click)="errorModal.hide()">Close</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
