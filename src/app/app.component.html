@@ -14,7 +14,8 @@
       </li>
     </ul>
     <div class="md-form mt-0">
-      <a mdbBtn color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect (click)="registerFrame.show()">Register</a>
+      <a mdbBtn color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect
+         (click)="registerFrame.show()">Register</a>
     </div>
   </links>
 </mdb-navbar>
@@ -63,7 +64,8 @@
 
 </footer>
 <!-- Register -->
-<div mdbModal #registerFrame="mdbModal" class="modal fade left" id="regristerFrameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div mdbModal #registerFrame="mdbModal" class="modal fade left" id="regristerFrameModalTop" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -84,7 +86,7 @@
           </div>
           <div class="form-inline">
             <div class="md-form form-group">
-              <input type="email" [(ngModel)]="registerObject.email"  placeholder="email" email>
+              <input type="email" [(ngModel)]="registerObject.email" placeholder="email" email>
             </div>
             <div class="md-form form-group">
               <input type="password" [(ngModel)]="registerObject.password" placeholder="password">
@@ -92,10 +94,10 @@
           </div>
           <div class="form-inline">
             <div class="md-form form-group">
-              <input type="number" [(ngModel)]="registerObject.zipCode"  placeholder="zipcode">
+              <input type="number" [(ngModel)]="registerObject.zipCode" placeholder="zipcode">
             </div>
             <div class="md-form form-group">
-              <input type="text" [(ngModel)]="registerObject.city"  placeholder="city">
+              <input type="text" [(ngModel)]="registerObject.city" placeholder="city">
             </div>
           </div>
           <div class="form-inline">
@@ -115,13 +117,15 @@
       </div>
 
       <div class="modal-footer d-flex justify-content-center">
-          <button mdbBtn [disabled]="registerObject.firstname == '' || registerObject.lastname == '' ||
+        <button mdbBtn [disabled]="registerObject.firstname == '' || registerObject.lastname == '' ||
           registerObject.email == '' || registerObject.password == ''|| registerObject.zipCode == '' ||
           registerObject.city == '' || registerObject.street == '' || registerObject.streetNumber == '' ||
-          registerObject.picture == ''" color="indigo" class="waves-light" mdbWavesEffect (click)="register()">Register</button>
+          registerObject.picture == ''" color="indigo" class="waves-light" mdbWavesEffect (click)="register()">Register
+        </button>
       </div>
-    <div class="error" align="center" style="margin-bottom: 4px">
-      {{ errorText }}
+      <div class="error" align="center" style="margin-bottom: 4px">
+        {{ errorText }}
+      </div>
     </div>
   </div>
 </div>
@@ -138,9 +142,13 @@
           <div id="errorMessage" class="pt-3 pr-2">
           </div>
 
-          <button mdbBtn type="button" rounded="true" class="waves-light" color="indigo" mdbWavesEffect (click)="errorModal.hide()">Close</button>
+          <button mdbBtn type="button" rounded="true" class="waves-light" color="indigo" mdbWavesEffect
+                  (click)="errorModal.hide()">Close
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
+<a mdbBtn hidden color="white" outline="true" rounded="true" id="showErrorModal" type="button" class="waves-light"
+   mdbWavesEffect (click)="errorModal.show()"></a>
