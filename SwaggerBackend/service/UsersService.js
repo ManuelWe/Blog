@@ -1,8 +1,7 @@
 'use strict';
 
-const User = require('../db/models/users');
-const Article = require('../db/models/articles');
-const Comment = require('../db/models/comments');
+const db = require('../utils/db').db;
+const bcrypt = require('bcrypt');
 
 /**
  * Retrieve all users
@@ -11,9 +10,11 @@ const Comment = require('../db/models/comments');
  **/
 exports.apiUsersGET = function() {
   return new Promise(function(resolve, reject) {
-    User.find({}, function(err, users) {
-      if (err) {
-        console.log(err);
+    const users = db.collection('Users');
+
+    users.find({}).toArray(function(error, users) {
+      if (error) {
+        console.log(error);
         reject();
       } else {
         let usersCopy = JSON.parse(JSON.stringify(users));
@@ -38,27 +39,32 @@ exports.apiUsersGET = function() {
  **/
 exports.apiUsersPOST = function(body) {
   return new Promise(function(resolve, reject) {
-    let newUser = new User({
-      firstname: body.firstname,
-      lastname: body.lastname,
-      zipCode: body.zipCode,
-      city: body.city,
-      street: body.street,
-      streetNumber: body.streetNumber,
-      email: body.email,
-      password: body.password,
-      picture: body.picture,
-    });
+    const users = db.collection('Users');
+    let user = body;
 
-    newUser.save(function(err, user) {
-      if (err) {
-        console.log(err);
-        reject();
-      } else {
-        let userCopy = JSON.parse(JSON.stringify(user));
-        delete userCopy.password;
-        resolve(userCopy);
-      }
+    // encrypt password
+    // generate a salt
+    bcrypt.genSalt(10, function(err, salt) {
+      if (err) console.log(err);
+
+      // hash the password using our new salt
+      bcrypt.hash(user.password, salt, function(err, hash) {
+        if (err) console.log(err);
+
+        // override the cleartext password with the hashed one
+        user.password = hash;
+
+        users.insert(user, function(error, user) {
+          if (error) {
+            console.log(error);
+            reject();
+          } else {
+            let userCopy = JSON.parse(JSON.stringify(user[0]));
+            delete userCopy.password;
+            resolve(userCopy);
+          }
+        });
+      });
     });
   });
 };
@@ -72,10 +78,12 @@ exports.apiUsersPOST = function(body) {
  **/
 exports.apiUsersUseridAuthenticatePOST = function(userid, body) {
   return new Promise(function(resolve, reject) {
-    User.findById(userid, function(err, user) {
-      user.comparePassword(body.password, function(err, isMatch) {
-        if (err) {
-          console.log(err);
+    const users = db.collection('Users');
+
+    users.findOne({_id: userid}, function(error, user) {
+      bcrypt.compare(body.password, user.password, function(error, isMatch) {
+        if (error) {
+          console.log(error);
           reject();
         } else if (!isMatch) {
           reject({correctPassword: false});
@@ -96,23 +104,28 @@ exports.apiUsersUseridAuthenticatePOST = function(userid, body) {
  **/
 exports.apiUsersUseridDELETE = function(userid) {
   return new Promise(function(resolve, reject) {
+    const users = db.collection('Users');
+    const comments = db.collection('Comments');
+    const articles = db.collection('Articles');
+
+    // TODO funktionsaufruf?
     // Delete all comments that belong to the user
-    Comment.deleteMany({author: userid}, function(err) {
-      if (err) {
-        console.log(err);
+    comments.remove({author: userid}, function(error) {
+      if (error) {
+        console.log(error);
         reject();
       }
     });
     // Delete all articles that belong to the user
-    Article.deleteMany({author: userid}, function(err) {
-      if (err) {
-        console.log(err);
+    articles.remove({author: userid}, function(error) {
+      if (error) {
+        console.log(error);
         reject();
       }
     });
-    User.findByIdAndDelete(userid, function(err) {
-      if (err) {
-        console.log(err);
+    users.remove({_id: userid}, function(error) {
+      if (error) {
+        console.log(error);
         reject();
       } else {
         resolve();
@@ -130,9 +143,11 @@ exports.apiUsersUseridDELETE = function(userid) {
  **/
 exports.apiUsersUseridGET = function(userid) {
   return new Promise(function(resolve, reject) {
-    User.findById(userid, function(err, user) {
-      if (err) {
-        console.log(err);
+    const users = db.collection('Users');
+
+    users.findOne({_id: userid}, function(error, user) {
+      if (error) {
+        console.log(error);
         reject();
       } else {
         let userCopy = JSON.parse(JSON.stringify(user));
@@ -153,9 +168,11 @@ exports.apiUsersUseridGET = function(userid) {
  **/
 exports.apiUsersUseridPUT = function(userid, body) {
   return new Promise(function(resolve, reject) {
-    User.findByIdAndUpdate(userid, body, {new: true}, function(err, user) {
-      if (err) {
-        console.log(err);
+    const users = db.collection('Users');
+
+    users.update({_id: userid}, body, function(error, user) {
+      if (error) {
+        console.log(error);
         reject();
       } else {
         let userCopy = JSON.parse(JSON.stringify(user));

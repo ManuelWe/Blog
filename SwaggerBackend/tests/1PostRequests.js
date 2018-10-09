@@ -16,20 +16,20 @@ describe('POST mock data', function() {
         .send({
           zipCode: 0,
           firstname: 'Test',
-          password: 'Pa$$w0rd',
-          city: 'Berlin',
+          password: 'password',
+          city: 'city',
           streetNumber: 6,
-          street: 'Waterstreet',
-          email: 'bla@blog.com',
-          picture: 'kdpowkKOKPkodkpo3i40239402394023ipokoskoksdpokwpokpojfop',
-          lastname: 'Maier',
+          street: 'street',
+          email: 'email',
+          picture: 'picture',
+          lastname: 'lastname',
         })
         .set('Accept', 'application/json')
         .expect(200)
         .end(function(err, res) {
           should.not.exist(err);
 
-          res.body.should.have.property('firstname', 'Test');
+          res.body[0].should.have.property('firstname', 'Test');
           idVariables.userID = res.body._id;
 
           done();

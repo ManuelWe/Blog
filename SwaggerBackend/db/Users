@@ -1,0 +1,3 @@
+{"k":"0000000078","o":"0000000252","v":"001"}
+{"_id":2,"_uid":2,"_dt":1539039942505,"_s":"090ca1102fa46c49e13ff8753eeea8e7"}
+{"zipCode":0,"firstname":"Klaus","password":"$2b$10$NTzns1K/wNqJJGH2JuwgsezSsPzprWOEGFTQ9skzTWAwR8DjeenmG","city":"city","streetNumber":6,"street":"street","email":"Klaus@blog.com","picture":"picture","lastname":"lastname","_id":{"$wrap":"$oid","v":2}}
