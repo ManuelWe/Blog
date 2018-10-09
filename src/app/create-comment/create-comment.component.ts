@@ -33,7 +33,7 @@ export class CreateCommentComponent implements OnInit {
   ngOnInit() {
   }
 
-    login() {
+  login() {
     this.successText = '';
     for (const user of this.allUsers) {
       if (user.email === this.author.email) {

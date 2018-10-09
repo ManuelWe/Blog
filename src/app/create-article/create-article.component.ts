@@ -25,15 +25,15 @@ export class CreateArticleComponent implements OnInit {
   topicString;
 
   constructor(public blogService: RecordsService, private router: Router) {
+      this.blogService.getAllUsers().subscribe(data => {
+          this.allUsers = data;
+      });
   }
 
   errorText;
   successText;
 
   ngOnInit() {
-      this.blogService.getAllUsers().subscribe(data => {
-          this.allUsers = data;
-      });
   }
 
   onFileChanged(event) {
