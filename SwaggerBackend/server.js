@@ -26,13 +26,13 @@ app.use(serveStatic(path.join(__dirname, 'dist/Frontend-App')));
 
 // swaggerRouter configuration
 const options = {
-  swaggerUi: path.join(__dirname, '/SwaggerBackend/swagger.json'),
-  controllers: path.join(__dirname, './SwaggerBackend/controllers'),
+  swaggerUi: path.join(__dirname, './swagger.json'),
+  controllers: path.join(__dirname, './controllers'),
   useStubs: process.env.NODE_ENV === 'development', // Conditionally turn on stubs (mock mode)
 };
 
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
-const spec = fs.readFileSync(path.join(__dirname, 'SwaggerBackend/api/swagger.yaml'), 'utf8');
+const spec = fs.readFileSync(path.join(__dirname, 'api/swagger.yaml'), 'utf8');
 const swaggerDoc = jsyaml.safeLoad(spec);
 
 // Initialize the Swagger middleware

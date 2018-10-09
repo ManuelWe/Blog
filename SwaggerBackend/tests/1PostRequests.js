@@ -1,6 +1,6 @@
 const should = require('should');
 const request = require('supertest');
-const server = require('../../server');
+const server = require('../server');
 
 exports.idVariables = idVariables = {
   articleID: '',
@@ -29,7 +29,7 @@ describe('POST mock data', function() {
         .end(function(err, res) {
           should.not.exist(err);
 
-          res.body[0].should.have.property('firstname', 'Test');
+          res.body.should.have.property('firstname', 'Test');
           idVariables.userID = res.body._id;
 
           done();
@@ -76,8 +76,8 @@ describe('POST mock data', function() {
         .end(function(err, res) {
           should.not.exist(err);
 
-          res.body.should.have.property('author', idVariables.userID);
-          idVariables.commentID = res.body._id;
+          res.body[0].should.have.property('author', idVariables.userID);
+          idVariables.commentID = res.body[0]._id;
 
           done();
         });

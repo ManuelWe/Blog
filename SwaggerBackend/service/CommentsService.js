@@ -104,7 +104,15 @@ exports.apiCommentsCommentidPUT = function(commentid, body) {
         console.log(error);
         reject();
       } else {
-        resolve(comment);
+        // workaround, because findOneAndUpdate is not working
+        comments.findOne({_id: commentid}, function(error, comment) {
+          if (error) {
+            console.log(error);
+            reject();
+          } else {
+            resolve(dateConverter.convertDate(comment));
+          }
+        });
       }
     });
   });

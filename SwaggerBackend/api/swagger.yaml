@@ -524,7 +524,7 @@ definitions:
       headline:
         type: "string"
       author:
-        type: "string"
+        type: "integer"
       text:
         type: "string"
       date:
@@ -537,7 +537,7 @@ definitions:
         type: "string"
     example:
       date: "date"
-      author: "author"
+      author: 5
       topic: []
       text: "text"
       headline: "headline"
@@ -555,8 +555,7 @@ definitions:
       headline:
         type: "string"
       author:
-        type: "string"
-        maxLength: 50
+        type: "integer"
       text:
         type: "string"
       date:
@@ -569,7 +568,7 @@ definitions:
         type: "string"
     example:
       date: "2000-01-23"
-      author: "author"
+      author: 5
       topic: []
       text: "text"
       headline: "headline"
@@ -583,17 +582,17 @@ definitions:
     - "text"
     properties:
       articleId:
-        type: "string"
+        type: "integer"
       author:
-        type: "string"
+        type: "integer"
       text:
         type: "string"
       date:
         type: "string"
     example:
       date: "date"
-      author: "author"
-      articleId: "articleId"
+      author: 5
+      articleId: 7
       text: "text"
   CommentCreate:
     type: "object"
@@ -604,19 +603,17 @@ definitions:
     - "text"
     properties:
       articleId:
-        type: "string"
-        maxLength: 50
+        type: "integer"
       author:
-        type: "string"
-        maxLength: 50
+        type: "integer"
       text:
         type: "string"
       date:
         type: "string"
     example:
       date: "2000-01-23"
-      author: "author"
-      articleId: "articleId"
+      author: 5
+      articleId: 8
       text: "text"
   Authentification:
     type: "object"

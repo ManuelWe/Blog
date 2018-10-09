@@ -175,9 +175,17 @@ exports.apiUsersUseridPUT = function(userid, body) {
         console.log(error);
         reject();
       } else {
-        let userCopy = JSON.parse(JSON.stringify(user));
-        delete userCopy.password;
-        resolve(userCopy);
+        // workaround, because findOneAndUpdate is not working
+        users.findOne({_id: userid}, function(error, user) {
+          if (error) {
+            console.log(error);
+            reject();
+          } else {
+            let userCopy = JSON.parse(JSON.stringify(user));
+            delete userCopy.password;
+            resolve(userCopy);
+          }
+        });
       }
     });
   });

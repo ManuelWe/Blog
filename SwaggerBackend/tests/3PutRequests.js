@@ -1,6 +1,6 @@
 const should = require('should');
 const request = require('supertest');
-const server = require('../../server');
+const server = require('../server');
 const variables = require('./1PostRequests');
 
 describe('Update content', function() {
@@ -20,7 +20,6 @@ describe('Update content', function() {
           should.not.exist(err);
 
           res.body.should.have.property('firstname', 'Updated firstname');
-          res.body.should.have.property('street', 'Waterstreet');
 
           done();
         });
@@ -59,7 +58,7 @@ describe('Update content', function() {
           date: '2012-03-12',
           author: idVariables.userID,
           articleId: idVariables.articleID,
-          text: 'Very nice article bla bla.....',
+          text: 'Very nice article bla bla bla.....',
         })
         .set('Accept', 'application/json')
         .expect(200)
@@ -67,7 +66,7 @@ describe('Update content', function() {
           should.not.exist(err);
 
           res.body.should.have.property('author', idVariables.userID);
-          res.body.should.have.property('date', '2012-03-12T00:00:00.000Z');
+          res.body.should.have.property('date', '03/12/2012');
 
           done();
         });

@@ -65,8 +65,7 @@ exports.apiArticlesArticleidGET = function(articleid) {
 exports.apiArticlesCommentsArticleidGET = function(articleid) {
   return new Promise(function(resolve, reject) {
     const comments = db.collection('Comments');
-
-    comments.find({articleId: articleid}, function(err, comments) {
+    comments.find({'articleId': articleid}).toArray(function(err, comments) {
       if (err) {
         console.log(err);
         reject();
@@ -147,7 +146,15 @@ exports.apiArticlesArticleidPUT = function(articleid, body) {
         console.log(error);
         reject();
       } else {
-        resolve(article);
+        // workaround, because findOneAndUpdate is not working
+        articles.findOne({_id: articleid}, function(error, article) {
+          if (error) {
+            console.log(error);
+            reject();
+          } else {
+            resolve(article);
+          }
+        });
       }
     });
   });
