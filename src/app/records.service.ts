@@ -41,6 +41,10 @@ export class RecordsService {
     return this.http.post('http://localhost:3000/api/articles', createArticleObject);
   }
 
+  deleteArticle(articleId) {
+      return this.http.delete('http://localhost:3000/api/article/' + articleId);
+  }
+
   createComment(createCommentObject) {
     return this.http.post('http://localhost:3000/api/comments', createCommentObject);
   }
