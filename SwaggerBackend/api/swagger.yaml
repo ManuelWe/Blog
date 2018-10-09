@@ -582,7 +582,7 @@ definitions:
     - "text"
     properties:
       articleId:
-        type: "string"
+        type: "integer"
       author:
         type: "integer"
       text:
@@ -592,7 +592,7 @@ definitions:
     example:
       date: "date"
       author: 5
-      articleId: "articleId"
+      articleId: 7
       text: "text"
   CommentCreate:
     type: "object"
@@ -603,8 +603,7 @@ definitions:
     - "text"
     properties:
       articleId:
-        type: "string"
-        maxLength: 50
+        type: "integer"
       author:
         type: "integer"
       text:
@@ -614,7 +613,7 @@ definitions:
     example:
       date: "2000-01-23"
       author: 5
-      articleId: "articleId"
+      articleId: 8
       text: "text"
   Authentification:
     type: "object"

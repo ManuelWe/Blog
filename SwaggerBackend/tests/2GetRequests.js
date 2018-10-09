@@ -1,6 +1,6 @@
 const should = require('should');
 const request = require('supertest');
-const server = require('../../server');
+const server = require('../server');
 const variables = require('./1PostRequests');
 
 
@@ -62,7 +62,7 @@ describe('GET Calls', function() {
           .end(function(err, res) {
             should.not.exist(err);
 
-            res.body[0].should.have.property('text', 'Lorem ipsum........');
+            res.body.should.have.property('text', 'Lorem ipsum........');
 
             done();
           });

@@ -4,7 +4,7 @@
   "scripts": {
     "start": "ng serve",
     "build": "ng build && node server.js",
-    "test": "node ./node_modules/mocha/bin/mocha \"./SwaggerBackend/tests/*.js\" --exit",
+    "test": "node ./node_modules/mocha/bin/mocha \"./tests/*.js\" --exit",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
