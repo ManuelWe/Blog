@@ -1,0 +1,45 @@
+{
+  "name": "SwaggerBackend",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "ng serve",
+    "build": "ng build && node server.js",
+    "test": "node ./node_modules/mocha/bin/mocha \"./SwaggerBackend/tests/*.js\" --exit",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "bcrypt": "^3.0.1",
+    "body-parser": "^1.18.3",
+    "chart.js": "^2.5.0",
+    "connect": "^3.2.0",
+    "core-js": "^2.5.4",
+    "cors": "^2.8.4",
+    "hammerjs": "^2.0.8",
+    "js-yaml": "^3.3.0",
+    "nodemon": "^1.18.4",
+    "npm": "^6.4.1",
+    "rxjs": "^6.0.0",
+    "swagger-tools": "0.10.1",
+    "tingodb": "^0.6.1",
+    "zone.js": "~0.8.26"
+  },
+  "devDependencies": {
+    "codelyzer": "~4.2.1",
+    "eslint": "^5.5.0",
+    "eslint-config-google": "^0.10.0",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-eslint": "^5.0.0",
+    "gulp-jsdoc3": "^2.0.0",
+    "gulp-mocha": "^6.0.0",
+    "gulp-tslint": "^8.1.3",
+    "gulp-typedoc": "^2.2.0",
+    "jasmine-core": "~2.99.1",
+    "jasmine-spec-reporter": "~4.2.1",
+    "mocha": "^5.2.0",
+    "protractor": "^5.4.1",
+    "should": "^7.1.1",
+    "supertest": "^1.2.0"
+  }
+}
