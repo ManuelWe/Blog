@@ -65,7 +65,7 @@ exports.apiArticlesArticleidGET = function(articleid) {
 exports.apiArticlesCommentsArticleidGET = function(articleid) {
   return new Promise(function(resolve, reject) {
     const comments = db.collection('Comments');
-    comments.find({'articleId': articleid}).toArray(function(err, comments) {
+    comments.find({articleId: Number(articleid)}).toArray(function(err, comments) {
       if (err) {
         console.log(err);
         reject();

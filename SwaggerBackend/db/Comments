@@ -7,24 +7,36 @@
 {"k":"0000000078","o":"0000000117","v":"001"}
 {"_id":4,"_uid":4,"_dt":1539119539175,"_s":"ea500e3a348439bd42de841e6b4fe245"}
 {"date":"2000-01-23","author":21,"articleId":23,"text":"Very nice article bla bla.....","_id":{"$wrap":"$oid","v":4}}
-{"k":"0000000078","o":"0000000117","v":"001"}
-{"_id":5,"_uid":5,"_dt":1539119599227,"_s":"0583f3c37c2f7812eaa3285afa0c3326"}
-{"date":"2000-01-23","author":22,"articleId":24,"text":"Very nice article bla bla.....","_id":{"$wrap":"$oid","v":5}}
-{"k":"0000000078","o":"0000000121","v":"001"}
-{"_id":5,"_uid":5,"_dt":1539119599466,"_s":"6fc529b8261119a94ada1c4bb064cfae"}
-{"date":"2012-03-12","author":22,"articleId":24,"text":"Very nice article bla bla bla.....","_id":{"$wrap":"$oid","v":5}}
-{"k":"0000000078","o":"0000000117","v":"001"}
-{"_id":6,"_uid":6,"_dt":1539119652917,"_s":"05a2c75b1fbd3ba5186a479f2ab81c87"}
-{"date":"2000-01-23","author":23,"articleId":25,"text":"Very nice article bla bla.....","_id":{"$wrap":"$oid","v":6}}
-{"k":"0000000078","o":"0000000121","v":"001"}
-{"_id":6,"_uid":6,"_dt":1539119653165,"_s":"2d307d49bf5bf1223106f1585f95f955"}
-{"date":"2012-03-12","author":23,"articleId":25,"text":"Very nice article bla bla bla.....","_id":{"$wrap":"$oid","v":6}}
-{"k":"0000000078","o":"0000000117","v":"001"}
-{"_id":7,"_uid":7,"_dt":1539119800860,"_s":"b2bcc11f0fed003c6ab58b01bb6432c0"}
-{"date":"2000-01-23","author":24,"articleId":26,"text":"Very nice article bla bla.....","_id":{"$wrap":"$oid","v":7}}
-{"k":"0000000078","o":"0000000121","v":"001"}
-{"_id":7,"_uid":7,"_dt":1539119801118,"_s":"f385744475056cf058de14083ecb0a5e"}
-{"date":"2012-03-12","author":24,"articleId":26,"text":"Very nice article bla bla bla.....","_id":{"$wrap":"$oid","v":7}}
+{"k":"0000000078","o":"0000000089","v":"001"}
+{"_id":5,"_uid":7,"_dt":1539191013292,"_s":"1941527d8d05b8bd62b4c2cfcf1512ad"}
+{"date":"2000-01-23","author":5,"articleId":6,"text":"text","_id":{"$wrap":"$oid","v":5}}
+{"k":"0000000078","o":"0000000089","v":"001"}
+{"_id":6,"_uid":7,"_dt":1539190947173,"_s":"0ddd885282306896eaac478a1f7da034"}
+{"date":"2000-01-23","author":5,"articleId":6,"text":"text","_id":{"$wrap":"$oid","v":6}}
+{"k":"0000000078","o":"0000000115","v":"001"}
+{"_id":8,"_uid":8,"_dt":1539206873269,"_s":"8c7fd7251f15ff38d16f9b969692cf0f"}
+{"date":"2000-01-23","author":6,"articleId":7,"text":"Very nice article bla bla.....","_id":{"$wrap":"$oid","v":8}}
+{"k":"0000000078","o":"0000000119","v":"001"}
+{"_id":8,"_uid":8,"_dt":1539206873448,"_s":"65c06696dda96fac49851dc3fc8bacb1"}
+{"date":"2012-03-12","author":6,"articleId":7,"text":"Very nice article bla bla bla.....","_id":{"$wrap":"$oid","v":8}}
 {"k":"0000000049","o":"0000000000","v":"001"}
-{"_id":7,"_uid":7,"_dt":1539119801188,"_a":"del"}
+{"_id":8,"_uid":8,"_dt":1539206873484,"_a":"del"}
+
+{"k":"0000000078","o":"0000000115","v":"001"}
+{"_id":9,"_uid":9,"_dt":1539207028217,"_s":"4a29e679b2d96fbf821c316d6a573b84"}
+{"date":"2000-01-23","author":7,"articleId":8,"text":"Very nice article bla bla.....","_id":{"$wrap":"$oid","v":9}}
+{"k":"0000000078","o":"0000000119","v":"001"}
+{"_id":9,"_uid":9,"_dt":1539207028380,"_s":"60550d57a47ace9325525b858fb497dc"}
+{"date":"2012-03-12","author":7,"articleId":8,"text":"Very nice article bla bla bla.....","_id":{"$wrap":"$oid","v":9}}
+{"k":"0000000049","o":"0000000000","v":"001"}
+{"_id":9,"_uid":9,"_dt":1539207028418,"_a":"del"}
+
+{"k":"0000000080","o":"0000000116","v":"001"}
+{"_id":10,"_uid":10,"_dt":1539207232393,"_s":"fe9a03773289c555cac095d92122b2c2"}
+{"date":"2000-01-23","author":8,"articleId":9,"text":"Very nice article bla bla.....","_id":{"$wrap":"$oid","v":10}}
+{"k":"0000000080","o":"0000000120","v":"001"}
+{"_id":10,"_uid":10,"_dt":1539207232579,"_s":"d9076063851f2fa405c1f363f36d4040"}
+{"date":"2012-03-12","author":8,"articleId":9,"text":"Very nice article bla bla bla.....","_id":{"$wrap":"$oid","v":10}}
+{"k":"0000000051","o":"0000000000","v":"001"}
+{"_id":10,"_uid":10,"_dt":1539207232624,"_a":"del"}
 
