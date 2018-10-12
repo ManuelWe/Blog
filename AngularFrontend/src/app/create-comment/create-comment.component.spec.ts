@@ -76,65 +76,9 @@ describe('CreateCommentComponent', () => {
         fixture = TestBed.createComponent(CreateCommentComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-
-        component.author.email = 'Klaus@blog.com';
-        component.author.password = 'Pa$$w0rd';
-        component.createCommentObject = {
-            'date': '',
-            'author': '',
-            'articleId': '5b9ba476305e3d1dd8781615',
-            'text': 'TestTextTestText'
-        };
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
-    });
-
-    it('should login', () => {
-        component.blogService.getAllUsers().subscribe(data => {
-            component.allUsers = data;
-            component.login();
-            expect(component.errorText).toBe('');
-        });
-    });
-
-    it('should not login because e-mail is wrong', () => {
-        component.author.email = 'NotAvalidEmail';
-        component.blogService.getAllUsers().subscribe(data => {
-            component.allUsers = data;
-            component.login();
-            expect(component.author.id).toBe(null);
-        });
-    });
-
-    it('should not login because password is wrong', () => {
-        component.author.password = 'NotValidPassword';
-        component.blogService.getAllUsers().subscribe(data => {
-            component.allUsers = data;
-            component.login();
-            expect(component.author.id).toBe(!null);
-            expect(component.errorText).toBe('Authentication failed: E-Mail or password incorrect');
-        });
-    });
-
-    it('should upload a article', () => {
-        component.author.email = 'Klaus@blog.com';
-        component.author.password = 'Pa$$w0rd';
-        component.upload();
-        expect(component.successText).toBe('Comment successful created');
-    });
-
-    afterEach ( () => {
-        component.author.email = '';
-        component.author.password = '';
-        component.author.id = '';
-        // component.allUsers = null;
-        component.createCommentObject = {
-            'date': '',
-            'author': '',
-            'articleId': '',
-            'text': ''
-        };
     });
 });

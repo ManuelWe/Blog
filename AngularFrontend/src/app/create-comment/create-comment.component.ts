@@ -17,8 +17,8 @@ export class CreateCommentComponent implements OnInit {
   };
   createCommentObject = {
     'date': '',
-    'author': '',
-    'articleId': '',
+    'author': null,
+    'articleId': null,
     'text': ''
   };
   @Input()
@@ -55,9 +55,9 @@ export class CreateCommentComponent implements OnInit {
   }
 
   upload() {
-    this.createCommentObject.author = this.author.id;
+    this.createCommentObject.author = +this.author.id;
     this.createCommentObject.date = new Date().toISOString();
-    this.createCommentObject.articleId = this.articleId;
+    this.createCommentObject.articleId = +this.articleId;
     this.blogService.createComment(this.createCommentObject).subscribe(data => {
       this.errorText = ''; // do something with the return value
       this.author.email = '';
@@ -70,7 +70,7 @@ export class CreateCommentComponent implements OnInit {
       };
       location.reload();
     });
-    this.successText = 'Comment successful created';
+    this.errorText = '';
   }
 
 }

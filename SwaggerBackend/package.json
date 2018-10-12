@@ -21,7 +21,7 @@
     "nodemon": "^1.18.4",
     "npm": "^6.4.1",
     "rxjs": "^6.0.0",
-    "swagger-tools": "0.10.1",
+    "swagger-tools": "^0.10.4",
     "tingodb": "^0.6.1",
     "zone.js": "~0.8.26"
   },
