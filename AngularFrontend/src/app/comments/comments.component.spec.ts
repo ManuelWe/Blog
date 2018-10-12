@@ -77,13 +77,7 @@ describe('CommentsComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(CommentsComponent);
         component = fixture.componentInstance;
-        component.comment = {
-            date: "10/11/2018",
-            author: 10,
-            articleId: 2,
-            text: "Thanks, I mostly got my information from wikipedia",
-            _id: 4
-        };
+        component.comment = {author: 12};
         fixture.detectChanges();
     });
 

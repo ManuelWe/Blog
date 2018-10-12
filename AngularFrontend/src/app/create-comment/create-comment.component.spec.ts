@@ -76,74 +76,9 @@ describe('CreateCommentComponent', () => {
         fixture = TestBed.createComponent(CreateCommentComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-
-        component.author.email = 'Jan@email.com';
-        component.author.password = 'Pa$$w0rd';
-        component.author.id = 12;
-        component.articleId = 11;
-        component.createCommentObject = {
-            date: '',
-            author: null,
-            articleId: null,
-            text: 'TestTextTestText'
-        };
     });
 
-    it('should create', () =>
-    {
-        console.log(component.createCommentObject);
+    it('should create', () => {
         expect(component).toBeTruthy();
-    });
-
-   /* it('should login', () => {
-        component.blogService.getAllUsers().subscribe(data => {
-            component.allUsers = data;
-            component.login();
-            expect(component.errorText).toBe('');
-        });
-    });
-
-    it('should not login because e-mail is wrong', () => {
-        component.author.email = 'NotAvalidEmail';
-        console.log(component.author);
-        console.log(component.author.email);
-        console.log(component.author.password);
-        console.log(component.author.id);
-        component.blogService.getAllUsers().subscribe(data => {
-            component.allUsers = data;
-            component.login();
-            expect(component.author.id).toBe(null);
-        });
-    });
-
-    it('should not login because password is wrong', () => {
-        component.author.password = 'NotValidPassword';
-        component.blogService.getAllUsers().subscribe(data => {
-            component.allUsers = data;
-            component.login();
-            expect(component.author.id).toBe(!null);
-            expect(component.errorText).toBe('Authentication failed: E-Mail or password incorrect');
-        });
-    });
-
-    it('should upload a comment', () => {
-        component.author.email = 'Jan@email.com';
-        component.author.password = 'Pa$$w0rd';
-        console.log(component.createCommentObject);
-        component.upload();
-        expect(component.errorText).toBe('');
-    });*/
-
-    afterEach ( () => {
-        component.author.email = '';
-        component.author.password = '';
-        component.author.id = null;
-        // component.allUsers = null;
-        /*component.createCommentObject = {
-            'date': '',
-            'author': null,
-            'articleId': null,
-            'text': ''
-        };*/
     });
 });
