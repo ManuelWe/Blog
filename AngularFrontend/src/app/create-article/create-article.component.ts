@@ -75,7 +75,7 @@ export class CreateArticleComponent implements OnInit {
       this.author.password = '';
       this.createArticleObject.headline = '';
       this.createArticleObject.text = '';
-      this.createArticleObject.author = '';
+      this.createArticleObject.author = null;
       this.topicString = '';
       // @ts-ignore
       this.router.navigateByUrl('/article/' + data._id);

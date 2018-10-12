@@ -12,7 +12,6 @@ export class MainPageComponent implements OnInit {
   articlesId = [];
   articles =[];
   authors = [];
-  pictures = [];
 
   constructor(private route: ActivatedRoute, private blogService: RecordsService) {
     this.blogService.getAllArticles().subscribe(data => {

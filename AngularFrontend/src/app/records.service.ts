@@ -10,7 +10,6 @@ export class RecordsService {
 
   getAllArticles() {
     return this.http.get('http://localhost:3000/api/articles');
-    // .pipe(catchError(this.errorHandler.handleError));
   }
 
   getAllUsers() {

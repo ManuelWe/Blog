@@ -23,6 +23,7 @@ export class CommentsComponent implements OnInit {
       this.blogService.getAllUsers().subscribe( data => {
           this.allUsers = data;
       });
+
   }
 
   ngOnInit() {

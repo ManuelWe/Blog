@@ -77,21 +77,25 @@ describe('CreateCommentComponent', () => {
         component = fixture.componentInstance;
         fixture.detectChanges();
 
-        component.author.email = 'Klaus@blog.com';
+        component.author.email = 'Jan@email.com';
         component.author.password = 'Pa$$w0rd';
+        component.author.id = 12;
+        component.articleId = 11;
         component.createCommentObject = {
-            'date': '',
-            'author': '',
-            'articleId': '5b9ba476305e3d1dd8781615',
-            'text': 'TestTextTestText'
+            date: '',
+            author: null,
+            articleId: null,
+            text: 'TestTextTestText'
         };
     });
 
-    it('should create', () => {
+    it('should create', () =>
+    {
+        console.log(component.createCommentObject);
         expect(component).toBeTruthy();
     });
 
-    it('should login', () => {
+   /* it('should login', () => {
         component.blogService.getAllUsers().subscribe(data => {
             component.allUsers = data;
             component.login();
@@ -101,6 +105,10 @@ describe('CreateCommentComponent', () => {
 
     it('should not login because e-mail is wrong', () => {
         component.author.email = 'NotAvalidEmail';
+        console.log(component.author);
+        console.log(component.author.email);
+        console.log(component.author.password);
+        console.log(component.author.id);
         component.blogService.getAllUsers().subscribe(data => {
             component.allUsers = data;
             component.login();
@@ -118,23 +126,24 @@ describe('CreateCommentComponent', () => {
         });
     });
 
-    it('should upload a article', () => {
-        component.author.email = 'Klaus@blog.com';
+    it('should upload a comment', () => {
+        component.author.email = 'Jan@email.com';
         component.author.password = 'Pa$$w0rd';
+        console.log(component.createCommentObject);
         component.upload();
         expect(component.errorText).toBe('');
-    });
+    });*/
 
     afterEach ( () => {
         component.author.email = '';
         component.author.password = '';
-        component.author.id = '';
+        component.author.id = null;
         // component.allUsers = null;
-        component.createCommentObject = {
+        /*component.createCommentObject = {
             'date': '',
-            'author': '',
-            'articleId': '',
+            'author': null,
+            'articleId': null,
             'text': ''
-        };
+        };*/
     });
 });

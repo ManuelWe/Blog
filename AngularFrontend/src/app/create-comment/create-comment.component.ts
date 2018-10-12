@@ -58,7 +58,6 @@ export class CreateCommentComponent implements OnInit {
     this.createCommentObject.author = +this.author.id;
     this.createCommentObject.date = new Date().toISOString();
     this.createCommentObject.articleId = +this.articleId;
-    console.log(this.createCommentObject);
     this.blogService.createComment(this.createCommentObject).subscribe(data => {
       this.errorText = ''; // do something with the return value
       this.author.email = '';
