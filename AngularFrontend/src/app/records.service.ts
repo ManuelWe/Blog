@@ -48,4 +48,8 @@ export class RecordsService {
   createComment(createCommentObject) {
     return this.http.post('http://localhost:3000/api/comments', createCommentObject);
   }
+
+  deleteComment(commentId) {
+    return this.http.delete('http://localhost:3000/api/comments/' + commentId);
+  }
 }

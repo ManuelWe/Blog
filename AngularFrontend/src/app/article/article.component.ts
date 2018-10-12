@@ -56,8 +56,6 @@ export class ArticleComponent implements OnInit {
     if (this.author.id != null) {
         this.blogService.login(this.author).subscribe(data1 => {
             // @ts-ignore
-            console.log(data1.correctPassword);
-            // @ts-ignore
             if (data1.correctPassword) {
                 this.deleteArticle();
             } else {
