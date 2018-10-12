@@ -42,7 +42,7 @@ export class RecordsService {
   }
 
   deleteArticle(articleId) {
-      return this.http.delete('http://localhost:3000/api/article/' + articleId);
+      return this.http.delete('http://localhost:3000/api/articles/' + articleId);
   }
 
   createComment(createCommentObject) {

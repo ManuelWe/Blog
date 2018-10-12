@@ -31,7 +31,6 @@ export class CreateArticleComponent implements OnInit {
   }
 
   errorText;
-  successText;
 
   ngOnInit() {
   }
@@ -47,7 +46,6 @@ export class CreateArticleComponent implements OnInit {
   }
 
   login() {
-    this.successText = '';
     for (const user of this.allUsers) {
       if (user.email === this.author.email) {
         this.author.id = user._id;
@@ -82,6 +80,6 @@ export class CreateArticleComponent implements OnInit {
       // @ts-ignore
       this.router.navigateByUrl('/article/' + data._id);
     });
-    this.successText = 'Article successful created';
+    this.errorText = '';
   }
 }

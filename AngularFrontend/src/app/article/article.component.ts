@@ -43,7 +43,6 @@ export class ArticleComponent implements OnInit {
   }
 
   login() {
-    console.log(this.allUsers);
     this.successText = '';
 
     for (const user of this.allUsers) {
@@ -51,19 +50,17 @@ export class ArticleComponent implements OnInit {
             this.user.id = user._id;
         }
     }
-    console.log(this.author.email);
-    console.log(this.user.email);
-    console.log(this.user.id);
     if (this.user.email === this.author.email) {
         this.author.id = this.user.id;
     }
     if (this.author.id != null) {
         this.blogService.login(this.author).subscribe(data1 => {
             // @ts-ignore
+            console.log(data1.correctPassword);
+            // @ts-ignore
             if (data1.correctPassword) {
                 this.deleteArticle();
             } else {
-                console.log("I fail here");
                 this.errorText = 'Authentication failed: E-Mail or password incorrect';
             }
         });
@@ -76,6 +73,6 @@ export class ArticleComponent implements OnInit {
       this.blogService.deleteArticle(this.articleId).subscribe( data => {
         console.log(data);
       });
-      // this.router.navigate(['index']);
+      this.router.navigate(['index']);
   }
 }

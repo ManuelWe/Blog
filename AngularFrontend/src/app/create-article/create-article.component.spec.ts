@@ -128,7 +128,7 @@ describe('CreateArticleComponent', () => {
         component.author.email = 'Klaus@blog.com';
         component.author.password = 'Pa$$w0rd';
         component.upload();
-        expect(component.successText).toBe('Article successful created');
+        expect(component.errorText).toBe('');
     });
 
     afterEach ( () => {
