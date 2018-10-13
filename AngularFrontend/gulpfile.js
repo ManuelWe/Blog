@@ -3,12 +3,16 @@ const del = require('del');
 const eslint = require('gulp-eslint');
 const tslint = require('gulp-tslint');
 const typedoc = require('gulp-typedoc');
+const validate = require('gulp-html-angular-validate');
 
 
 const files = {
   projectTsSources: [
     'e2e/src/*.ts',
     'src/**/*.ts',
+  ],
+  projectHtmlSources: [
+    'src/**/*.html',
   ],
 };
 
@@ -45,7 +49,35 @@ function validateGulpfile() {
       .pipe(eslint.failAfterError());
 }
 
-const codeValidation = gulp.parallel(validateTsSources, validateGulpfile);
+/**
+ * @return {*}
+ */
+function validateHtmlFiles() {
+  const options = {
+    angular: true,
+    customattrs: ['*'],
+    customtags: ['*'],
+    emitError: true,
+    /* reportFn: function(fileFailures) {
+      for (let i = 0; i < fileFailures.length; i++) {
+        let fileResult = fileFailures[i];
+        gutil.log(fileResult.filepath);
+        for (let j = 0; j < fileResult.errors.length; j++) {
+          let err = fileResult.errors[j];
+          if (err.line !== undefined) {
+            gutil.log('[line' +err.line +', col: ' + err.col +'] ' +err.msg);
+          } else {
+            gutil.log(err.msg);
+          }
+        }
+      }
+    },*/
+  };
+  return gulp.src(files.projectHtmlSources)
+      .pipe(validate(options));
+}
+
+const codeValidation = gulp.parallel(validateTsSources, validateHtmlFiles, validateGulpfile);
 
 /* TODO add karma
 function executeBackendUnitTests() {
