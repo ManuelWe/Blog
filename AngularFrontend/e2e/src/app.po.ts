@@ -6,6 +6,6 @@ export class AppPage {
   }
 
   getParagraphText() {
-    return element(by.id('heading')).getText();
+    return element(by.id('mainHeading')).getText();
   }
 }

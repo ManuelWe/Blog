@@ -1,5 +1,5 @@
 <div class="container">
-  <h3 class="mb-3 font-weight-bold dark-grey-text">
+  <h3 id="mainHeading" class="mb-3 font-weight-bold dark-grey-text">
     <strong>About this blog</strong>
   </h3>
   <p class="mb-5 pb-3">Hey there,<br>
@@ -21,13 +21,13 @@
           <strong>{{articles[0]?.topic.join(", ")}}</strong>
         </h6>
       </a>
-      <h4 class="mb-3 font-weight-bold dark-grey-text">
+      <h4 id="article1Headline" class="mb-3 font-weight-bold dark-grey-text">
         <strong>{{articles[0]?.headline}}</strong>
       </h4>
       by <a class="font-weight-bold dark-grey-text">{{ authors[0]?.firstname }} {{ authors[0]?.lastname }}</a>,
       {{articles[0]?.date}}
       <p class="grey-text">{{ articles[0]?.text.substring(0, 200) }} ...</p>
-      <a mdbBtn *ngIf="articles[0]" [routerLink]="['/article', articles[0]._id]" color="pink" rounded="true" size="md"
+      <a id="readMoreBtn1" mdbBtn *ngIf="articles[0]" [routerLink]="['/article', articles[0]._id]" color="pink" rounded="true" size="md"
          class="waves-light" mdbWavesEffect>Read more</a>
     </div>
     <div class="col-lg-4 col-md-6 mb-4">
