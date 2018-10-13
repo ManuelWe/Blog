@@ -3,6 +3,9 @@ Project for Web Engeneering 2
 
 API specification: SwaggerBackend/api/swagger.yaml
 
+If bcrypt doesnt work:
+npm install -g --production windows-build-tools
+
 ## Complie Angular and start server
 ```bash
 $ npm run build

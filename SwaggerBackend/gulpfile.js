@@ -3,6 +3,7 @@ const del = require('del');
 const eslint = require('gulp-eslint');
 const jsdoc = require('gulp-jsdoc3');
 const mocha = require('gulp-mocha');
+const jsValidate = require('gulp-jsvalidate');
 
 
 const files = {
@@ -34,11 +35,20 @@ function clean() {
  * Javascript Code validation
  * @return {*}
  **/
-function validateJsSources() {
+function validateJsSourcesStyle() {
   return gulp.src(files.projectJsSources)
       .pipe(eslint({configFile: '.eslintrc.js'}))
       .pipe(eslint.format())
       .pipe(eslint.failAfterError());
+}
+
+/**
+ *
+ * @return {*}
+ */
+function validateJsSourcesSyntax() {
+  return gulp.src(files.projectJsSources)
+      .pipe(jsValidate());
 }
 
 
@@ -53,7 +63,7 @@ function validateGulpfile() {
       .pipe(eslint.failAfterError());
 }
 
-const codeValidation = gulp.parallel(validateJsSources, validateGulpfile);
+const codeValidation = gulp.parallel(validateJsSourcesStyle, validateJsSourcesSyntax, validateGulpfile);
 
 
 /**
