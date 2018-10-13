@@ -63,7 +63,6 @@ export class ArticleComponent implements OnInit {
             }
         });
     } else {
-        console.log("I fail here 1");
         this.errorText = 'Authentication failed: E-Mail or password incorrect';
     }
   }

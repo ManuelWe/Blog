@@ -14,10 +14,9 @@ describe('test tests', () => {
   });
 
   it('should display correct article', () => {
-    element(by.id('articleHeader')).getText().then(function(text) {
-      console.log(text);
-      element(by.id('readMoreBtn')).click();
-      expect(element(by.id('articleHeader')).getText()).toEqual(text);
+    element(by.id('article1Headline')).getText().then(function(text) {
+      element(by.id('readMoreBtn1')).click();
+      expect(element(by.id('articleHeadline')).getText()).toEqual(text);
     });
   });
 });

@@ -10,7 +10,7 @@ import {RecordsService} from '../records.service';
 export class MainPageComponent implements OnInit {
   allArticles;
   articlesId = [];
-  articles =[];
+  articles = [];
   authors = [];
 
   constructor(private route: ActivatedRoute, private blogService: RecordsService) {

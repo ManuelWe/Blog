@@ -1,25 +1,55 @@
 # Blog
-Project for Web Engeneering 2
+Project for Web Engeneering 2.\
+##### Developed by Jan-Nicolai Geistler and Manuel Wetzel.
 
-API specification: SwaggerBackend/api/swagger.yaml
-
-If bcrypt doesnt work:
+_**If bcrypt module wont install:**_
+```bash
 npm install -g --production windows-build-tools
-
-## Complie Angular and start server
-```bash
-$ npm run build
 ```
 
-## Automatic update Angular with changes
+## Backend
+
+### Start server
 ```bash
-$ ng serve
+node server
 ```
 
-## Only start server
+Server is listening on localhost:3000\
+Backend specification can be viewed and tested via localhost:3000/docs 
+
+
+## Frontend
+
+### Start angular in development mode
 ```bash
-$ node server
+ng serve
 ```
 
-## Server is listening on localhost:3000
-### View api specification on localhost:3000/docs
+Server is listening on localhost:4200
+
+### Gulp
+
+#### Validate ts sources and gulpfile
+```bash
+gulp validate
+```
+ 
+#### Execute frontend unit tests and E2E tests
+```bash
+gulp test
+```
+ 
+#### Create frontend documentation
+```bash
+gulp doc
+```
+
+#### Build Angular
+```bash
+gulp build
+```
+
+#### Validate, test, document and build
+```bash
+gulp
+```

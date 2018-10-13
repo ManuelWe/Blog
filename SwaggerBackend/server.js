@@ -3,30 +3,24 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-
 const app = require('connect')();
-const serveStatic = require('serve-static');
 const swaggerTools = require('swagger-tools');
 const jsyaml = require('js-yaml');
-const serverPort = 3000;
-
 const cors = require('cors');
 
-// TODO remove allow cors
+const serverPort = 3000;
+
+// Enable Cors for testing
 app.use(cors());
 
 
-// Parsers for POST data
+// Parsers for POST data; set max size to 2mb
 app.use(bodyParser.json({limit: '2mb'}));
 app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));
-
-// Point static path to dist
-app.use(serveStatic(path.join(__dirname, 'dist/Frontend-App')));
 
 
 // swaggerRouter configuration
 const options = {
-  swaggerUi: path.join(__dirname, './swagger.json'),
   controllers: path.join(__dirname, './controllers'),
   useStubs: process.env.NODE_ENV === 'development', // Conditionally turn on stubs (mock mode)
 };
@@ -47,9 +41,6 @@ swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
   // Route validated requests to appropriate controller
   app.use(middleware.swaggerRouter(options));
 
-  // Serve the Swagger documents and Swagger UI
-  app.use(middleware.swaggerUi());
-
   // Start the server, if not in testing mode
   if (!module.parent) {
     http.createServer(app).listen(serverPort, function() {
@@ -58,5 +49,3 @@ swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
     });
   }
 });
-
-module.exports = app; // for testing

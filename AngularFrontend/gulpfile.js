@@ -3,32 +3,30 @@ const del = require('del');
 const eslint = require('gulp-eslint');
 const tslint = require('gulp-tslint');
 const typedoc = require('gulp-typedoc');
-const validate = require('gulp-html-angular-validate');
+const exec = require('child_process').exec;
 
 
 const files = {
   projectTsSources: [
     'e2e/src/*.ts',
     'src/**/*.ts',
-  ],
-  projectHtmlSources: [
-    'src/**/*.html',
+    'src/*.ts',
   ],
 };
 
 
 /**
- * Cleanup
- * @return {*}
+ * Delete docs and builded angular files
+ * @return {Stream}
  */
 function clean() {
-  return del(['build', 'bin', 'dist', 'docs']);
+  return del(['dist', 'docs']);
 }
 
 
 /**
- * Typescript Code validation
- * @return {*}
+ * Typescript style validation
+ * @return {Stream}
  */
 function validateTsSources() {
   return gulp.src(files.projectTsSources)
@@ -38,9 +36,10 @@ function validateTsSources() {
       .pipe(tslint.report());
 }
 
+
 /**
- * gulpfile validation
- * @return {*}
+ * gulpfile style validation
+ * @return {Stream}
  */
 function validateGulpfile() {
   return gulp.src(['gulpfile.js'])
@@ -49,48 +48,46 @@ function validateGulpfile() {
       .pipe(eslint.failAfterError());
 }
 
+
 /**
- * @return {*}
+ * Karma Frontend Unit Tests
  */
-function validateHtmlFiles() {
-  const options = {
-    angular: true,
-    customattrs: ['*'],
-    customtags: ['*'],
-    emitError: true,
-    /* reportFn: function(fileFailures) {
-      for (let i = 0; i < fileFailures.length; i++) {
-        let fileResult = fileFailures[i];
-        gutil.log(fileResult.filepath);
-        for (let j = 0; j < fileResult.errors.length; j++) {
-          let err = fileResult.errors[j];
-          if (err.line !== undefined) {
-            gutil.log('[line' +err.line +', col: ' + err.col +'] ' +err.msg);
-          } else {
-            gutil.log(err.msg);
-          }
-        }
-      }
-    },*/
-  };
-  return gulp.src(files.projectHtmlSources)
-      .pipe(validate(options));
-}
-
-const codeValidation = gulp.parallel(validateTsSources, validateHtmlFiles, validateGulpfile);
-
-/* TODO add karma
-function executeBackendUnitTests() {
-  return gulp.src(files.projectJsSources, {read: false})
-      .pipe(mocha({exit: true}));
-}
-
-const executeTests = gulp.parallel(executeBackendUnitTests);
-*/
+gulp.task('executeFrontendUnitTests', function(cb) {
+  exec('ng test --watch=false', function(err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+});
 
 
 /**
- * @return {*}
+ * Protractor E2E Tests
+ */
+gulp.task('executeE2ETests', function(cb) {
+  exec('ng e2e', function(err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+});
+
+
+/**
+ * Builds Angular into dist folder
+ */
+gulp.task('buildAngular', function(cb) {
+  exec('ng build', function(err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+});
+
+
+/**
+ * Generate Documentation from ts files
+ * @return {Stream}
  */
 function generateTsDocumentation() {
   return gulp
@@ -105,10 +102,10 @@ function generateTsDocumentation() {
   ;
 }
 
-const documentation = generateTsDocumentation;
-
 
 // Common task definition
-// TODO validation
-gulp.task('build', gulp.series(clean, codeValidation, documentation));
-gulp.task('default', gulp.series(codeValidation));
+gulp.task('validate', gulp.parallel(validateTsSources, validateGulpfile));
+gulp.task('test', gulp.parallel('executeFrontendUnitTests', 'executeE2ETests'));
+gulp.task('doc', gulp.series(clean, generateTsDocumentation));
+gulp.task('build', gulp.series('buildAngular'));
+gulp.task('default', gulp.series('validate', 'test', 'doc', 'build'));
