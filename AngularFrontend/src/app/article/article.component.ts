@@ -43,33 +43,34 @@ export class ArticleComponent implements OnInit {
   }
 
   login() {
-    console.log(this.allUsers);
     this.successText = '';
-      /*for (const user of this.allUsers) {
-          if (user.email === this.author.email) {
-              this.author.id = user._id;
-          }
-      }*/
-      if (this.user.email === this.author.email) {
-        this.author.id = this.user.id;
-      }
-      if (this.author.id != null) {
-          this.blogService.login(this.author).subscribe(data1 => {
-              // @ts-ignore
-              if (data1.correctPassword) {
-                  this.deleteArticle();
-              } else {
-                  this.errorText = 'Authentication failed: E-Mail or password incorrect';
-              }
-          });
-      } else {
-          this.errorText = 'Authentication failed: E-Mail or password incorrect';
-      }
+
+    for (const user of this.allUsers) {
+        if (user.email === this.author.email) {
+            this.user.id = user._id;
+        }
     }
+    if (this.user.email === this.author.email) {
+        this.author.id = this.user.id;
+    }
+    if (this.author.id != null) {
+        this.blogService.login(this.author).subscribe(data1 => {
+            // @ts-ignore
+            if (data1.correctPassword) {
+                this.deleteArticle();
+            } else {
+                this.errorText = 'Authentication failed: E-Mail or password incorrect';
+            }
+        });
+    } else {
+        console.log("I fail here 1");
+        this.errorText = 'Authentication failed: E-Mail or password incorrect';
+    }
+  }
   deleteArticle() {
       this.blogService.deleteArticle(this.articleId).subscribe( data => {
         console.log(data);
       });
-      this.router.navigate(['']);
+      this.router.navigate(['index']);
   }
 }
