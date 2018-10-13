@@ -24,16 +24,17 @@ const files = {
 
 
 /**
- * Cleanup
+ * Delete documentation
  * @return {*}
  */
 function clean() {
-  return del(['build', 'bin', 'dist', 'docs']);
+  return del(['docs']);
 }
 
+
 /**
- * Javascript Code validation
- * @return {*}
+ * Javascript style validation
+ * @return {Stream}
  **/
 function validateJsSourcesStyle() {
   return gulp.src(files.projectJsSources)
@@ -42,9 +43,10 @@ function validateJsSourcesStyle() {
       .pipe(eslint.failAfterError());
 }
 
+
 /**
- *
- * @return {*}
+ * Javascript syntax validation
+ * @return {Stream}
  */
 function validateJsSourcesSyntax() {
   return gulp.src(files.projectJsSources)
@@ -53,8 +55,8 @@ function validateJsSourcesSyntax() {
 
 
 /**
- * gulpfile validation
- * @return {*}
+ * gulpfile style validation
+ * @return {Stream}
  */
 function validateGulpfile() {
   return gulp.src(['gulpfile.js'])
@@ -63,22 +65,20 @@ function validateGulpfile() {
       .pipe(eslint.failAfterError());
 }
 
-const codeValidation = gulp.parallel(validateJsSourcesStyle, validateJsSourcesSyntax, validateGulpfile);
-
 
 /**
- * @return {*}
+ * Mocha backend unit tests
+ * @return {Stream}
  */
 function executeBackendUnitTests() {
   return gulp.src(files.projectJsSources, {read: false})
       .pipe(mocha({exit: true}));
 }
 
-const executeTests = executeBackendUnitTests;
-
 
 /**
- * @return {*}
+ * Generate documentation from js files
+ * @return {Stream}
  */
 function generateJsDocumentation() {
   let config = require('./jsdocConfig');
@@ -86,10 +86,9 @@ function generateJsDocumentation() {
       .pipe(jsdoc(config));
 }
 
-const documentation = generateJsDocumentation;
-
 
 // Common task definition
-// TODO validation
-gulp.task('build', gulp.series(clean, codeValidation, executeTests, documentation));
-gulp.task('default', gulp.series(codeValidation));
+gulp.task('validate', gulp.parallel(validateJsSourcesStyle, validateJsSourcesSyntax, validateGulpfile));
+gulp.task('test', executeBackendUnitTests);
+gulp.task('doc', gulp.series(clean, generateJsDocumentation));
+gulp.task('default', gulp.series('validate', 'test', 'doc'));

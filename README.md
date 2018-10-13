@@ -1,12 +1,14 @@
 # Blog
 Project for Web Engeneering 2.\
 ##### Developed by Jan-Nicolai Geistler and Manuel Wetzel.
-
+\
 _**If bcrypt module wont install:**_
 ```bash
 npm install -g --production windows-build-tools
 ```
-
+\
+Small Block bla bla.....\
+Only the User who created an article or comment is able to delete him. 
 ## Backend
 
 ### Start server
@@ -16,6 +18,28 @@ node server
 
 Server is listening on localhost:3000\
 Backend specification can be viewed and tested via localhost:3000/docs 
+
+### Gulp
+
+#### Validate js sources and gulpfile
+```bash
+gulp validate
+```
+ 
+#### Execute backend unit tests
+```bash
+gulp test
+```
+ 
+#### Create backend documentation
+```bash
+gulp doc
+```
+
+#### Validate, test and document
+```bash
+gulp
+```
 
 
 ## Frontend

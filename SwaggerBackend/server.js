@@ -41,6 +41,9 @@ swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
   // Route validated requests to appropriate controller
   app.use(middleware.swaggerRouter(options));
 
+  // Serve the Swagger documents and Swagger UI
+  app.use(middleware.swaggerUi());
+
   // Start the server, if not in testing mode
   if (!module.parent) {
     http.createServer(app).listen(serverPort, function() {
@@ -49,3 +52,6 @@ swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
     });
   }
 });
+
+// for testing
+module.exports = app;

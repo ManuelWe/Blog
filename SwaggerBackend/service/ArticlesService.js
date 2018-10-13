@@ -49,7 +49,7 @@ exports.apiArticlesArticleidGET = function(articleid) {
         console.log(error);
         reject();
       } else {
-        resolve(article);
+        resolve(dateConverter.convertDate(article));
       }
     });
   });
