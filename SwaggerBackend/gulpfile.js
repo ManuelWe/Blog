@@ -7,19 +7,19 @@ const jsValidate = require('gulp-jsvalidate');
 
 
 const files = {
-  projectJsSources: [
-    'server.js',
-    'controllers/*.js',
-    'service/*.js',
-    'tests/*.js',
-    'utils/*.js',
-  ],
-  filesToDocument: [
-    '../README.md',
-    'controllers/*.js',
-    'service/*.js',
-    'utils/*.js',
-  ],
+    projectJsSources: [
+        'server.js',
+        'controllers/*.js',
+        'service/*.js',
+        'tests/*.js',
+        'utils/*.js',
+    ],
+    filesToDocument: [
+        '../README.md',
+        'controllers/*.js',
+        'service/*.js',
+        'utils/*.js',
+    ],
 };
 
 
@@ -28,7 +28,7 @@ const files = {
  * @return {*}
  */
 function clean() {
-  return del(['docs']);
+    return del(['docs']);
 }
 
 
@@ -37,10 +37,10 @@ function clean() {
  * @return {Stream}
  **/
 function validateJsSourcesStyle() {
-  return gulp.src(files.projectJsSources)
-      .pipe(eslint({configFile: '.eslintrc.js'}))
-      .pipe(eslint.format())
-      .pipe(eslint.failAfterError());
+    return gulp.src(files.projectJsSources)
+        .pipe(eslint({configFile: '.eslintrc.js'}))
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
 }
 
 
@@ -49,8 +49,8 @@ function validateJsSourcesStyle() {
  * @return {Stream}
  */
 function validateJsSourcesSyntax() {
-  return gulp.src(files.projectJsSources)
-      .pipe(jsValidate());
+    return gulp.src(files.projectJsSources)
+        .pipe(jsValidate());
 }
 
 
@@ -59,10 +59,10 @@ function validateJsSourcesSyntax() {
  * @return {Stream}
  */
 function validateGulpfile() {
-  return gulp.src(['gulpfile.js'])
-      .pipe(eslint({configFile: '.eslintrc.js'}))
-      .pipe(eslint.format())
-      .pipe(eslint.failAfterError());
+    return gulp.src(['gulpfile.js'])
+        .pipe(eslint({configFile: '.eslintrc.js'}))
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
 }
 
 
@@ -71,8 +71,8 @@ function validateGulpfile() {
  * @return {Stream}
  */
 function executeBackendUnitTests() {
-  return gulp.src(files.projectJsSources, {read: false})
-      .pipe(mocha({exit: true}));
+    return gulp.src(files.projectJsSources, {read: false})
+        .pipe(mocha({exit: true}));
 }
 
 
@@ -81,9 +81,9 @@ function executeBackendUnitTests() {
  * @return {Stream}
  */
 function generateJsDocumentation() {
-  let config = require('./jsdocConfig');
-  return gulp.src(files.filesToDocument, {read: false})
-      .pipe(jsdoc(config));
+    let config = require('./jsdocConfig');
+    return gulp.src(files.filesToDocument, {read: false})
+        .pipe(jsdoc(config));
 }
 
 

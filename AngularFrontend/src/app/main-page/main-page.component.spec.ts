@@ -60,7 +60,7 @@ describe('MainPageComponent', () => {
             ],
             providers: [
                 RecordsService,
-                {provide: APP_BASE_HREF, useValue : '/' }
+                {provide: APP_BASE_HREF, useValue: '/'}
             ],
             imports: [
                 BrowserModule,
@@ -72,7 +72,7 @@ describe('MainPageComponent', () => {
         }).compileComponents();
     }));
 
-    beforeEach( () => {
+    beforeEach(() => {
         fixture = TestBed.createComponent(MainPageComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();

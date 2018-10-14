@@ -1,77 +1,78 @@
 <div class="container">
-  <h3 id="mainHeading" class="mb-3 font-weight-bold dark-grey-text">
-    <strong>About this blog</strong>
-  </h3>
-  <p class="mb-5 pb-3">Hey there,<br>
-    this is a fun blog where everybody can create and comment entries... something about the blog (dunno what to right
-    here)</p>
-  <h3 class="mb-3 font-weight-bold dark-grey-text">
-    <strong>Recent posts</strong>
-  </h3>
-  <div class="row">
-    <div class="col-lg-4 col-md-12 mb-4">
-      <div class="view overlay rounded z-depth-2 mb-2 waves-light" mdbWavesEffect>
-        <img src="{{articles[0]?.picture}}" class="img-fluid">
-        <a>
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
-      <a href="" class="pink-text">
-        <h6 class="mb-3 mt-4">
-          <strong>{{articles[0]?.topic.join(", ")}}</strong>
-        </h6>
-      </a>
-      <h4 id="article1Headline" class="mb-3 font-weight-bold dark-grey-text">
-        <strong>{{articles[0]?.headline}}</strong>
-      </h4>
-      by <a class="font-weight-bold dark-grey-text">{{ authors[0]?.firstname }} {{ authors[0]?.lastname }}</a>,
-      {{articles[0]?.date}}
-      <p class="grey-text">{{ articles[0]?.text.substring(0, 200) }} ...</p>
-      <a id="readMoreBtn1" mdbBtn *ngIf="articles[0]" [routerLink]="['/article', articles[0]._id]" color="pink" rounded="true" size="md"
-         class="waves-light" mdbWavesEffect>Read more</a>
+    <h3 id="mainHeading" class="mb-2 font-weight-bold dark-grey-text">
+        <strong>Welcome to our Blog!</strong>
+    </h3>
+    <p class="mb-5 pb-3">Go ahead and create an account to post articles and comments.</p>
+    <h3 class="mb-3 font-weight-bold dark-grey-text">
+        <strong>Recent posts</strong>
+    </h3>
+    <div class="row">
+        <div class="col-lg-4 col-md-12 mb-4">
+            <div class="view overlay rounded z-depth-2 mb-2 waves-light" mdbWavesEffect>
+                <img src="{{articles[0]?.picture}}" class="img-fluid">
+                <a>
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+            <a href="" class="pink-text">
+                <h6 class="mb-3 mt-4">
+                    <strong>{{articles[0]?.topic.join(", ")}}</strong>
+                </h6>
+            </a>
+            <h4 id="article1Headline" class="mb-3 font-weight-bold dark-grey-text">
+                <strong>{{articles[0]?.headline}}</strong>
+            </h4>
+            by <a class="font-weight-bold dark-grey-text">{{ authors[0]?.firstname }} {{ authors[0]?.lastname }}</a>,
+            {{articles[0]?.date}}
+            <p class="grey-text">{{ articles[0]?.text.substring(0, 200) }} ...</p>
+            <a id="readMoreBtn1" mdbBtn *ngIf="articles[0]" [routerLink]="['/article', articles[0]._id]" color="pink"
+               rounded="true" size="md"
+               class="waves-light" mdbWavesEffect>Read more</a>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="view overlay rounded z-depth-2 mb-2 waves-light" mdbWavesEffect>
+                <img src="{{articles[1]?.picture}}" class="img-fluid">
+                <a>
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+            <a href="" class="deep-orange-text">
+                <h6 class="mb-3 mt-4">
+                    <strong>{{articles[1]?.topic.join(", ")}}</strong>
+                </h6>
+            </a>
+            <h4 class="mb-3 font-weight-bold dark-grey-text">
+                <strong>{{articles[1]?.headline}}</strong>
+            </h4>
+            by <a class="font-weight-bold dark-grey-text">{{ authors[1]?.firstname }} {{ authors[1]?.lastname }}</a>,
+            {{articles[1]?.date}}
+            <p class="grey-text">{{articles[1]?.text.substring(0, 200)}} ...</p>
+            <a mdbBtn *ngIf="articles[1]" [routerLink]="['/article', articles[1]._id]" color="deep-orange"
+               rounded="true"
+               size="md" class="waves-light" mdbWavesEffect>Read more</a>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <!--Featured image-->
+            <div class="view overlay rounded z-depth-2 mb-2 waves-light" mdbWavesEffect>
+                <img src="{{articles[2]?.picture}}" class="img-fluid">
+                <a>
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+            <a href="" class="cyan-text">
+                <h6 class="mb-3 mt-4">
+                    <strong>{{articles[2]?.topic.join(", ")}}</strong>
+                </h6>
+            </a>
+            <h4 class="mb-3 font-weight-bold dark-grey-text">
+                <strong>{{articles[2]?.headline}}</strong>
+            </h4>
+            by <a class="font-weight-bold dark-grey-text">{{ authors[2]?.firstname }} {{ authors[2]?.lastname }}</a>,
+            {{articles[2]?.date}}
+            <p class="grey-text">{{articles[2]?.text.substring(0, 200)}} ...</p>
+            <a mdbBtn *ngIf="articles[2]" [routerLink]="['/article', articles[2]._id]" color="info" rounded="true"
+               size="md"
+               class="waves-light" mdbWavesEffect>Read more</a>
+        </div>
     </div>
-    <div class="col-lg-4 col-md-6 mb-4">
-      <div class="view overlay rounded z-depth-2 mb-2 waves-light" mdbWavesEffect>
-        <img src="{{articles[1]?.picture}}" class="img-fluid">
-        <a>
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
-      <a href="" class="deep-orange-text">
-        <h6 class="mb-3 mt-4">
-          <strong>{{articles[1]?.topic.join(", ")}}</strong>
-        </h6>
-      </a>
-      <h4 class="mb-3 font-weight-bold dark-grey-text">
-        <strong>{{articles[1]?.headline}}</strong>
-      </h4>
-      by <a class="font-weight-bold dark-grey-text">{{ authors[1]?.firstname }} {{ authors[1]?.lastname }}</a>,
-      {{articles[1]?.date}}
-      <p class="grey-text">{{articles[1]?.text.substring(0, 200)}} ...</p>
-      <a mdbBtn *ngIf="articles[1]" [routerLink]="['/article', articles[1]._id]" color="deep-orange" rounded="true"
-         size="md" class="waves-light" mdbWavesEffect>Read more</a>
-    </div>
-    <div class="col-lg-4 col-md-6 mb-4">
-      <!--Featured image-->
-      <div class="view overlay rounded z-depth-2 mb-2 waves-light" mdbWavesEffect>
-        <img src="{{articles[2]?.picture}}" class="img-fluid">
-        <a>
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
-      <a href="" class="cyan-text">
-        <h6 class="mb-3 mt-4">
-          <strong>{{articles[2]?.topic.join(", ")}}</strong>
-        </h6>
-      </a>
-      <h4 class="mb-3 font-weight-bold dark-grey-text">
-        <strong>{{articles[2]?.headline}}</strong>
-      </h4>
-      by <a class="font-weight-bold dark-grey-text">{{ authors[2]?.firstname }} {{ authors[2]?.lastname }}</a>,
-      {{articles[2]?.date}}
-      <p class="grey-text">{{articles[2]?.text.substring(0, 200)}} ...</p>
-      <a mdbBtn *ngIf="articles[2]" [routerLink]="['/article', articles[2]._id]" color="info" rounded="true" size="md"
-         class="waves-light" mdbWavesEffect>Read more</a>
-    </div>
-  </div>
 </div>

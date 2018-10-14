@@ -2,38 +2,38 @@ import {Component, Input, OnInit} from '@angular/core';
 import {RecordsService} from '../records.service';
 
 @Component({
-  selector: 'app-comments',
-  templateUrl: './comments.component.html',
-  styleUrls: ['./comments.component.scss']
+    selector: 'app-comments',
+    templateUrl: './comments.component.html',
+    styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent implements OnInit {
-  @Input()
-  comment;
-  commentAuthor;
+    @Input()
+    comment;
+    commentAuthor;
 
-  allUsers;
-  errorText;
-  author = {
+    allUsers;
+    errorText;
+    author = {
         'id': null,
         'email': '',
         'password': ''
-  };
+    };
 
-  constructor(private blogService: RecordsService) {
-      this.blogService.getAllUsers().subscribe( data => {
-          this.allUsers = data;
-      });
+    constructor(private blogService: RecordsService) {
+        this.blogService.getAllUsers().subscribe(data => {
+            this.allUsers = data;
+        });
 
-  }
+    }
 
-  ngOnInit() {
-      this.blogService.getUser(this.comment.author).subscribe(data => {
-          this.commentAuthor = data;
-      });
-  }
+    ngOnInit() {
+        this.blogService.getUser(this.comment.author).subscribe(data => {
+            this.commentAuthor = data;
+        });
+    }
 
-  login() {
-      this.errorText = '';
+    login() {
+        this.errorText = '';
         if (this.commentAuthor.email === this.author.email) {
             this.author.id = this.commentAuthor._id;
         }
@@ -50,8 +50,9 @@ export class CommentsComponent implements OnInit {
             this.errorText = 'Authentication failed: E-Mail or password incorrect';
         }
     }
+
     deleteComment() {
-        this.blogService.deleteComment(this.comment._id).subscribe( data => {
+        this.blogService.deleteComment(this.comment._id).subscribe(data => {
             console.log(data);
         });
         location.reload();

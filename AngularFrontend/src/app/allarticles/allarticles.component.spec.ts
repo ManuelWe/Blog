@@ -1,6 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AllarticlesComponent } from './allarticles.component';
+import {AllarticlesComponent} from './allarticles.component';
 import {AppComponent} from '../app.component';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {RecordsService} from '../records.service';
@@ -62,7 +62,7 @@ describe('AllarticlesComponent', () => {
             ],
             providers: [
                 RecordsService,
-                {provide: APP_BASE_HREF, useValue : '/' }
+                {provide: APP_BASE_HREF, useValue: '/'}
             ],
             imports: [
                 BrowserModule,

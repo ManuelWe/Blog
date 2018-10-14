@@ -10,27 +10,27 @@ const dateConverter = require('../utils/dateConverter');
  * @return {Promise} no response value expected for this operation
  **/
 exports.apiArticlesArticleidDELETE = function(articleid) {
-  return new Promise(function(resolve, reject) {
-    // Delete all comments that belong to the article
-    const comments = db.collection('Comments');
-    const articles = db.collection('Articles');
+    return new Promise(function(resolve, reject) {
+        // Delete all comments that belong to the article
+        const comments = db.collection('Comments');
+        const articles = db.collection('Articles');
 
-    comments.remove({articleId: articleid}, function(err) {
-      if (err) {
-        console.log(err);
-        reject();
-      }
-    });
+        comments.remove({articleId: articleid}, function(err) {
+            if (err) {
+                console.log(err);
+                reject();
+            }
+        });
 
-    articles.remove({_id: articleid}, function(error, item) {
-      if (error) {
-        console.log(error);
-        reject();
-      } else {
-        resolve();
-      }
+        articles.remove({_id: articleid}, function(error, item) {
+            if (error) {
+                console.log(error);
+                reject();
+            } else {
+                resolve();
+            }
+        });
     });
-  });
 };
 
 
@@ -41,18 +41,18 @@ exports.apiArticlesArticleidDELETE = function(articleid) {
  * @return {Promise.Article} article object
  **/
 exports.apiArticlesArticleidGET = function(articleid) {
-  return new Promise(function(resolve, reject) {
-    const articles = db.collection('Articles');
+    return new Promise(function(resolve, reject) {
+        const articles = db.collection('Articles');
 
-    articles.findOne({_id: articleid}, function(error, article) {
-      if (error) {
-        console.log(error);
-        reject();
-      } else {
-        resolve(dateConverter.convertDate(article));
-      }
+        articles.findOne({_id: articleid}, function(error, article) {
+            if (error) {
+                console.log(error);
+                reject();
+            } else {
+                resolve(dateConverter.convertDate(article));
+            }
+        });
     });
-  });
 };
 
 
@@ -63,23 +63,23 @@ exports.apiArticlesArticleidGET = function(articleid) {
  * @return {Promise.Comment[]} array of comment objects
  **/
 exports.apiArticlesCommentsArticleidGET = function(articleid) {
-  return new Promise(function(resolve, reject) {
-    const comments = db.collection('Comments');
-    comments.find({articleId: Number(articleid)}).toArray(function(err, comments) {
-      if (err) {
-        console.log(err);
-        reject();
-      } else {
-        let commentsCopy = JSON.parse(JSON.stringify(comments));
-        for (let i in commentsCopy) {
-          if ({}.hasOwnProperty.call(commentsCopy, i)) {
-            delete commentsCopy[i].picture;
-          }
-        }
-        resolve(dateConverter.convertDate(commentsCopy));
-      }
+    return new Promise(function(resolve, reject) {
+        const comments = db.collection('Comments');
+        comments.find({articleId: Number(articleid)}).toArray(function(err, comments) {
+            if (err) {
+                console.log(err);
+                reject();
+            } else {
+                let commentsCopy = JSON.parse(JSON.stringify(comments));
+                for (let i in commentsCopy) {
+                    if ({}.hasOwnProperty.call(commentsCopy, i)) {
+                        delete commentsCopy[i].picture;
+                    }
+                }
+                resolve(dateConverter.convertDate(commentsCopy));
+            }
+        });
     });
-  });
 };
 
 
@@ -89,24 +89,24 @@ exports.apiArticlesCommentsArticleidGET = function(articleid) {
  * @return {Promise.Article[]} array of article objects
  **/
 exports.apiArticlesGET = function() {
-  return new Promise(function(resolve, reject) {
-    const articles = db.collection('Articles');
+    return new Promise(function(resolve, reject) {
+        const articles = db.collection('Articles');
 
-    articles.find({}).toArray(function(error, articles) {
-      if (error) {
-        console.log(error);
-        reject();
-      } else {
-        let articlesCopy = JSON.parse(JSON.stringify(articles));
-        for (let i in articlesCopy) {
-          if ({}.hasOwnProperty.call(articlesCopy, i)) {
-            delete articlesCopy[i].picture;
-          }
-        }
-        resolve(dateConverter.convertDate(articlesCopy));
-      }
+        articles.find({}).toArray(function(error, articles) {
+            if (error) {
+                console.log(error);
+                reject();
+            } else {
+                let articlesCopy = JSON.parse(JSON.stringify(articles));
+                for (let i in articlesCopy) {
+                    if ({}.hasOwnProperty.call(articlesCopy, i)) {
+                        delete articlesCopy[i].picture;
+                    }
+                }
+                resolve(dateConverter.convertDate(articlesCopy));
+            }
+        });
     });
-  });
 };
 
 
@@ -117,17 +117,17 @@ exports.apiArticlesGET = function() {
  * @return {Promise.Article} article object
  **/
 exports.apiArticlesPOST = function(body) {
-  return new Promise(function(resolve, reject) {
-    const articles = db.collection('Articles');
+    return new Promise(function(resolve, reject) {
+        const articles = db.collection('Articles');
 
-    articles.insert(body, function(error, article) {
-      if (error) {
-        console.log(error);
-      } else {
-        resolve(article[0]);
-      }
+        articles.insert(body, function(error, article) {
+            if (error) {
+                console.log(error);
+            } else {
+                resolve(article[0]);
+            }
+        });
     });
-  });
 };
 
 /**
@@ -138,24 +138,24 @@ exports.apiArticlesPOST = function(body) {
  * @return {Promise.Article} updated article object
  **/
 exports.apiArticlesArticleidPUT = function(articleid, body) {
-  return new Promise(function(resolve, reject) {
-    const articles = db.collection('Articles');
+    return new Promise(function(resolve, reject) {
+        const articles = db.collection('Articles');
 
-    articles.update({_id: articleid}, body, function(error, article) {
-      if (error) {
-        console.log(error);
-        reject();
-      } else {
-        // workaround, because findOneAndUpdate is not working
-        articles.findOne({_id: articleid}, function(error, article) {
-          if (error) {
-            console.log(error);
-            reject();
-          } else {
-            resolve(article);
-          }
+        articles.update({_id: articleid}, body, function(error, article) {
+            if (error) {
+                console.log(error);
+                reject();
+            } else {
+                // workaround, because findOneAndUpdate is not working
+                articles.findOne({_id: articleid}, function(error, article) {
+                    if (error) {
+                        console.log(error);
+                        reject();
+                    } else {
+                        resolve(article);
+                    }
+                });
+            }
         });
-      }
     });
-  });
 };

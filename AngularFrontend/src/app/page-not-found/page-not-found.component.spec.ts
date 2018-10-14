@@ -44,7 +44,7 @@ describe('PageNotFoundComponent', () => {
     let component: PageNotFoundComponent;
     let fixture: ComponentFixture<PageNotFoundComponent>;
 
-    beforeEach( async(() => {
+    beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
                 AppComponent,
@@ -74,13 +74,13 @@ describe('PageNotFoundComponent', () => {
         }).compileComponents();
     }));
 
-    beforeEach( () => {
+    beforeEach(() => {
         fixture = TestBed.createComponent(PageNotFoundComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
     it('should create', () => {
-      expect(component).toBeTruthy();
+        expect(component).toBeTruthy();
     });
 });

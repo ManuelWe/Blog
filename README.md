@@ -1,5 +1,5 @@
 # Blog
-Project for Web Engeneering 2.\
+Project for Web Engeneering 2.
 ##### Developed by Jan-Nicolai Geistler and Manuel Wetzel.
 \
 _**If bcrypt module wont install:**_
@@ -7,7 +7,7 @@ _**If bcrypt module wont install:**_
 npm install -g --production windows-build-tools
 ```
 \
-Small Block bla bla.....\
+On our Blog webpage you can read articles and comments. If you want to post an article or comment you have to create an account first.
 Only the User who created an article or comment is able to delete him. 
 ## Backend
 
@@ -59,6 +59,7 @@ gulp validate
 ```
  
 #### Execute frontend unit tests and E2E tests
+(Backend should run)
 ```bash
 gulp test
 ```
@@ -74,6 +75,7 @@ gulp build
 ```
 
 #### Validate, test, document and build
+(Backend should run)
 ```bash
 gulp
 ```

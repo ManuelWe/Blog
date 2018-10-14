@@ -437,6 +437,8 @@ definitions:
     - "email"
     - "picture"
     - "password"
+    - "firstname"
+    - "lastname"
     properties:
       firstname:
         type: "string"
@@ -462,7 +464,7 @@ definitions:
       password:
         type: "string"
         format: "password"
-        minLength: 6
+        minLength: 8
         maxLength: 50
       picture:
         type: "string"
@@ -623,7 +625,7 @@ definitions:
       password:
         type: "string"
         format: "password"
-        minLength: 6
+        minLength: 8
         maxLength: 50
     example:
       password: "password"

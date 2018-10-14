@@ -1,51 +1,54 @@
 <div class="row comments">
-  <div class="label col-2">
-    <img class="img-responsive img-fluid view overlay rounded-circle z-depth-2 mb-2 waves-light"
-         src="{{commentAuthor?.picture}}" style="width: 75px;height:75px;">
-  </div>
-  <div class="label col-8">
-    <div class="author">
-      <a class="font-weight-bold dark-grey-text">{{commentAuthor?.firstname + ' ' + commentAuthor?.lastname + ':'}}</a>
-      {{comment?.date}}
+    <div class="label col-2">
+        <img class="img-responsive img-fluid view overlay rounded-circle z-depth-2 mb-2 waves-light"
+             src="{{commentAuthor?.picture}}" style="width: 75px;height:75px;">
     </div>
-    <div class="comment">
-      <a class="name">{{comment?.text}}</a>
+    <div class="label col-8">
+        <div class="author">
+            <a class="font-weight-bold dark-grey-text">{{commentAuthor?.firstname + ' ' + commentAuthor?.lastname +
+                ':'}}</a>
+            {{comment?.date}}
+        </div>
+        <div class="comment">
+            <a class="name">{{comment?.text}}</a>
+        </div>
     </div>
-  </div>
-  <div class="label col-1">
-    <button mdbBtn type="button" rounded="true" class="waves-light" color="indigo" mdbWavesEffect
-            (click)="deleteModal.show()">Delete
-    </button>
-  </div>
+    <div class="label col-1">
+        <button mdbBtn type="button" rounded="true" class="waves-light" color="indigo" mdbWavesEffect
+                (click)="deleteModal.show()">Delete
+        </button>
+    </div>
 </div>
 <!--Delete article-->
 <div mdbModal #deleteModal="mdbModal" class="modal fade top" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-frame modal-top" role="document">
+    <div class="modal-dialog modal-frame modal-top" role="document">
 
-    <div class="modal-content justify-content-center align-items-center">
-      <div class="modal-body">
-        <div class="row d-flex">
-          <div class="form-inline border">
-            <div class="md-form form-group">
-              <input class="form-control" type="text" [(ngModel)]="author.email" placeholder="email">
+        <div class="modal-content justify-content-center align-items-center">
+            <div class="modal-body">
+                <div class="row d-flex">
+                    <div class="form-inline border">
+                        <div class="md-form form-group">
+                            <input class="form-control" type="text" [(ngModel)]="author.email" placeholder="email">
+                        </div>
+                        <div class="md-form form-group">
+                            <input class="form-control" type="password" [(ngModel)]="author.password"
+                                   placeholder="password">
+                        </div>
+                        <div class="md-form form-group">
+                            <button mdbBtn [disabled]="author.email == '' || author.password.length < 8" type="button"
+                                    rounded="true" class="waves-light" color="indigo" mdbWavesEffect
+                                    (click)="login();">Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="error" align="center">
+                        {{ errorText }}
+                    </div>
+                </div>
             </div>
-            <div class="md-form form-group">
-              <input class="form-control" type="password" [(ngModel)]="author.password" placeholder="password">
-            </div>
-            <div class="md-form form-group">
-              <button mdbBtn [disabled]="author.email == '' || author.password.length < 8" type="button" rounded="true" class="waves-light" color="indigo" mdbWavesEffect
-                      (click)="login();">Delete
-              </button>
-            </div>
-          </div>
         </div>
-        <div class="modal-footer">
-          <div class="error" align="center">
-            {{ errorText }}
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
 </div>

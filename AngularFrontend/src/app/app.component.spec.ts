@@ -43,7 +43,7 @@ describe('AppComponent', () => {
     let component: AppComponent;
     let fixture: ComponentFixture<AppComponent>;
 
-    beforeEach(async( () => {
+    beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
                 AppComponent,
@@ -60,7 +60,7 @@ describe('AppComponent', () => {
             ],
             providers: [
                 RecordsService,
-                {provide: APP_BASE_HREF, useValue : '/' }
+                {provide: APP_BASE_HREF, useValue: '/'}
             ],
             imports: [
                 BrowserModule,
@@ -72,7 +72,7 @@ describe('AppComponent', () => {
         }).compileComponents();
     }));
 
-    beforeEach( () => {
+    beforeEach(() => {
         fixture = TestBed.createComponent(AppComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -83,7 +83,7 @@ describe('AppComponent', () => {
     });
 
     it('should verify an e-mail', () => {
-        component.inputObject.email = 'Klaus@blog.com';
+        component.registerObject.email = 'Klaus@blog.com';
         component.allUsers = [];
         expect(component.isValidEmail()).toBeTruthy();
     });

@@ -3,52 +3,52 @@ import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class RecordsService {
-  allArticles;
+    allArticles;
 
-  constructor(private http: HttpClient) {
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  getAllArticles() {
-    return this.http.get('http://localhost:3000/api/articles');
-  }
+    getAllArticles() {
+        return this.http.get('http://localhost:3000/api/articles');
+    }
 
-  getAllUsers() {
-    return this.http.get('http://localhost:3000/api/users');
-  }
+    getAllUsers() {
+        return this.http.get('http://localhost:3000/api/users');
+    }
 
-  getArticle(articleId) {
-    return this.http.get('http://localhost:3000/api/articles/' + articleId);
-  }
+    getArticle(articleId) {
+        return this.http.get('http://localhost:3000/api/articles/' + articleId);
+    }
 
-  getComments(articleId) {
-    return this.http.get('http://localhost:3000/api/articles/comments/' + articleId);
-  }
+    getComments(articleId) {
+        return this.http.get('http://localhost:3000/api/articles/comments/' + articleId);
+    }
 
-  getUser(userId) {
-    return this.http.get('http://localhost:3000/api/users/' + userId);
-  }
+    getUser(userId) {
+        return this.http.get('http://localhost:3000/api/users/' + userId);
+    }
 
-  login(loginObject) {
-    return this.http.post('http://localhost:3000/api/users/' + loginObject.id + '/authenticate', loginObject);
-  }
+    login(loginObject) {
+        return this.http.post('http://localhost:3000/api/users/' + loginObject.id + '/authenticate', loginObject);
+    }
 
-  register(registerObject) {
-    return this.http.post('http://localhost:3000/api/users/', registerObject);
-  }
+    register(registerObject) {
+        return this.http.post('http://localhost:3000/api/users/', registerObject);
+    }
 
-  createArticle(createArticleObject) {
-    return this.http.post('http://localhost:3000/api/articles', createArticleObject);
-  }
+    createArticle(createArticleObject) {
+        return this.http.post('http://localhost:3000/api/articles', createArticleObject);
+    }
 
-  deleteArticle(articleId) {
-      return this.http.delete('http://localhost:3000/api/articles/' + articleId);
-  }
+    deleteArticle(articleId) {
+        return this.http.delete('http://localhost:3000/api/articles/' + articleId);
+    }
 
-  createComment(createCommentObject) {
-    return this.http.post('http://localhost:3000/api/comments', createCommentObject);
-  }
+    createComment(createCommentObject) {
+        return this.http.post('http://localhost:3000/api/comments', createCommentObject);
+    }
 
-  deleteComment(commentId) {
-    return this.http.delete('http://localhost:3000/api/comments/' + commentId);
-  }
+    deleteComment(commentId) {
+        return this.http.delete('http://localhost:3000/api/comments/' + commentId);
+    }
 }

@@ -62,7 +62,7 @@ describe('CommentsComponent', () => {
             ],
             providers: [
                 RecordsService,
-                {provide: APP_BASE_HREF, useValue : '/' }
+                {provide: APP_BASE_HREF, useValue: '/'}
             ],
             imports: [
                 BrowserModule,
@@ -84,7 +84,7 @@ describe('CommentsComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-    afterEach( () => {
+    afterEach(() => {
         component.comment = {};
     });
 });

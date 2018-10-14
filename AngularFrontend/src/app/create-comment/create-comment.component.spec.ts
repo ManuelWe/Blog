@@ -60,7 +60,7 @@ describe('CreateCommentComponent', () => {
             ],
             providers: [
                 RecordsService,
-                {provide: APP_BASE_HREF, useValue : '/' }
+                {provide: APP_BASE_HREF, useValue: '/'}
             ],
             imports: [
                 BrowserModule,
@@ -72,7 +72,7 @@ describe('CreateCommentComponent', () => {
         }).compileComponents();
     }));
 
-    beforeEach( () => {
+    beforeEach(() => {
         fixture = TestBed.createComponent(CreateCommentComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();

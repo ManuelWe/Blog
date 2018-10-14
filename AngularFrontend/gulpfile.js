@@ -7,11 +7,11 @@ const exec = require('child_process').exec;
 
 
 const files = {
-  projectTsSources: [
-    'e2e/src/*.ts',
-    'src/**/*.ts',
-    'src/*.ts',
-  ],
+    projectTsSources: [
+        'e2e/src/*.ts',
+        'src/**/*.ts',
+        'src/*.ts',
+    ],
 };
 
 
@@ -20,7 +20,7 @@ const files = {
  * @return {Stream}
  */
 function clean() {
-  return del(['dist', 'docs']);
+    return del(['dist', 'docs']);
 }
 
 
@@ -29,11 +29,11 @@ function clean() {
  * @return {Stream}
  */
 function validateTsSources() {
-  return gulp.src(files.projectTsSources)
-      .pipe(tslint({
-        formatter: 'verbose',
-      }))
-      .pipe(tslint.report());
+    return gulp.src(files.projectTsSources)
+        .pipe(tslint({
+            formatter: 'verbose',
+        }))
+        .pipe(tslint.report());
 }
 
 
@@ -42,10 +42,10 @@ function validateTsSources() {
  * @return {Stream}
  */
 function validateGulpfile() {
-  return gulp.src(['gulpfile.js'])
-      .pipe(eslint({configFile: '.eslintrc.js'}))
-      .pipe(eslint.format())
-      .pipe(eslint.failAfterError());
+    return gulp.src(['gulpfile.js'])
+        .pipe(eslint({configFile: '.eslintrc.js'}))
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
 }
 
 
@@ -53,11 +53,11 @@ function validateGulpfile() {
  * Karma Frontend Unit Tests
  */
 gulp.task('executeFrontendUnitTests', function(cb) {
-  exec('ng test --watch=false', function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
+    exec('ng test --watch=false', function(err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
+    });
 });
 
 
@@ -65,11 +65,11 @@ gulp.task('executeFrontendUnitTests', function(cb) {
  * Protractor E2E Tests
  */
 gulp.task('executeE2ETests', function(cb) {
-  exec('ng e2e', function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
+    exec('ng e2e', function(err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
+    });
 });
 
 
@@ -77,11 +77,11 @@ gulp.task('executeE2ETests', function(cb) {
  * Builds Angular into dist folder
  */
 gulp.task('buildAngular', function(cb) {
-  exec('ng build', function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
+    exec('ng build', function(err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
+    });
 });
 
 
@@ -90,16 +90,16 @@ gulp.task('buildAngular', function(cb) {
  * @return {Stream}
  */
 function generateTsDocumentation() {
-  return gulp
-      .src(files.projectTsSources)
-      .pipe(typedoc({
-        module: 'commonjs',
-        target: 'es6',
-        out: 'docs',
-        name: 'Blog',
-        experimentalDecorators: true,
-      }))
-  ;
+    return gulp
+        .src(files.projectTsSources)
+        .pipe(typedoc({
+            module: 'commonjs',
+            target: 'es6',
+            out: 'docs',
+            name: 'Blog',
+            experimentalDecorators: true,
+        }))
+    ;
 }
 
 
