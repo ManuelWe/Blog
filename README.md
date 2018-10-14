@@ -8,7 +8,9 @@ npm install -g --production windows-build-tools
 ```
 \
 On our Blog webpage you can read articles and comments. If you want to post an article or comment you have to create an account first.
-Only the User who created an article or comment is able to delete him. 
+Only the User who created an article or comment is able to delete him.
+####Default Password of all the users is: Pa$$w0rd
+ 
 ## Backend
 
 ### Start server
