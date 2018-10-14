@@ -63,6 +63,9 @@ export class AppComponent {
 
   register() {
     this.registerObject = this.inputObject;
+    this.blogService.getAllUsers().subscribe(data => {
+          this.allUsers = data;
+    });
     if (!this.isValidEmail()) {
       this.openErrorModal('Register failed: E-mail is not valid');
       return;
@@ -71,13 +74,25 @@ export class AppComponent {
       this.openErrorModal('Register failed: Password must be at least 8 characters');
       return;
     }
-    if(this.registerObject.zipCode == null) {
+    if(this.inputObject.zipCode == null) {
       delete this.registerObject.zipCode;
     }
     if(this.inputObject.streetNumber == null) {
-      delete this.inputObject.streetNumber;
+      delete this.registerObject.streetNumber;
     }
-    this.blogService.register(this.inputObject).subscribe(data => {
+    if(this.inputObject.firstname == '') {
+      delete this.registerObject.firstname;
+    }
+    if(this.inputObject.street == '') {
+      delete this.registerObject.streetNumber;
+    }
+    if(this.inputObject.lastname == '') {
+      delete this.registerObject.lastname;
+    }
+    if(this.inputObject.city == '') {
+      delete this.registerObject.city;
+    }
+    this.blogService.register(this.registerObject).subscribe(data => {
         // @ts-ignore
         if(data.email == this.inputObject.email) {
             this.openErrorModal('Register successful');
@@ -89,7 +104,7 @@ export class AppComponent {
 
   isValidEmail(): boolean {
     for (const user of this.allUsers) {
-      if (user.email === this.inputObject.email) {
+      if (user.email.toLowerCase() === this.inputObject.email.toLowerCase()) {
         return false;
       }
     }
