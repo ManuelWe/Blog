@@ -96,7 +96,7 @@ export class AppComponent {
             delete this.registerObject.streetNumber;
         }
         if (this.registerObject.street === '') {
-            delete this.registerObject.streetNumber;
+            delete this.registerObject.street;
         }
         if (this.registerObject.city === '') {
             delete this.registerObject.city;
