@@ -83,13 +83,13 @@ describe('AppComponent', () => {
     });
 
     it('should verify an e-mail', () => {
-        component.registerObject.email = 'Klaus@blog.com';
+        component.inputObject.email = 'Klaus@blog.com';
         component.allUsers = [];
         expect(component.isValidEmail()).toBeTruthy();
     });
 
     it('should falsify an wrong e-mail', () => {
-        component.registerObject.email = 'NotValidEmail';
+        component.inputObject.email = 'NotValidEmail';
         component.allUsers = [];
         expect(component.isValidEmail()).toBeFalsy();
     });
