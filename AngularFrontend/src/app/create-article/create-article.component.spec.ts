@@ -62,7 +62,7 @@ describe('CreateArticleComponent', () => {
             ],
             providers: [
                 RecordsService,
-                {provide: APP_BASE_HREF, useValue : '/' }
+                {provide: APP_BASE_HREF, useValue: '/'}
             ],
             imports: [
                 BrowserModule,
@@ -74,7 +74,7 @@ describe('CreateArticleComponent', () => {
         }).compileComponents();
     }));
 
-    beforeEach( () => {
+    beforeEach(() => {
         fixture = TestBed.createComponent(CreateArticleComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();

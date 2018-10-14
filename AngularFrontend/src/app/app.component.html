@@ -1,146 +1,154 @@
 <ng-progress [thick]="true" [color]="'#e60400'" [ease]="'linear'"></ng-progress>
 <!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
-  <mdb-navbar-brand><a class="navbar-brand" routerLink="['/index']">Navbar</a></mdb-navbar-brand>
-  <links>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item" [routerLink]="['/index']">
-        <a class="nav-link waves-light" mdbWavesEffect>Home</a>
-      </li>
-      <li class="nav-item" [routerLink]="['/allArticles']">
-        <a class="nav-link waves-light" mdbWavesEffect>All articles</a>
-      </li>
-      <li class="nav-item" [routerLink]="['/createArticle']">
-        <a class="nav-link waves-light" mdbWavesEffect>Create article</a>
-      </li>
-    </ul>
-    <div class="md-form mt-0">
-      <a mdbBtn color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect
-         (click)="registerFrame.show()">Register</a>
-    </div>
-  </links>
+    <mdb-navbar-brand><img class="img-fluid" src="assets/Logo.png" height="100" width="170" alt="Logo">
+    </mdb-navbar-brand>
+    <links>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" [routerLink]="['/index']">
+                <a class="nav-link waves-light" mdbWavesEffect>Home</a>
+            </li>
+            <li id="allArticlesBtn" class="nav-item" [routerLink]="['/allArticles']">
+                <a class="nav-link waves-light" mdbWavesEffect>All articles</a>
+            </li>
+            <li id="createArticleBtn" class="nav-item" [routerLink]="['/createArticle']">
+                <a class="nav-link waves-light" mdbWavesEffect>Create article</a>
+            </li>
+        </ul>
+        <div class="md-form mt-0">
+            <a mdbBtn id="registerBtn" color="white" outline="true" rounded="true" class="waves-light" mdbWavesEffect
+               (click)="registerFrame.show()">Register</a>
+        </div>
+    </links>
 </mdb-navbar>
 <!--MainBody-->
 <router-outlet></router-outlet>
 <!-- Footer -->
 <footer class="page-footer font-small indigo pt-4">
 
-  <!-- Footer Elements -->
-  <div class="container">
+    <!-- Footer Elements -->
+    <div class="container">
 
-    <ul class="list-unstyled list-inline text-center">
-      <li class="list-inline-item">
-        <a class="btn-floating btn-fb mx-1" mdbWavesEffect>
-          <mdb-icon icon="facebook"></mdb-icon>
-        </a>
-      </li>
-      <li class="list-inline-item">
-        <a class="btn-floating btn-tw mx-1" mdbWavesEffect>
-          <mdb-icon icon="twitter"></mdb-icon>
-        </a>
-      </li>
-      <li class="list-inline-item">
-        <a class="btn-floating btn-gplus mx-1" mdbWavesEffect>
-          <mdb-icon icon="google-plus"></mdb-icon>
-        </a>
-      </li>
-      <li class="list-inline-item">
-        <a class="btn-floating btn-li mx-1" mdbWavesEffect>
-          <mdb-icon icon="linkedin"></mdb-icon>
-        </a>
-      </li>
-      <li class="list-inline-item">
-        <a class="btn-floating btn-dribbble mx-1" mdbWavesEffect>
-          <mdb-icon icon="dribbble"></mdb-icon>
-        </a>
-      </li>
-    </ul>
+        <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a class="btn-floating btn-fb mx-1" href="https://www.facebook.com/dhbwstuttgart/" mdbWavesEffect>
+                    <mdb-icon icon="facebook"></mdb-icon>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-tw mx-1" href="https://twitter.com/dhbwengineering?lang=en" mdbWavesEffect>
+                    <mdb-icon icon="twitter"></mdb-icon>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-gplus mx-1" href="https://plus.google.com/discover" mdbWavesEffect>
+                    <mdb-icon icon="google-plus"></mdb-icon>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-li mx-1" href="https://www.linkedin.com" mdbWavesEffect>
+                    <mdb-icon icon="linkedin"></mdb-icon>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-dribbble mx-1" href="https://dribbble.com/" mdbWavesEffect>
+                    <mdb-icon icon="dribbble"></mdb-icon>
+                </a>
+            </li>
+        </ul>
 
-  </div>
-  <!-- Footer Elements -->
+    </div>
+    <!-- Footer Elements -->
 
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2018 Copyright: Wetzel/Geistler</div>
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2018 Copyright: Wetzel/Geistler</div>
 
 </footer>
 <!-- Register -->
 <div mdbModal #registerFrame="mdbModal" class="modal fade left" id="regristerFrameModalTop" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header center justify-content-center align-items-center">
-        <h4 class="modal-title w-100 font-weight-bold">Register</h4>
-        <button id="closeRegisterModal" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="registerFrame.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body justify-content-center align-items-center">
-          <div class="form-inline">
-            <div class="md-form form-group">
-              <input class="form-group" type="text" [(ngModel)]="inputObject.firstname" placeholder="firstname (optional)">
+    <div id="modalDialog" class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header center justify-content-center align-items-center">
+                <h4 class="modal-title w-100 font-weight-bold">Register</h4>
+                <button id="closeRegisterModal" type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        (click)="registerFrame.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="md-form form-group">
-              <input class="form-group" type="text" [(ngModel)]="inputObject.lastname" placeholder="lastname (optional)">
+            <div id="modalBody" class="modal-body justify-content-center align-items-center">
+                <div class="form-inline">
+                    <div class="md-form form-group">
+                        <input id="firstnameField" class="form-group" type="text" [(ngModel)]="inputObject.firstname"
+                               placeholder="firstname">
+                    </div>
+                    <div class="md-form form-group">
+                        <input id="lastnameField" class="form-group" type="text" [(ngModel)]="inputObject.lastname"
+                               placeholder="lastname">
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="md-form form-group">
+                        <input id="emailField" type="email" [(ngModel)]="inputObject.email" placeholder="email" email>
+                    </div>
+                    <div class="md-form form-group">
+                        <input id="passwordField" type="password" [(ngModel)]="inputObject.password"
+                               placeholder="password">
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="md-form form-group">
+                        <input type="text" [(ngModel)]="inputObject.zipCode" placeholder="zipcode (optional)">
+                    </div>
+                    <div class="md-form form-group">
+                        <input type="text" [(ngModel)]="inputObject.city" placeholder="city (optional)">
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="md-form form-group">
+                        <input type="text" [(ngModel)]="inputObject.street" placeholder="street (optional)">
+                    </div>
+                    <div class="md-form form-group">
+                        <input type="text" [(ngModel)]="inputObject.streetNumber" placeholder="number (optional)">
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="md-form form-group">
+                        <input type="file" (change)="onFileChanged($event)">
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="form-inline">
-            <div class="md-form form-group">
-              <input type="email" [(ngModel)]="inputObject.email" placeholder="email" email>
-            </div>
-            <div class="md-form form-group">
-              <input type="password" [(ngModel)]="inputObject.password" placeholder="password">
-            </div>
-          </div>
-          <div class="form-inline">
-            <div class="md-form form-group">
-              <input type="number" [(ngModel)]="inputObject.zipCode" placeholder="zipcode (optional)">
-            </div>
-            <div class="md-form form-group">
-              <input type="text" [(ngModel)]="inputObject.city" placeholder="city (optional)">
-            </div>
-          </div>
-          <div class="form-inline">
-            <div class="md-form form-group">
-              <input type="text" [(ngModel)]="inputObject.street" placeholder="street (optional)">
-            </div>
-            <div class="md-form form-group">
-              <input type="number" [(ngModel)]="inputObject.streetNumber" placeholder="number (optional)">
-            </div>
-          </div>
-          <div class="form-inline">
-            <div class="md-form form-group">
-              <input type="file" (change)="onFileChanged($event)">
-            </div>
-          </div>
-        </div>
 
-      <div class="modal-footer d-flex justify-content-center">
-        <button mdbBtn [disabled]="inputObject.email == '' || inputObject.password == ''|| inputObject.picture == ''" color="indigo" class="waves-light" mdbWavesEffect (click)="register()">Register
-        </button>
-      </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button id="createUserBtn" mdbBtn [disabled]="inputObject.firstname == '' || inputObject.lastname == '' ||
+        inputObject.email == '' || inputObject.password == ''|| inputObject.picture == null" color="indigo"
+                        class="waves-light" mdbWavesEffect (click)="register()">Register
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <!-- Error Modal -->
 <div mdbModal #errorModal="mdbModal" class="modal fade top" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
 
-  <div class="modal-dialog modal-frame modal-top" role="document">
+    <div class="modal-dialog modal-frame modal-top" role="document">
 
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="row d-flex justify-content-center align-items-center">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row d-flex justify-content-center align-items-center">
 
-          <div id="errorMessage" class="pt-3 pr-2">
-          </div>
+                    <div id="errorMessage" class="pt-3 pr-2">
+                    </div>
 
-          <button mdbBtn type="button" rounded="true" class="waves-light" color="indigo" mdbWavesEffect
-                  (click)="errorModal.hide()">Close
-          </button>
+                    <button mdbBtn id="closeBtn" type="button" rounded="true" class="waves-light" color="indigo"
+                            mdbWavesEffect
+                            (click)="errorModal.hide()">Close
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 <a mdbBtn hidden color="white" outline="true" rounded="true" id="showErrorModal" type="button" class="waves-light"
    mdbWavesEffect (click)="errorModal.show()"></a>

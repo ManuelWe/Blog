@@ -10,18 +10,18 @@ const dateConverter = require('../utils/dateConverter');
  * @return {Promise.Comment} comment object
  **/
 exports.apiCommentsPOST = function(body) {
-  return new Promise(function(resolve, reject) {
-    const comments = db.collection('Comments');
+    return new Promise(function(resolve, reject) {
+        const comments = db.collection('Comments');
 
-    comments.insert(body, function(error, comment) {
-      if (error) {
-        console.log(error);
-        reject();
-      } else {
-        resolve(comment);
-      }
+        comments.insert(body, function(error, comment) {
+            if (error) {
+                console.log(error);
+                reject();
+            } else {
+                resolve(comment);
+            }
+        });
     });
-  });
 };
 
 
@@ -32,18 +32,18 @@ exports.apiCommentsPOST = function(body) {
  * @return {Promise} no response value expected for this operation
  **/
 exports.apiCommentsCommentidDELETE = function(commentid) {
-  return new Promise(function(resolve, reject) {
-    const comments = db.collection('Comments');
+    return new Promise(function(resolve, reject) {
+        const comments = db.collection('Comments');
 
-    comments.remove({_id: commentid}, function(error, item) {
-      if (error) {
-        console.log(error);
-        reject();
-      } else {
-        resolve();
-      }
+        comments.remove({_id: commentid}, function(error, item) {
+            if (error) {
+                console.log(error);
+                reject();
+            } else {
+                resolve();
+            }
+        });
     });
-  });
 };
 
 
@@ -54,18 +54,18 @@ exports.apiCommentsCommentidDELETE = function(commentid) {
  * @return {Promise.Comment} comment object
  **/
 exports.apiCommentsCommentidGET = function(commentid) {
-  return new Promise(function(resolve, reject) {
-    const comments = db.collection('Comments');
+    return new Promise(function(resolve, reject) {
+        const comments = db.collection('Comments');
 
-    comments.findOne({_id: commentid}, function(error, comment) {
-      if (error) {
-        console.log(error);
-        reject();
-      } else {
-        resolve(dateConverter.convertDate(comment));
-      }
+        comments.findOne({_id: commentid}, function(error, comment) {
+            if (error) {
+                console.log(error);
+                reject();
+            } else {
+                resolve(dateConverter.convertDate(comment));
+            }
+        });
     });
-  });
 };
 
 /**
@@ -74,18 +74,18 @@ exports.apiCommentsCommentidGET = function(commentid) {
  * @return {Promise.Comment[]} array of comment objects
  **/
 exports.apiCommentsGET = function() {
-  return new Promise(function(resolve, reject) {
-    const comments = db.collection('Comments');
+    return new Promise(function(resolve, reject) {
+        const comments = db.collection('Comments');
 
-    comments.find({}).toArray(function(error, comments) {
-      if (error) {
-        console.log(error);
-        reject();
-      } else {
-        resolve(dateConverter.convertDate(comments));
-      }
+        comments.find({}).toArray(function(error, comments) {
+            if (error) {
+                console.log(error);
+                reject();
+            } else {
+                resolve(dateConverter.convertDate(comments));
+            }
+        });
     });
-  });
 };
 
 /**
@@ -96,25 +96,25 @@ exports.apiCommentsGET = function() {
  * @return {Promise.Comment} new comment object
  **/
 exports.apiCommentsCommentidPUT = function(commentid, body) {
-  return new Promise(function(resolve, reject) {
-    const comments = db.collection('Comments');
+    return new Promise(function(resolve, reject) {
+        const comments = db.collection('Comments');
 
-    comments.update({_id: commentid}, body, function(error, comment) {
-      if (error) {
-        console.log(error);
-        reject();
-      } else {
-        // workaround, because findOneAndUpdate is not working
-        comments.findOne({_id: commentid}, function(error, comment) {
-          if (error) {
-            console.log(error);
-            reject();
-          } else {
-            resolve(dateConverter.convertDate(comment));
-          }
+        comments.update({_id: commentid}, body, function(error, comment) {
+            if (error) {
+                console.log(error);
+                reject();
+            } else {
+                // workaround, because findOneAndUpdate is not working
+                comments.findOne({_id: commentid}, function(error, comment) {
+                    if (error) {
+                        console.log(error);
+                        reject();
+                    } else {
+                        resolve(dateConverter.convertDate(comment));
+                    }
+                });
+            }
         });
-      }
     });
-  });
 };
 

@@ -1,91 +1,96 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12 blogShort">
-      <h3 id="articleHeadline" class="mb-3 font-weight-bold dark-grey-text">
-        <strong>{{ article?.headline }}</strong>
-      </h3>
-      <img src="{{ article?.picture }}"
-           class="pull-left img-responsive img-fluid view overlay rounded z-depth-2 mb-2 waves-light" id="articleImage">
-      <article>
-        <p class="box-text">
-          {{article?.text}}
-        </p>
-      </article>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="media">
-        <a class="articleAuthorPicture pull-left">
-          <img class="img-responsive img-fluid view overlay rounded z-depth-2 mb-2 waves-light"
-               src="{{ user?.picture }}" style="width: 100px;height:100px;">
-        </a>
-        <div class="media-body">
-          <h4 class="media-heading">{{ user?.firstname }} {{ user?.lastname }}</h4>
-          <h5>{{article?.date}}</h5>
-          <h6>Topics: {{article?.topic?.join(', ')}}</h6>
+    <div class="row">
+        <div class="col-md-12 blogShort">
+            <h3 id="articleHeadline" class="mb-3 font-weight-bold dark-grey-text">
+                <strong>{{ article?.headline }}</strong>
+            </h3>
+            <img src="{{ article?.picture }}"
+                 class="pull-left img-responsive img-fluid view overlay rounded z-depth-2 mb-2 waves-light"
+                 id="articleImage">
+            <article>
+                <p class="box-text">
+                    {{article?.text}}
+                </p>
+            </article>
         </div>
-      </div>
     </div>
-  </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="media">
+                <a class="articleAuthorPicture pull-left">
+                    <img class="img-responsive img-fluid view overlay rounded z-depth-2 mb-2 waves-light"
+                         src="{{ user?.picture }}" style="width: 100px;height:100px;">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">{{ user?.firstname }} {{ user?.lastname }}</h4>
+                    <h5>{{article?.date}}</h5>
+                    <h6>Topics: {{article?.topic?.join(', ')}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!--Delete article-->
 <div mdbModal #deleteModal="mdbModal" class="modal fade top" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-frame modal-top" role="document">
+    <div class="modal-dialog modal-frame modal-top" role="document">
 
-    <div class="modal-content justify-content-center align-items-center">
-      <div class="modal-header">
-        <div class="md-form form-group">
-          <h4>Article: {{ article?.headline }}<br></h4>
-        </div>
-      </div>
-      <div class="modal-body">
-        <div class="row d-flex">
-          <div class="form-inline border">
-            <div class="md-form form-group">
-              <input class="form-control" type="text" [(ngModel)]="author.email" placeholder="email">
+        <div class="modal-content justify-content-center align-items-center">
+            <div class="modal-header">
+                <div class="md-form form-group">
+                    <h4>Article: {{ article?.headline }}<br></h4>
+                </div>
             </div>
-            <div class="md-form form-group">
-              <input class="form-control" type="password" [(ngModel)]="author.password" placeholder="password">
+            <div class="modal-body">
+                <div class="row d-flex">
+                    <div class="form-inline border">
+                        <div class="md-form form-group">
+                            <input id="emailField" class="form-control" type="text" [(ngModel)]="author.email"
+                                   placeholder="email">
+                        </div>
+                        <div class="md-form form-group">
+                            <input id="passwordField" class="form-control" type="password" [(ngModel)]="author.password"
+                                   placeholder="password">
+                        </div>
+                        <div class="md-form form-group">
+                            <button mdbBtn id="deleteBtn" [disabled]="author.email == '' || author.password.length < 8"
+                                    type="button" rounded="true" class="waves-light" color="indigo" mdbWavesEffect
+                                    (click)="login();">Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="error" align="center">
+                        {{ errorText }}
+                    </div>
+                </div>
             </div>
-            <div class="md-form form-group">
-              <button mdbBtn [disabled]="author.email == '' || author.password.length < 8" type="button" rounded="true" class="waves-light" color="indigo" mdbWavesEffect
-                      (click)="login();">Delete
-              </button>
-            </div>
-          </div>
         </div>
-        <div class="modal-footer">
-          <div class="error" align="center">
-            {{ errorText }}
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
 <div class="container">
-  <button mdbBtn type="button" rounded="true" class="container waves-light" color="indigo" mdbWavesEffect
-          (click)="deleteModal.show()">Delete Article
-  </button>
+    <button mdbBtn id="deleteArticleBtn" type="button" rounded="true" class="container waves-light" color="indigo"
+            mdbWavesEffect
+            (click)="deleteModal.show()">Delete Article
+    </button>
 </div>
 
 <!--Comments input-->
 <div class="container md-form">
-  <hr style="margin:8px auto">
-  <app-create-comment [articleId]="articleId"></app-create-comment>
+    <hr style="margin:8px auto">
+    <app-create-comment [articleId]="articleId"></app-create-comment>
 </div>
 <!--Comments-->
 <section class="container pt-0 pb-3">
-  <hr style="margin:8px auto">
-  <h4>Comments</h4>
-  <div class="row">
-    <div class="col-lg-10">
-      <div class="mdb-feed" *ngFor="let comment of comments" >
-        <app-comments [comment]="comment"></app-comments>
-      </div>
+    <hr style="margin:8px auto">
+    <h4>Comments</h4>
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="mdb-feed" *ngFor="let comment of comments">
+                <app-comments [comment]="comment"></app-comments>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 

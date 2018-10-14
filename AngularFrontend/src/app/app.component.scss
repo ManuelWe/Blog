@@ -1,10 +1,12 @@
-.modal-dialog{
+#modalDialog {
   overflow-y: initial !important;
 }
-.modal-body{
+
+#modalBody {
   height: 290px;
   overflow-y: auto;
 }
-.modal-footer{
+
+.modal-footer {
   overflow-y: auto;
 }

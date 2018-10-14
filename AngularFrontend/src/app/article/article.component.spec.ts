@@ -62,7 +62,7 @@ describe('ArticleComponent', () => {
             ],
             providers: [
                 RecordsService,
-                {provide: APP_BASE_HREF, useValue : '/' }
+                {provide: APP_BASE_HREF, useValue: '/'}
             ],
             imports: [
                 BrowserModule,
