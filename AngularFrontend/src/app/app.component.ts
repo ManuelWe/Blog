@@ -63,6 +63,17 @@ export class AppComponent {
 
   register() {
     this.registerObject = this.inputObject;
+    this.inputObject = {
+          'zipCode': null,
+          'firstname': '',
+          'password': '',
+          'city': '',
+          'streetNumber': null,
+          'street': '',
+          'email': '',
+          'picture': '',
+          'lastname': ''
+      };
     this.blogService.getAllUsers().subscribe(data => {
           this.allUsers = data;
     });
