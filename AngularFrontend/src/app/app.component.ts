@@ -10,10 +10,20 @@ import {RecordsService} from './records.service';
 export class AppComponent {
   allArticles;
   allUsers;
-  errorText;
   httpResponse = '';
   regexp;
 
+  inputObject = {
+    'zipCode': null,
+    'firstname': '',
+    'password': '',
+    'city': '',
+    'streetNumber': null,
+    'street': '',
+    'email': '',
+    'picture': '',
+    'lastname': ''
+  };
   registerObject = {
     'zipCode': null,
     'firstname': '',
@@ -22,7 +32,7 @@ export class AppComponent {
     'streetNumber': null,
     'street': '',
     'email': '',
-    'picture': null,
+    'picture': '',
     'lastname': ''
   };
 
@@ -46,34 +56,72 @@ export class AppComponent {
     const myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
-      this.registerObject.picture = myReader.result;
+      this.inputObject.picture = myReader.result;
     };
     myReader.readAsDataURL(file);
   }
 
   register() {
-    this.errorText = '';
+    this.registerObject = this.inputObject;
+    this.inputObject = {
+          'zipCode': null,
+          'firstname': '',
+          'password': '',
+          'city': '',
+          'streetNumber': null,
+          'street': '',
+          'email': '',
+          'picture': '',
+          'lastname': ''
+      };
+    this.blogService.getAllUsers().subscribe(data => {
+          this.allUsers = data;
+    });
     if (!this.isValidEmail()) {
-      this.errorText = 'Register failed: E-mail is not valid';
+      this.openErrorModal('Register failed: E-mail is not valid');
       return;
     }
-    if (this.registerObject.password.length < 8) {
-      this.errorText = 'Register failed: Password must be at least 8 characters';
+    if (this.inputObject.password.length < 8) {
+      this.openErrorModal('Register failed: Password must be at least 8 characters');
       return;
+    }
+    if(this.inputObject.zipCode == null) {
+      delete this.registerObject.zipCode;
+    }
+    if(this.inputObject.streetNumber == null) {
+      delete this.registerObject.streetNumber;
+    }
+    if(this.inputObject.firstname == '') {
+      delete this.registerObject.firstname;
+    }
+    if(this.inputObject.street == '') {
+      delete this.registerObject.streetNumber;
+    }
+    if(this.inputObject.lastname == '') {
+      delete this.registerObject.lastname;
+    }
+    if(this.inputObject.city == '') {
+      delete this.registerObject.city;
     }
     this.blogService.register(this.registerObject).subscribe(data => {
+        // @ts-ignore
+        if(data.email == this.inputObject.email) {
+            this.openErrorModal('Register successful');
+            const registerModal: HTMLElement = document.getElementById('closeRegisterModal') as HTMLElement;
+            registerModal.click();
+        }
     });
   }
 
   isValidEmail(): boolean {
     for (const user of this.allUsers) {
-      if (user.email === this.registerObject.email) {
+      if (user.email.toLowerCase() === this.inputObject.email.toLowerCase()) {
         return false;
       }
     }
 
     // tslint:disable-next-line:max-line-length
     this.regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    return this.regexp.test(this.registerObject.email);
+    return this.regexp.test(this.inputObject.email);
   }
 }
